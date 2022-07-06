@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, hasMany, hasOne, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, HasMany, hasMany
+} from '@ioc:Adonis/Lucid/Orm'
 import Comment from './Comment'
 
 export default class User extends BaseModel {
@@ -18,8 +19,8 @@ export default class User extends BaseModel {
   @column()
   public isAdmin:boolean
 
-  @manyToMany(() => Comment)
-  public comments: ManyToMany<typeof Comment>
+  @hasMany(() => Comment)
+  public comments: HasMany<typeof Comment>
 
 
   @column.dateTime({ autoCreate: true })

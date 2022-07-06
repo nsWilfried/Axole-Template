@@ -19,7 +19,8 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-
-Route.get('/', async () => {
-  return { hello: 'world' }
+import Post from 'App/Models/Post'
+Route.get('/', async()=> {
+  const posts = Post.query().preload('comments')
+  return await posts
 })
