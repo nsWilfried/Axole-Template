@@ -2,44 +2,17 @@
 
 <template>
  <div>
-   <span>
-     hello world 
-     je suis le compteur et pour le moment je suis à {{count}}
-   </span>
-
-   <button @click="increment()">Incrémenter</button>
-   <router-view></router-view>
+    <Home/>
  </div>
-
-  
 </template>
 <script>
+import Home from './pages/Home.vue'
 export default ({
-  data() {
-    return {
-      count: 0
-    }
-    
-  },
-
-  methods: {
-    increment: function(){
-     this.count++
-    }
-  }
+  components: {Home}
 })
 </script>
 
-<style>
-@import './assets/base.css';
-
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-
-  font-weight: normal;
-}
+<style lang='scss'>
 
 
 </style>
