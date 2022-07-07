@@ -18,6 +18,9 @@ export default class Post extends BaseModel {
   @column()
   public content:string
 
+  @column()
+  public thubmnail:string
+
 
   @hasMany(() =>Comment)
   public comments: HasMany<typeof Comment>
