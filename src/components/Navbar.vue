@@ -4,7 +4,7 @@
 
             <div class="navbar__brand bg-orange flex justify-center items-center">
                 <span class="navbar__brand__logo uppercase">
-                    Axiole.
+                   <router-link to="/"> Axiole.</router-link>
                 </span>
             </div>
 
@@ -12,19 +12,19 @@
                 <div class="flex flex-column text-uppercase">
                     <div class="navbar__link " >
                         <span class="active">
-                            Blog
+                           <router-link to="blog">Blog</router-link>
                         </span>
                     </div>
 
                     <div class="navbar__link">
                         <span>
-                            About
+                            <router-link to="about">about</router-link>
                         </span>
                     </div>
 
                     <div class="navbar__link">
                         <span>
-                            Contact
+                            <router-link to="contact">Contact</router-link>
                         </span>
                     </div>
 
@@ -67,7 +67,8 @@
     }
 
     &__link {
-        width: 90px;
+        padding-left: 25px;
+        padding-right: 25px;
         height: $full-height;
         @include display;
        
