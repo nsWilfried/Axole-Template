@@ -9,6 +9,7 @@
 |
 | Define routes in following two files
 | ├── start/routes/cart.ts
+
 | ├── start/routes/customer.ts
 |
 | and then import them inside `start/routes.ts` as follows
@@ -20,7 +21,14 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import Post from 'App/Models/Post'
+import User from 'App/Models/User'
 Route.get('/', async()=> {
   const posts = Post.query().preload('comments')
   return await posts
-})
+}).as('home')
+
+Route.get('/user/register', async () => {
+  const users = await User.query()
+  return  users
+} )
+Route.post('/user/register', 'AuthController.register')
