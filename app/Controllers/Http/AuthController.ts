@@ -12,12 +12,11 @@ export default class AuthController {
 
 
             })
-
             response.redirect().toPath(`http://localhost:3000/user/login`)
         }
         catch(error){
-            console.log('erreur lors de l\'ajout du user dans la db')
-            console.log(error)
+            //console.log('erreur lors de l\'ajout du user dans la db')
+            //console.log(error)
             response.redirect(`http://localhost:3000/user/register`)
         }
        
@@ -32,18 +31,17 @@ export default class AuthController {
 
         if(remember == 'on'){
             rememberMe = true
-        } else {
-            return rememberMe;
-        }
+        } 
 
         try{
+            //console.log(rememberMe)
             await auth.use('web').attempt(email, password, rememberMe)
             response.redirect().toPath(`http://localhost:3000/`)
         }
         catch(error){
 
-            console.log('failed to login', error)
-            response.redirect().toPath(`http://localhost:3000/user/login`)
+            //console.log('failed to login', error.name)
+            response.redirect().toPath(`http://localhost:3000/user/login?error=${error.name}`)
 
         }
     }
