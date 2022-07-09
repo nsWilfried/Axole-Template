@@ -20,6 +20,12 @@ export default class User extends BaseModel {
   @column()
   public isAdmin:boolean
 
+  @column()
+  public rememberMeToken?:string
+
+  @column()
+  public profile:string
+
   @beforeSave()
   public static async hashPassword(user:User){
     if(user.$dirty.password){
