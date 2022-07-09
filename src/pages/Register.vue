@@ -9,12 +9,14 @@
 <script>
 
 import {ErrorMessage} from 'vee-validate'
-import Form from '../components/Form.vue'
+import Form from '@/components/Form.vue'
 import * as yup from "yup"
 export default {
     
     components: {Form, ErrorMessage}, 
     data() {
+        
+        
         const registerSchema = {
             fields: [
                 {
@@ -30,7 +32,7 @@ export default {
                     as: 'input', 
                     name: 'email', 
                     type:'text', 
-                    rules: yup.string().email('Email non valide').required('Champ requis')
+                    rules: yup.string().email('Email invalide').required('Champ requis')
                 }, 
                 {
                     label: 'Mot de passe', 
@@ -38,13 +40,6 @@ export default {
                     name: 'password', 
                     type: 'password',  
                     rules: yup.string().min(6, 'Mot de passe trop faible ( >= 6caractères)').required('Champ requis')
-                },
-
-                {
-                    label: 'Se souvenir de moi ?', 
-                    as: 'input', 
-                    name: 'remember', 
-                    type: 'checkbox'
                 },
                 ]
         }
@@ -54,14 +49,7 @@ export default {
             text: 'S\'inscrire',
             registerSchema
         }
-    },
-    methods: 
-    {
-
-       
-    }, 
-    
-    
+    } 
 } 
 </script>
 
