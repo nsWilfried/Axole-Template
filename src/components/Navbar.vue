@@ -50,7 +50,7 @@
 .navbar {
     height: 90px;
     &__content {
-        width: 1320px;
+        width: $header-width;
         height: 58px;
     }
     &__brand{
