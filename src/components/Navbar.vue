@@ -28,12 +28,33 @@
                         </span>
                     </div>
 
+                    
+
+
                 </div>
+                <LinkButton :name='loginButton' :link='loginLink' class="text-white" style="background: #111; font-weight:bold;" />
+                <LinkButton :name='registerButton' :link='registerLink' class="text-black" style='background: transparent; border:1px solid black' />
+
             </div>
         
         </div>
     </div>
 </template>
+
+<script>
+import LinkButton from '@/components/LinkButton.vue'
+export default {
+    components: {LinkButton},
+    data() {
+        return {
+            loginButton: "S'inscrire",
+            registerButton: "Se connecter", 
+            loginLink: 'user/login', 
+            registerLink: 'user/register'
+        }
+    },
+}
+</script>
 
 <style lang="scss">
 @import '../assets/styles/_variables.scss';

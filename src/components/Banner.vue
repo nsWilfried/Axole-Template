@@ -1,78 +1,77 @@
 <template>
-    <div style="background: #111;">
-        <div class="banner-component w-full flex items-center justify-center">
-            <div class="banner-component__content h-full flex flex-col items-center justify-center">
-                <div class="banner-component__breadcrumb uppercase">
-                    <span class="banner__route-active">
-                        <router-link  to="/">Home -></router-link>
-                    </span>
+  <div style="background: #111">
+    <div class="banner-component w-full flex items-center justify-center">
+      <div
+        class="banner-component__content h-full flex flex-col items-center justify-center"
+      >
+        <div class="banner-component__breadcrumb uppercase">
+          <span class="banner__route-active">
+            <router-link to="/">Home -> </router-link>
+          </span>
 
-                    <span>
-                        {{name}} ->
-                    </span>
-                </div>
-                <div class="banner-component__title w-full flex items-center justify-center ">
-                    <span>{{name}}.</span>
-                </div>
-            </div>
+          <span> {{ name }} -> </span>
         </div>
+        <div
+          class="banner-component__title w-full flex items-center justify-center"
+        >
+          <span>{{ name }}.</span>
+        </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "Banner",
-    props: {
-        name: String, 
-    },
-    data() {
-        return {
-            
-        }
-    },
-    
-}
+  name: "Banner",
+  props: {
+    name: String
+  },
+
+
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="scss">
-@import '../assets/styles/_variables.scss'; 
-@import '../assets/styles/_fonts.scss';
-@import '../assets/styles/_mixins.scss'; 
+@import "../assets/styles/_variables.scss";
+@import "../assets/styles/_fonts.scss";
+@import "../assets/styles/_mixins.scss";
 .bottom {
-    color: $secondary-bg;
+  color: $secondary-bg;
 }
 .banner-component {
-    font-family: $primary-font;
-    height: 400px;
-    background: $header-component-bg;
+  font-family: $primary-font;
+  height: 400px;
+  background: $header-component-bg;
 
-    &__content{
-        width: $header-width;
-        //background: orange;
+  &__content {
+    width: $header-width;
+    //background: orange;
+  }
+
+  &__title {
+    height: auto;
+    //background: blue;
+
+    > span {
+      font-weight: 600;
+      color: #444;
+      font-size: 80px;
+      line-height: 1.2;
     }
+  }
 
-    &__title{
-        height: auto;
-        //background: blue; 
-
-
-        > span {
-            font-weight: 600;
-            color: #444;
-            font-size: 80px;
-            line-height: 1.2;
-        }
-
+  &__breadcrumb {
+    font-size: 12px;
+    font-weight: 500;
+    color: $secondary-color;
+    letter-spacing: 3px;
+    > span {
+      margin-right: 1em;
     }
-
-    &__breadcrumb{
-        font-size: 12px;
-        font-weight: 500;
-        color: $secondary-color;
-        letter-spacing: 3px;
-         > span {
-             margin-right:1em;
-         }
-    }
+  }
 }
 </style>
