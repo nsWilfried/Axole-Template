@@ -1,5 +1,5 @@
 <template>
-    <div class="  w-full flex justify-center items-center lg:bg-white md:bg-black sm:text-white navbar ">
+    <div class="  w-full fixed flex justify-center items-center lg:bg-white md:bg-black sm:text-white navbar ">
         <div class="navbar__content flex">
 
             <div class="navbar__brand bg-orange flex justify-center items-center">
@@ -32,8 +32,8 @@
 
 
                 </div>
-                <LinkButton :name='loginButton' :link='loginLink' class="text-white" style="background: #111; font-weight:bold;" />
-                <LinkButton :name='registerButton' :link='registerLink' class="text-black" style='background: transparent; border:1px solid black' />
+                <LinkButton :name='loginButton' :link='loginLink' class="text-white" style="background: #444444; font-weight:bold;" />
+                <LinkButton :name='registerButton' :link='registerLink' class="text-black" style='background: transparent; border:1px solid #444444' />
 
             </div>
         

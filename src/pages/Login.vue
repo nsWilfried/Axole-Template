@@ -1,11 +1,14 @@
 <template>
-    <div>
-        <div v-if="errorMessage">
-            <span>
-                {{errorMessage}}
-            </span>
+    <div class="login w-full h-screen bg-slate-100 flex justify-center items-center ">
+        <div class=" w-52 h-80 bg-white ">
+            <div v-if="errorMessage">
+                <span>
+                    {{errorMessage}}
+                </span>
+            </div>
+            <Form :action="action" :buttonText="text" :schema="loginSchema"/>
         </div>
-        <Form :action="action" :buttonText="text" :schema="loginSchema"/>
+        
     </div>
 </template>
 

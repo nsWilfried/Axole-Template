@@ -44,7 +44,7 @@ export default {
 }
 .banner-component {
   font-family: $primary-font;
-  height: 400px;
+  height: 480px;
   background: $header-component-bg;
 
   &__content {
