@@ -4,9 +4,9 @@
             <Banner :name="title"/>
         </div>
 
-        <div class="about__content flex flex-col items-center justify-center">
+        <div class="about__content flex flex-col items-center justify-center sm:h-auto">
 
-            <div class="about__profile flex flex-row  ">
+            <div class="about__profile flex lg:flex-row sm:h-  md:flex-col-reverse ">
 
                 <!-- profile --> 
                 <div class="about__profile__img bg-cover bg-center  w-5/6 h-full">

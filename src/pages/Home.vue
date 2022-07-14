@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="banner w-full flex items-center justify-center">
-            <div class="banner__content flex justify-end">
+            <div class="banner__content flex items-start mt-44 justify-end">
                 <div class="flex flex-col">
                     <div class="banner__text flex items-center justify-start">
                         <span class="uppercase">A personnal <span class=" border-b-2 border-black">blog</span></span>
@@ -101,8 +101,8 @@ export default {
                     
                     font-size: 30px;
                     letter-spacing: 1px;
-                    font-weight: 200;
                     color: #919191;
+                    font-weight: 200;
                 }
 
         }
