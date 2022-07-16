@@ -49,15 +49,25 @@ export default {
         }
         
     },
-    mounted() {
-       if(this.$route.query.error =='InvalidCredentialsException'){
-           this.errorMessage = 'Informations non valide'
+    methods: {
+        checkError(code , message) {
+            if(this.$route.query.error == code){
+                this.errorMessage = message
+                return this.removeErrorMessage()
+            }
+        },
 
-           setTimeout(() => {
-               this.errorMessage = null
-               this.$router.push({query: undefined})
-           }, 2000)
-       }
+        removeErrorMessage() {
+            setTimeout(() => {
+                this.errorMessage = null
+                this.$router.push({query: undefined})
+            }, 4000)           
+        }      
+    },
+    mounted() {
+       this.checkError('E_INVALID_AUTH_PASSWORD', 'Mot de passe incorrect')
+       this.checkError('E_INVALID_AUTH_UID', "Cet utilisateur n'existe pas")
+
     },
 
 }

@@ -32,8 +32,8 @@
 
 
                 </div>
-                <LinkButton :name='loginButton' :link='loginLink' class="text-white" style="background: #444444; font-weight:bold;" />
-                <LinkButton :name='registerButton' :link='registerLink' class="text-black" style='background: transparent; border:1px solid #444444' />
+                <LinkButton :name='loginButton' :link='loginLink' class="text-black " style='background: transparent;' />
+                <LinkButton :name='registerButton' :link='registerLink' class="text-white bg-blue-400 font-bold  " />
 
             </div>
         
@@ -47,10 +47,10 @@ export default {
     components: {LinkButton},
     data() {
         return {
-            loginButton: "S'inscrire",
-            registerButton: "Se connecter", 
-            loginLink: 'user/login', 
-            registerLink: 'user/register'
+            loginButton: "Se connecter",
+            registerButton: "S'inscrire", 
+            loginLink: '/user/login', 
+            registerLink: '/user/register'
         }
     },
 }
