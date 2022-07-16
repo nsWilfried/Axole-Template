@@ -12,11 +12,12 @@ export default class AuthController {
 
 
             })
+            request.cookie('isConnected', true)
             response.redirect().toPath(`http://localhost:3000/user/login`)
         }
         catch(error){
             //console.log('erreur lors de l\'ajout du user dans la db')
-            //console.log(error)
+            //console.log(error.type)
             response.redirect(`http://localhost:3000/user/register`)
         }
        
@@ -40,8 +41,9 @@ export default class AuthController {
         }
         catch(error){
 
-            //console.log('failed to login', error.name)
-            response.redirect().toPath(`http://localhost:3000/user/login?error=${error.name}`)
+            const errorCode = error.responseText.split(':')[0]
+            //console.log('failed to login', error.responseText.split(':'))
+            response.redirect().toPath(`http://localhost:3000/user/login?error=${errorCode}`)
 
         }
     }
