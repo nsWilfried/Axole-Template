@@ -20,11 +20,13 @@
 */
 
 import Route from '@ioc:Adonis/Core/Route'
-import Post from 'App/Models/Post'
 import User from 'App/Models/User'
 Route.get('/', async()=> {
-  const posts = Post.query().preload('comments')
-  return await posts
+  const users = User.query().preload('comments', (query) => {
+    query.preload('posts')
+  })
+
+  return await users
 }).as('home')
 
 Route.get('/user/register', async () => {

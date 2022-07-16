@@ -12,7 +12,7 @@ export default class AuthController {
 
 
             })
-            request.cookie('isConnected', true)
+            response.cookie('isConnected', true)
             response.redirect().toPath(`http://localhost:3000/user/login`)
         }
         catch(error){

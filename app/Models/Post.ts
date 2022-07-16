@@ -25,8 +25,7 @@ export default class Post extends BaseModel {
   @hasMany(() =>Comment)
   public comments: HasMany<typeof Comment>
 
-
-
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
