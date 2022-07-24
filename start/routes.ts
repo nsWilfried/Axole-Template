@@ -33,5 +33,8 @@ Route.get('/user/register', async () => {
   const users = await User.query()
   return  users
 } )
+
+// POSTS
 Route.post('/user/login', 'AuthController.login')
 Route.post('/user/register', 'AuthController.register')
+Route.post('/contact', 'ContactController.send')

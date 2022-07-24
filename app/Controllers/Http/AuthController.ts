@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 export default class AuthController {
 
+    client = 'http://localhost:3000'
     public async register({request, response}: HttpContextContract){
 
         try{
@@ -12,16 +13,24 @@ export default class AuthController {
 
 
             })
-            response.cookie('isConnected', true)
-            response.redirect().toPath(`http://localhost:3000/user/login`)
+            response.cookie('isConnected', true, {
+                domain: this.client, 
+                path: '/'
+            })
+            response.redirect().toPath(`/user/login`)
         }
         catch(error){
             //console.log('erreur lors de l\'ajout du user dans la db')
             //console.log(error.type)
-            response.redirect(`http://localhost:3000/user/register`)
+            response.redirect(`${this.client}/user/register`)
         }
        
 
+    }
+
+    public async logOut({auth, response}: HttpContextContract){
+        await auth.use('web').logout()
+        response.redirect().toPath(this.client)
     }
 
     public async login({request, auth, response}:HttpContextContract){
@@ -37,13 +46,12 @@ export default class AuthController {
         try{
             //console.log(rememberMe)
             await auth.use('web').attempt(email, password, rememberMe)
-            response.redirect().toPath(`http://localhost:3000/`)
+            response.redirect().toPath(this.client)
         }
         catch(error){
-
             const errorCode = error.responseText.split(':')[0]
             //console.log('failed to login', error.responseText.split(':'))
-            response.redirect().toPath(`http://localhost:3000/user/login?error=${errorCode}`)
+            response.redirect().toPath(`${this.client}/user/login?error=${errorCode}`)
 
         }
     }
