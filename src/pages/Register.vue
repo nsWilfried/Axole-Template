@@ -1,5 +1,5 @@
 <template>
-    <div class="form">
+    <div class="w-full h-screen flex justify-center items-center">
         <Form :buttonText="text" :schema="registerSchema" :action="action"></Form>
     </div>
 </template>

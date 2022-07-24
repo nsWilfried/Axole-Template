@@ -12,19 +12,20 @@
                 <div class="flex flex-column text-uppercase">
                     <div class="navbar__link " >
                         <span class="active">
-                           <router-link to="blog">Blog</router-link>
+                           <router-link to="/blog">Blog</router-link>
                         </span>
                     </div>
 
                     <div class="navbar__link">
                         <span>
-                            <router-link to="about">about</router-link>
+                            <router-link to="/about">about</router-link>
+
                         </span>
                     </div>
 
                     <div class="navbar__link">
                         <span>
-                            <router-link to="contact">Contact</router-link>
+                            <router-link to="/contact">Contact</router-link>
                         </span>
                     </div>
 
