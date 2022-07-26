@@ -2,8 +2,8 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 export default class AuthController {
 
-    client = 'http://localhost:3000'
-    public async register({request, response}: HttpContextContract){
+    client = 'http://127.0.0.1:3000'
+    public async register({request, response, auth}: HttpContextContract){
 
         try{
             const user = await User.create({
@@ -12,16 +12,16 @@ export default class AuthController {
                 password: request.input('password')
 
 
+            }).then(data => {
+                console.log('voici ce qui se passe après la création du user', data)
             })
-            response.cookie('isConnected', true, {
-                domain: this.client, 
-                path: '/'
-            })
+
+            this.setUserInfoCookie(response, user)
+           
             response.redirect().toPath(`/user/login`)
         }
         catch(error){
-            //console.log('erreur lors de l\'ajout du user dans la db')
-            //console.log(error.type)
+
             response.redirect(`${this.client}/user/register`)
         }
        
@@ -38,21 +38,35 @@ export default class AuthController {
         const password = request.input('password')
         const remember = request.input('remember')
         let rememberMe = false
+        
+
 
         if(remember == 'on'){
             rememberMe = true
         } 
 
         try{
-            //console.log(rememberMe)
-            await auth.use('web').attempt(email, password, rememberMe)
+            await auth.use('web').attempt(email,password, rememberMe).then(data => {
+                const user = data.$attributes
+                this.setUserInfoCookie(response, {
+                    id: user.id, 
+                    email: user.email, 
+                    profile: user.profile, 
+                    isAdmin: user.isAdmin
+                } )
+            })
+           
             response.redirect().toPath(this.client)
         }
         catch(error){
             const errorCode = error.responseText.split(':')[0]
-            //console.log('failed to login', error.responseText.split(':'))
             response.redirect().toPath(`${this.client}/user/login?error=${errorCode}`)
 
         }
+    }
+
+    public setUserInfoCookie(response, user){
+        response.cookie('isConnected', true)
+        response.cookie('user', user)
     }
 }
