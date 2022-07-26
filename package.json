@@ -7,11 +7,13 @@
     "preview": "vite preview --port 4173"
   },
   "dependencies": {
+    "js-cookie": "^3.0.1",
     "sass": "^1.53.0",
     "vee-validate": "^4.5.11",
     "vue": "^3.2.37",
     "vue-cookies": "^1.8.1",
     "vue-router": "^4.1.1",
+    "vuex": "^4.0.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {

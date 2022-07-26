@@ -6,9 +6,9 @@
 
         <div class="contact w-full bg-orange-50 flex justify-center items-center ">
             <div class="contact__content h-screen flex  ">
-                <div class="contact__form w-1/2 bg-slate-300">
-                    <div class="contact__title">
-                        <span>Contact</span>
+                <div class="contact__form w-1/2 bg-slate-300 p-14 ">
+                    <div class="contact__title ">
+                        <span class="font-medium text-3xl h-14 ">Contact</span>
                     </div>
 
                     <div class="contact__description">

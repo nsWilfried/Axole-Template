@@ -67,9 +67,6 @@ export default {
     mounted() {
        this.checkError('E_INVALID_AUTH_PASSWORD', 'Mot de passe incorrect')
        this.checkError('E_INVALID_AUTH_UID', "Cet utilisateur n'existe pas")
-
-       console.log(this.$cookies.get('pma_lang'))
-
     },
 
 }

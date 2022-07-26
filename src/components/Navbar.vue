@@ -33,8 +33,23 @@
 
 
                 </div>
-                <LinkButton :name='loginButton' :link='loginLink' class="text-black " style='background: transparent;' />
-                <LinkButton :name='registerButton' :link='registerLink' class="text-white bg-blue-400 font-bold  " />
+
+                <div class=" flex flex-row" v-if="connected == false">
+                    <LinkButton :name='loginButton' :link='loginLink' class="text-black " style='background: transparent;' />
+                    <LinkButton :name='registerButton' :link='registerLink' class="text-white bg-blue-400 font-bold  " />
+                </div>
+
+                <div class="px-3 py-1 bg-blue-400 flex justify-center items-center" v-else>
+                    <span class="text-black">
+                        créer un post
+                    </span>
+
+                </div>
+              
+
+                    <span class="text-black">
+                       {{user_info.email}}
+                    </span>
 
             </div>
         
@@ -51,8 +66,14 @@ export default {
             loginButton: "Se connecter",
             registerButton: "S'inscrire", 
             loginLink: '/user/login', 
-            registerLink: '/user/register'
-        }
+            registerLink: '/user/register', 
+            connected: this.$store.state.isConnected,
+            user_info:  this.$store.state.user,
+            }
+    },
+
+    mounted() {
+        console.log(this.random)
     },
 }
 </script>
