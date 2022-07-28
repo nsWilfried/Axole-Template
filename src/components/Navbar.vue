@@ -47,10 +47,6 @@
                 </div>
               
 
-                    <span class="text-black">
-                       {{user_info.email}}
-                    </span>
-
             </div>
         
         </div>
@@ -68,12 +64,10 @@ export default {
             loginLink: '/user/login', 
             registerLink: '/user/register', 
             connected: this.$store.state.isConnected,
-            user_info:  this.$store.state.user,
             }
     },
 
     mounted() {
-        console.log(this.random)
     },
 }
 </script>
@@ -81,12 +75,8 @@ export default {
 <style lang="scss">
 @import '../assets/styles/_variables.scss';
 @import '../assets/styles/_fonts.scss';
+@import '../assets/styles/_mixins.scss';
 
-@mixin display(){
- display: flex;
- justify-content: center;
- align-items: center;
-}
 .active{
     color: $primary-color !important;
 }
@@ -113,7 +103,7 @@ export default {
         padding-left: 25px;
         padding-right: 25px;
         height: $full-height;
-        @include display;
+        @include center-element;
        
         > span {
             text-transform: uppercase;

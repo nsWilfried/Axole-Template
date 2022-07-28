@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 
 const connected = Cookies.get('isConnected')
 const user_info = Cookies.get('user')
-Cookies.converter('l4cXoK5X2QVro9g6EdTs7OC3AaicFJwZ')
 const store = createStore({
     state(){
         return {
