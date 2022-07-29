@@ -1,12 +1,16 @@
 <template>
-    <div class="login w-full h-screen bg-slate-100 flex justify-center items-center ">
-        <div class=" w-52 h-80 bg-white ">
-            <div v-if="errorMessage">
+    <div class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
+         <div style="width:330px" class="bg-red-400 text-white p-2 text-center rounded-lg my-2" v-if="errorMessage">
                 <span>
                     {{errorMessage}}
                 </span>
             </div>
-            <Form :action="action" :buttonText="text" :schema="loginSchema"/>
+        <div class=" w-96 h-auto rounded-lg bg-white ">
+
+            <div class="w-full h-14 flex justify-center items-center">
+                <span class="font-bold text-2xl">Connexion</span>
+            </div>
+           <Form :action="action"  :buttonText="text" :schema="loginSchema"/>
         </div>
         
     </div>
@@ -25,12 +29,14 @@ export default {
                     as: 'input', 
                     name:'email', 
                     type: 'text', 
+                    placeholder: "Entrez votre adresse mail...", 
                     rules: yup.string().required('Champ requis').email('Email invalide')
                 }, {
                     label: 'Mot de passe:',
                     as: 'input', 
                     name:'password', 
                     type: 'password', 
+                    placeholder: "Entrez votre mot de passe...", 
                     rules: yup.string().required('Champ requis').min(6, 'Mot de passe trop faible ( >= 6caractères)')
                 } ,
                 {
@@ -71,3 +77,13 @@ export default {
 
 }
 </script>
+
+
+<style lang="scss">
+@import '../assets/styles/_variables.scss'; 
+@import '../assets/styles/_fonts.scss'; 
+    .login {
+        font-family:$primary-font;
+    }
+
+</style>

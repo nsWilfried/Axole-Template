@@ -1,6 +1,13 @@
 <template>
-    <div class="w-full h-screen flex justify-center items-center">
+    <div class="w-full h-screen bg-slate-200 flex justify-center items-center">
+
+        <div class=" w-96 h-auto rounded-lg bg-white ">
+            <div class="w-full h-14 flex justify-center items-center">
+                <span class="font-bold text-2xl">Inscription</span>
+            </div>
         <Form :buttonText="text" :schema="registerSchema" :action="action"></Form>
+        </div>
+        
     </div>
 </template>
 
@@ -20,25 +27,28 @@ export default {
         const registerSchema = {
             fields: [
                 {
-                    label: 'Nom d\'utilisateur', 
+                    label: 'Nom d\'utilisateur:', 
                     as: 'input', 
                     name:'username', 
                     type:'text', 
+                    placeholder: "Entrez un nom d'utilisateur...", 
                     rules: yup.string().required('Champ requis')
                 
                 }, 
                 {
-                    label: 'Email', 
+                    label: 'Email:', 
                     as: 'input', 
                     name: 'email', 
                     type:'text', 
+                    placeholder: "Entrez votre adresse mail...",
                     rules: yup.string().email('Email invalide').required('Champ requis')
                 }, 
                 {
-                    label: 'Mot de passe', 
+                    label: 'Mot de passe:', 
                     as: 'input', 
                     name: 'password', 
                     type: 'password',  
+                    placeholder: "Entrez votre mot de passe...",
                     rules: yup.string().min(6, 'Mot de passe trop faible ( >= 6caractères)').required('Champ requis')
                 },
                 ]
