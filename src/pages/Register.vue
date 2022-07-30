@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full h-screen bg-slate-200 flex justify-center items-center">
+    <div class="w-full main bg-slate-200 flex justify-center items-center">
 
         <div class=" w-96 h-auto rounded-lg bg-white ">
             <div class="w-full h-14 flex justify-center items-center">
-                <span class="font-bold text-2xl">Inscription</span>
+                <span class="font-medium uppercase  text-2xl">Inscription</span>
             </div>
         <Form :buttonText="text" :schema="registerSchema" :action="action"></Form>
         </div>
@@ -66,5 +66,9 @@ export default {
 
 
 <style lang="scss">
-
+@import '../assets/styles/_variables.scss'; 
+.main{
+    font-family: $primary-font;
+    height: 105vh;
+}
 </style>

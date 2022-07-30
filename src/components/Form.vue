@@ -2,24 +2,28 @@
     <Form :action="action" method="post">
         <div  v-for="{ as, name,type,placeholder, label,  ...attrs } of schema.fields" :key="name">
             <div class="w-full h-12 flex items-center justify-center">
-                <div style="width: 330px;">
-                    <label :for="name" class=" font-medium">
-                        {{label}}
-                    </label>
-                </div>
-               
-            </div>
 
+                <div class="h-full flex justify-center items-center" style="width: 330px;">
+                    <div style="width: 330px;" >
+                        <label :for="name">
+                            {{label}}
+                        </label>
+                        
+                    </div>
+
+                    <div v-if="type==='checkbox'">
+                        <Field  :type="type" :placeholder="placeholder"  class=" focus:border-blue-400 rounded-sm " :as="as" :name="name" :id="name" v-bind="attrs" />
+                    </div>
+                </div>
+                
+            </div>
+    
+               
             <div v-if="type!='checkbox'" class="w-full h-12 flex justify-center ">
                 <Field  :type="type" :placeholder="placeholder" class="form__input  rounded-sm " :as="as" :name="name" :id="name" v-bind="attrs" />
-
             </div>
     
-            <div v-if="type=='checkbox'" class="w-full flex justify-center ">
-                <Field  :type="type" :placeholder="placeholder" class="form__input  focus:border-blue-400 rounded-sm " :as="as" :name="name" :id="name" v-bind="attrs" />
-
-            </div>
-    
+            
                     
             <div class="w-full flex justify-center items-center">
              <ErrorMessage style="width:330px" class="bg-red-400 text-white p-2 rounded-lg my-2" :name="name" />
@@ -59,7 +63,6 @@ export default {
 
 .form__input {
     width: 330px;
-    outline: none;
     background: $primary-bg;
     border: 1px solid $primary-bg;
     padding: 6px;

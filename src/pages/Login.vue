@@ -7,7 +7,7 @@
             </div>
         <div class=" w-96 h-auto rounded-lg bg-white ">
 
-            <div class="w-full h-14 flex justify-center items-center">
+            <div class="w-full h-16 flex justify-center items-center">
                 <span class="font-bold text-2xl">Connexion</span>
             </div>
            <Form :action="action"  :buttonText="text" :schema="loginSchema"/>
