@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full main bg-slate-200 flex justify-center items-center">
+    <div class="w-full main__register bg-slate-200 flex justify-center items-center">
 
         <div class=" w-96 h-auto rounded-lg bg-white ">
             <div class="w-full h-14 flex justify-center items-center">
@@ -67,7 +67,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/styles/_variables.scss'; 
-.main{
+.main__register{
     font-family: $primary-font;
     height: 105vh;
 }

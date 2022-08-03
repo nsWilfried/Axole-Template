@@ -1694,6 +1694,11 @@
     "shebang-command" "^2.0.0"
     "which" "^2.0.1"
 
+"cryptr@^6.0.3":
+  "integrity" "sha512-Nhaxn3CYl/OoWF3JSZlF8B6FQO600RRkU3g8213OGEIq4YvMlc3od8hL9chubhY1SmTq8ienvCRq1MSFjMTpOg=="
+  "resolved" "https://registry.npmjs.org/cryptr/-/cryptr-6.0.3.tgz"
+  "version" "6.0.3"
+
 "css-declaration-sorter@^6.3.0":
   "integrity" "sha512-OGT677UGHJTAVMRhPO+HJ4oKln3wkBTwtDFH0ojbqm+MJm6xuDMHp2nkhh/ThaBqq20IbraBQSWKfSLNHQO9Og=="
   "resolved" "https://registry.npmjs.org/css-declaration-sorter/-/css-declaration-sorter-6.3.0.tgz"

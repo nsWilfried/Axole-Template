@@ -35,12 +35,14 @@ import Footer from "@/components/Footer.vue"
 export default {
     components: {Footer}, 
     data() {
+
         return {
         }
     },
 
     mounted() {
-     
+
+    console.log(this.$store.state.user)
     },
 }
 </script>

@@ -130,7 +130,7 @@
 @import '../assets/styles/_mixins.scss';
     .main {
 
-        background: $primary-font;
+        background: $primary-bg;
     }
     .footer {
         width: $header-width; 
