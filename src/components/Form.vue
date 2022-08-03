@@ -43,7 +43,7 @@
 <script>
 import {Form, Field, ErrorMessage} from 'vee-validate'
 export default {
-    name: 'Form',
+    name: Form,
     components: {Form, Field, ErrorMessage},
     props: {
         schema: {
