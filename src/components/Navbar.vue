@@ -39,11 +39,10 @@
                     <LinkButton :name='registerButton' :link='registerLink' class="text-white bg-blue-400 font-bold  " />
                 </div>
 
-                <div class="px-3 py-1 bg-blue-400 flex justify-center items-center" v-else>
-                    <span class="text-black">
-                        créer un post
-                    </span>
-
+                <div v-if="connected == true" >
+                    <form action="http://127.0.0.1:3333/logout" method="post" >
+                        <button class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Se déconnecter</button>
+                    </form>
                 </div>
               
 

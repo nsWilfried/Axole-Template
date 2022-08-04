@@ -5,6 +5,15 @@ import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
 import Blog from '../pages/Blog.vue'
 import {createRouter, createWebHistory} from 'vue-router'
+import Cookies from 'js-cookie'
+
+const isUserLogin = () => {
+    const isConnected = Cookies.get('isConnected') != undefined ? true : false
+    console.log('Avant de rentrer dans la page', isConnected)
+    if(isConnected){
+        return '/'
+    }
+}
 const routes = [
     {
         path:'/', 
@@ -14,12 +23,14 @@ const routes = [
     {
         path: '/user/login',
         component: Login, 
-        name: 'login'
+        name: 'login', 
+        beforeEnter:  [isUserLogin]
     }, 
     {
         path: '/user/register',
         component: Register, 
-        name: 'register'
+        name: 'register', 
+        beforeEnter: [isUserLogin]
     }, 
     {
         path: '/about', 
