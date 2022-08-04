@@ -21,13 +21,46 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 import User from 'App/Models/User'
+import Post from 'App/Models/Post'
+import Comment from 'App/Models/Comment'
+
+// GET ALL CONTENT
 Route.get('/', async()=> {
-  const users = User.query().preload('comments', (query) => {
-    query.preload('posts')
+  const users = User.query().preload('posts', (query) => {
+    query.preload('comments')
   })
 
   return await users
 }).as('home')
+
+Route.get('/users',async () => {
+  const users = await User.query()
+  return users;
+})
+
+Route.get('/posts',async () => {
+  const posts = await Post.query()
+  return posts;
+})
+
+Route.get('/comments',async () => {
+  const comments = await Comment.query()
+  return comments;
+})
+
+// FIND WITH CONTENT ID 
+Route.get('/comments/:id',async (request) => {
+  const comments = await Comment.findOrFail(request.params.id)
+  return comments;
+})
+Route.get('/posts/:id',async (request) => {
+  const posts = await Post.findOrFail(request.params.id)
+  return posts;
+})
+Route.get('/users/:id',async (request) => {
+  const users = await User.findOrFail(request.params.id)
+  return users;
+})
 
 Route.get('/user/register', async () => {
   const users = await User.query()
@@ -39,3 +72,4 @@ Route.post('/user/login', 'AuthController.login')
 Route.post('/user/register', 'AuthController.register')
 Route.post('/contact', 'ContactController.send')
 Route.post('/logout', 'AuthController.logout')
+Route.post('/create-post', 'BlogController.createPost')
