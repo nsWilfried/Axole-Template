@@ -4,7 +4,7 @@
 
             <div class="navbar__brand bg-orange flex justify-center items-center">
                 <span class="navbar__brand__logo uppercase">
-                   <router-link to="/"> Axiole.</router-link>
+                   <router-link to="/"> Axole.</router-link>
                 </span>
             </div>
 
@@ -12,7 +12,7 @@
                 <div class="flex flex-column text-uppercase">
                     <div class="navbar__link " >
                         <span class="active">
-                           <router-link to="/blog">Blog</router-link>
+                           <router-link to="/">Blog</router-link>
                         </span>
                     </div>
 

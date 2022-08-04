@@ -1,5 +1,6 @@
 <template>
     <div>
+        <!--banner-->
         <div class="banner w-full flex items-center justify-center">
             <div class="banner__content flex items-start mt-44 justify-end">
                 <div class="flex flex-col">
@@ -26,6 +27,51 @@
             </div>
         </div>
 
+        <!--blog --> 
+        <div  class="blog  w-full flex justify-center items-center">
+            <div style="width:1320px " class="bg-green- h-full flex ">
+                <div class="blog__poster h-full bg-slate-300 w-2/3">
+                    <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg" style="height:540px; " class=" bg-cover bg-scroll  " alt="random ">
+                </div>
+
+                <div class="blog__content h-full w-1/2 flex justify-center items-center">
+                    <div class="w-full p-12 bg- h-auto">
+                        <div class="w-full flex flex-row justify-around bg-green-"> 
+                            <div class="blog__content__author">
+                                <span>admin</span>
+                            </div>
+                            <div class="blog__content__date">
+                                <span>Jan. 30, 2021</span>
+                            </div>
+
+                            <div class="blog__content__comments">
+                                <span>2comments</span>
+                            </div>
+                        </div>
+                        
+                        <!-- title -->
+                        <div class="blog__content__title bg-yellow-">
+                            <span class="underline ">
+                               Writing A Novel with A Heart
+                            </span>
+                        </div>
+
+                        <!--description--> 
+                        <div class="blog__content__description">
+                            <span class="text-gray-400">
+                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste, rem. Et, quaerat vel at veniam magni repellat quasi deserunt voluptatem officia, beatae reprehenderit inventore perspiciatis. Ex numquam commodi maxime corrupti.
+                            </span>
+                        </div>
+
+                        <!--learn more-->
+                        <div class="blog__content__button">
+                            <button class="bg-blue-400 text-white uppercase px-3 w-36 p-3 font-medium  my-3 rounded hover:bg-blue-600">Lire en plus</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <Footer/>
     </div>
 </template>
@@ -121,6 +167,25 @@ export default {
 
         }
          
+    }
+}
+
+
+.blog {
+    background: $primary-bg; 
+    color: #444;
+    &__content{
+        &__title {
+            font-size: 80px;
+            font-family: $primary-font;
+            line-height: 1.1;
+             margin-top: 10px;
+             margin-bottom: 10px;
+            
+        }
+        &__button {
+            font-family: $primary-font;
+        }
     }
 }
     

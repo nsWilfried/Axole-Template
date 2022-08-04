@@ -3,7 +3,6 @@ import Register from '../pages/Register.vue'
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
-import Blog from '../pages/Blog.vue'
 import {createRouter, createWebHistory} from 'vue-router'
 import Cookies from 'js-cookie'
 
@@ -40,11 +39,6 @@ const routes = [
         path: '/contact', 
         component: Contact, 
         name: 'contact'
-    }, 
-    {
-        path:'/blog', 
-        component: Blog,
-        name: 'blog'
     }
 ]
 
