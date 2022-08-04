@@ -3,6 +3,8 @@ import Register from '../pages/Register.vue'
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
+import CreatePost from '../pages/create-post.vue'
+
 import {createRouter, createWebHistory} from 'vue-router'
 import Cookies from 'js-cookie'
 
@@ -39,6 +41,17 @@ const routes = [
         path: '/contact', 
         component: Contact, 
         name: 'contact'
+    }
+    , {
+        path: '/create-post', 
+        component: CreatePost, 
+        name: 'create-post', 
+        beforeEnter: () => {
+            const isConnected = Cookies.get('isConnected') != undefined ? true: false
+            if(!isConnected){
+                return '/'
+            }
+        }
     }
 ]
 

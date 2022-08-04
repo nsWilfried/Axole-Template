@@ -79,12 +79,15 @@
                         
                                 
                                 <div v-if="type!='textarea'" class="w-full h-12 flex justify-center ">
-                                    <Field  :type="type" :placeholder="placeholder" class="rounded-sm w-full border border-gray-300" :as="as" :name="name" :id="name" v-bind="attrs" />
+                                    <Field  :type="type" :placeholder="placeholder" class="invalid:border-red-400 bg-gray-100 rounded-sm w-full border px-1" :as="as" :name="name" :id="name" v-bind="attrs" />
                                 </div>
 
-                                <div v-else class="w-full   flex justify-center " >
-                                    <Field  :type="type" :placeholder="placeholder"   class="rounded-sm w-full h-full border border-gray-300" :as="as" :name="name" :id="name" v-bind="attrs" required />
+                                <div v-else  class="w-full  flex justify-center " >
+                                    <Field draggable="false" :type="type" :placeholder="placeholder"   class="bg-gray-100  rounded-sm w-full h-full border" :as="as" :name="name" :id="name" v-bind="attrs" />
                                 </div>
+
+                                    <ErrorMessage style="width:330px" class=" text-red-400" :name="name" />
+
                                 
                             </div>
 
@@ -128,6 +131,7 @@ export default {
                     as: 'input', 
                     name:'fullname', 
                     type: 'text', 
+                    placeholder:' Entrez votre nom et prénom...', 
                     rules: yup.string().required('Champ requis')
                },
                {
@@ -135,6 +139,7 @@ export default {
                     as: 'input', 
                     name:'email', 
                     type: 'text', 
+                    placeholder:' Entrez votre adresse mail..', 
                     rules: yup.string().required('Champ requis').email('Email invalide')
                }, 
                {
@@ -142,6 +147,7 @@ export default {
                     as: 'input', 
                     name:'subject', 
                     type: 'text', 
+                    placeholder:' Entrez le sujet...', 
                     rules: yup.string().required('Champ requis')
                }, 
                {
@@ -149,6 +155,7 @@ export default {
                     as: 'textarea', 
                     name:'message', 
                     type: 'text', 
+                    placeholder:' Tapez votre message...', 
                     rules: yup.string().required('Champ requis')
                }
 

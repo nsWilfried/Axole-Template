@@ -34,11 +34,16 @@
 
                 </div>
 
+                <!-- login and register button --> 
                 <div class=" flex flex-row" v-if="connected == false">
-                    <LinkButton :name='loginButton' :link='loginLink' class="text-black " style='background: transparent;' />
-                    <LinkButton :name='registerButton' :link='registerLink' class="text-white bg-blue-400 font-bold  " />
+                    <LinkButton name='se connecter' link='/user/login' class="text-black " style='background: transparent;' />
+                    <LinkButton name="s'inscrire" link='/user/register' class="text-white bg-blue-400 font-bold  " />
                 </div>
 
+                <!-- create post button --> 
+                 <LinkButton v-if="connected == true" name='Créer un post' link='/create-post' class="text-black " style='background: transparent;' />
+                
+                <!-- logout button --> 
                 <div v-if="connected == true" >
                     <form action="http://127.0.0.1:3333/logout" method="post" >
                         <button class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Se déconnecter</button>
@@ -57,11 +62,7 @@ import LinkButton from '@/components/LinkButton.vue'
 export default {
     components: {LinkButton},
     data() {
-        return {
-            loginButton: "Se connecter",
-            registerButton: "S'inscrire", 
-            loginLink: '/user/login', 
-            registerLink: '/user/register', 
+        return { 
             connected: this.$store.state.isConnected,
             }
     },
