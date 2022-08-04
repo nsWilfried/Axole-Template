@@ -38,3 +38,4 @@ Route.get('/user/register', async () => {
 Route.post('/user/login', 'AuthController.login')
 Route.post('/user/register', 'AuthController.register')
 Route.post('/contact', 'ContactController.send')
+Route.post('/logout', 'AuthController.logout')

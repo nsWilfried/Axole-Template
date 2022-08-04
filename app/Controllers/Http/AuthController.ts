@@ -3,7 +3,7 @@ import User from 'App/Models/User'
 export default class AuthController {
 
     client = 'http://127.0.0.1:3000'
-    public async register({request, response, auth}: HttpContextContract){
+    public async register({request, response}: HttpContextContract){
 
         try{
             const user = await User.create({
@@ -28,8 +28,10 @@ export default class AuthController {
 
     }
 
-    public async logOut({auth, response}: HttpContextContract){
+    public async logout({auth, response}: HttpContextContract){
         await auth.use('web').logout()
+        response.clearCookie('user')
+        response.clearCookie('isConnected')
         response.redirect().toPath(this.client)
     }
 

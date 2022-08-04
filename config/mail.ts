@@ -45,7 +45,7 @@ export default mailConfig({
     smtp: {
       driver: 'smtp',
       host: Env.get('SMTP_HOST') as string,
-      port: "1025",
+      port:  Env.get('SMTP_PORT') as string,
       ignoreTLS: true, 
       requireTLS: false, 
 			auth: {
