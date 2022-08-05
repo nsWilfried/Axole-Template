@@ -3,7 +3,11 @@ import Register from '../pages/Register.vue'
 import Home from '../pages/Home.vue'
 import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
-import CreatePost from '../pages/create-post.vue'
+import CreatePost from '../pages/CreatePost.vue'
+import PostDetail from '../pages/PostDetail.vue'
+import NotFound from '../pages/NotFound.vue'
+
+
 
 import {createRouter, createWebHistory} from 'vue-router'
 import Cookies from 'js-cookie'
@@ -52,6 +56,11 @@ const routes = [
                 return '/'
             }
         }
+    }, 
+    , {
+        path: '/:id', 
+        component: PostDetail, 
+        name: 'post-detail'
     }
 ]
 
