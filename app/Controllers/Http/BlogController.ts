@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Comment from 'App/Models/Comment';
 import Post from 'App/Models/Post';
 
 export default class BlogController {
@@ -16,5 +17,16 @@ export default class BlogController {
         await Post.create(post)
         response.redirect().toPath(this.client)
 
+    }
+
+    public async addComment({request, params, response}:HttpContextContract){
+        const comment = {
+            message: request.input('message'), 
+            userId: request.cookie('user').id, 
+            postId: request.input('post_id')
+        }
+
+        await Comment.create(comment)
+        response.redirect().toPath(`${this.client}/${params.id}`)
     }
 }
