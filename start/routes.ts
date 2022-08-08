@@ -39,7 +39,7 @@ Route.get('/users',async () => {
 })
 
 Route.get('/posts',async () => {
-  const posts = await Post.query().preload('comments', (query) => {
+  const posts = await Post.query().preload('user').preload('comments', (query) => {
     query.preload('users')
   })
   return posts;
@@ -84,4 +84,4 @@ Route.post('/contact', 'ContactController.send')
 Route.post('/logout', 'AuthController.logout')
 Route.post('/create-post', 'BlogController.createPost')
 Route.post('/comments', 'BlogController.addComment')
-
+Route.get('/downloads/:fileName', 'BlogController.download')
