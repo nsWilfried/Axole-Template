@@ -50,11 +50,13 @@
 
                 <!--footer posts --> 
                 <div class="h-28 w-full">
-                    <div class="flex flex-row h-full w-full">
+                    <div v-for="post in posts " :key="post.id" class="flex flex-row h-full w-full">
 
                         <!--post image--> 
                         <div class="w-28 h-full items-center flex">
-                            <div class="w-12 h-12 rounded bg-gray-400"></div>
+                            <div class="w-12 h-12 rounded bg-gray-400 overflow-hidden">
+                                <img :src="post.thumbnail" alt="" srcset="">
+                            </div>
                         </div>
 
                         <!-- post date, image, title -->
@@ -67,12 +69,16 @@
 
                                     <div>
 
-                                        <span>Admin</span>
+                                        <span>
+                                            {{post.user.username}}
+                                        </span>
                                     </div>
                                 </div>
 
                                 <div>
-                                    <span class="">Creativy inspiration</span>
+                                    <span class="">
+                                        {{post.name}}
+                                    </span>
                                 </div>
                             </div>
                             
@@ -124,6 +130,20 @@
     </div>
 </template>
 
+<script>
+export default {
+    
+    data(){
+        return {
+            posts: []
+        }
+    }, 
+
+    created() {
+        this.$store.state.posts.then(result => this.posts = result.slice(0, 2))
+    },
+}
+</script>
 <style lang="scss">
 
 @import '../assets/styles/_variables.scss';
@@ -180,9 +200,3 @@
     }
 
 </style>
-
-<script>
-export default {
-    
-}
-</script>
