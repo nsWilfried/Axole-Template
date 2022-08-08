@@ -7,7 +7,7 @@
         </span>
         <div>
           <img
-            :src="'/home/anonym/Desktop/portfolio_projects/axole/server/tmp/uploads/'+ post.thumbnail"
+            :src="post.thumbnail"
             alt=""
             srcset=""
           />

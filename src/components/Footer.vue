@@ -54,7 +54,7 @@
 
                         <!--post image--> 
                         <div class="w-28 h-full items-center flex">
-                            <div class="w-12 h-12 rounded bg-gray-400 overflow-hidden">
+                            <div style="width:70px; height: 75px;" class=" rounded bg-gray-400 overflow-hidden">
                                 <img :src="post.thumbnail" alt="" srcset="">
                             </div>
                         </div>
@@ -64,7 +64,7 @@
                             <div class="flex flex-col " >
                                 <div class=" grid" style="grid-template-columns: 1fr 1fr;">
                                     <div>
-                                        <span>Jan. 30, 2021</span>
+                                        <span>{{moment(post.created_at).subtract(10, 'days').calendar()}}</span>
                                     </div>
 
                                     <div>
@@ -131,6 +131,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     
     data(){
@@ -141,6 +142,13 @@ export default {
 
     created() {
         this.$store.state.posts.then(result => this.posts = result.slice(0, 2))
+    },
+
+    methods: {
+        moment: (date) => {
+            return moment()
+        }
+
     },
 }
 </script>
