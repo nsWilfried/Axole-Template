@@ -36,16 +36,31 @@
 
                 <div class="blog__content h-full w-1/2 flex justify-center items-center">
                     <div class="w-full p-12 bg- h-auto">
-                        <div class="w-full flex flex-row justify-around bg-green-"> 
-                            <div class="blog__content__author">
-                                <span>admin</span>
-                            </div>
-                            <div class="blog__content__date">
-                                <span>Jan. 30, 2021</span>
+                        <div class="w-full flex flex-row justify-between bg-green-"> 
+
+                            <!-- author --> 
+                            <div class="blog__content__author flex">
+
+                                <aside>
+                                    <font-awesome-icon icon="fa-solid fa-user-large" />
+                                </aside>
+                                <aside class="mx-2">admin</aside>
                             </div>
 
-                            <div class="blog__content__comments">
-                                <span>2comments</span>
+                            <!--blog date--> 
+                            <div class="blog__content__date flex ">
+                                <aside>
+                                    <font-awesome-icon icon="fa-regular fa-calendar-days" />
+                                </aside>
+                                <aside class="mx-2">Jan. 30, 2021</aside>
+                            </div>
+
+                            <!--blog comments-->
+                            <div class="blog__content__comments flex">
+                                <aside>
+                                    <font-awesome-icon icon="fa-regular fa-comments" />
+                                </aside>
+                                <aside class="mx-2">2comments</aside>
                             </div>
                         </div>
                         
@@ -186,6 +201,7 @@ export default {
         &__button {
             font-family: $primary-font;
         }
+       
     }
 }
     

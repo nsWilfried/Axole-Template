@@ -10,7 +10,7 @@ const store = createStore({
         return {
             isConnected: connected == undefined ? false :  true, 
             user: user_info !=  undefined ? Cookies.get('user') : null, 
-            posts:   axios(`${api}/posts`).then(response => {return response.data})
+            posts:   axios(`${api}/posts`).then(response => {return response.data}).catch(() => {return []})
 
         }
     }, 

@@ -28,7 +28,7 @@
 
                     <div class="w-full flex justify-center ">
                         <div class="w-full">
-                             <AboutSkills v-for="skill of skills" :key="skill" :title="skill.title" :description='skill.description' />
+                             <AboutSkills v-for="skill of skills" :key="skill" :title="skill.title" :icon='skill.icon' :description='skill.description' />
                         </div>
                     </div>
                 </div>
@@ -90,15 +90,18 @@ export default {
         const skills = [
             {
                 title:"Writter & Blogger", 
+                icon: "fa-solid fa-marker", 
                 description:"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."
             }
             , 
             {
                 title:"Writter & Blogger", 
+                icon: "fa-solid fa-camera-retro", 
                 description:"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."
             }, 
             {
                 title:"Writter & Blogger", 
+                icon: "fa-solid fa-earth-europe", 
                 description:"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts."
             }
         ]

@@ -1,8 +1,7 @@
 <template>
     <div class="about__skill flex flex-row w-full h-40 mt-2 bg-white hover:text-white">
         <div class="about__skill_icon w-48 bg-orange flex justify-center items-center ">
-            <span>
-            </span>
+            <font-awesome-icon class="text-5xl" :icon="icon" />
         </div>
 
         <div class="about__skill__content flex flex-col">
@@ -55,7 +54,8 @@
 export default {
     props: {
         title: String, 
-        description: String
+        description: String, 
+        icon: String
     }, 
 }
 </script>

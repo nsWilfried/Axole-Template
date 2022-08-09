@@ -6,10 +6,10 @@
       >
         <div class="banner-component__breadcrumb uppercase">
           <span class="banner__route-active">
-            <router-link to="/">Home -> </router-link>
+            <router-link to="/">Home <font-awesome-icon icon="fa-solid fa-arrow-right-long" /></router-link>
           </span>
 
-          <span> {{ name }} -> </span>
+          <span> {{ name }} <font-awesome-icon icon="fa-solid fa-arrow-right-long" /> </span>
         </div>
         <div
           class="banner-component__title w-full flex items-center justify-center"
