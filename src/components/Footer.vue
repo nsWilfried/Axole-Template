@@ -1,11 +1,14 @@
 <template>
   <div class="w-full h-auto main flex flex-col items-center justify-center">
     <div class="footer grid">
-      <div class="footer__grid">
+      <div class="footer__grid flex flex-col justify-center bg-red-">
+
+        <!-- axole  --> 
         <div class="footer__title">
-          <span class="font-bold">Axole.</span>
+          <span class="font-bold text-xl">Axole.</span>
         </div>
 
+        <!-- axole description -->
         <div class="footer__description h-auto my-3 flex justify-center">
           <span class="text-gray-400">
             A small river named Duden flows by their place and supplies it with
@@ -13,37 +16,27 @@
           </span>
         </div>
 
+        <!--social links -->
         <div class="w-full flex">
-          <div class="footer__social"></div>
-          <div class="footer__social"></div>
-          <div class="footer__social"></div>
+          <div v-for="social in socials" :key="social.icon" class="footer__social bg-slate-300 flex justify-center items-center">
+            <router-link :to="social.to"><font-awesome-icon :icon="social.icon" class="text-xl" /></router-link>
+          </div>
         </div>
       </div>
 
       <!--explore  -->
       <div class="footer__grid w-full">
+
+        <!--title--> 
         <div class="footer__title">
           <span>Explore</span>
         </div>
 
-        <div class="w-full h-auto flex flex-col footer__links">
-          <div>
-
-
-            <router-link to="/about">
-              <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
-              About</router-link
-            >
-          </div>
-          <div>
-            <router-link to="/blog"> <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
- Blog</router-link>
-          </div>
-
-          <div>
-            <router-link to="/contact"> 
-              <font-awesome-icon icon="fa-solid fa-arrow-right-long" />
-            Contact</router-link>
+        <!--content-->
+        <div class="w-full text-gray-400  h-auto flex flex-col footer__links">
+          <!--router link -->
+          <div v-for="link in links" :key="link.name">
+            <router-link  :to='link.to'><font-awesome-icon icon="fa-solid fa-arrow-right-long" /><span class="pl-2 capitalize">{{link.name}}</span></router-link>
           </div>
         </div>
       </div>
@@ -56,16 +49,16 @@
         </div>
 
         <!--footer posts -->
-        <div class="h-28 w-full">
+        <div class="h-28 w-full footer__grid__content">
           <div
             v-for="post in posts"
             :key="post.id"
-            class="flex flex-row h-full w-full"
+            class="flex flex-row h-full w-full bg-red-"
           >
             <!--post image-->
-            <div class="w-28 h-full items-center flex">
+            <div class="w-auto pr-2 h-full items-center flex bg-green-">
               <div
-                style="width: 70px; height: 75px"
+                style="width: 50px; height: 55px"
                 class="rounded bg-gray-400 overflow-hidden"
               >
                 <img :src="post.thumbnail" alt="" srcset="" />
@@ -74,8 +67,8 @@
 
             <!-- post date, image, title -->
             <div class="w-full h-full flex justify-center flex-col">
-              <div class="flex flex-col">
-                <div class="grid" style="grid-template-columns: 1fr 1fr">
+              <div class="flex flex-col text-gray-400">
+                <div class="grid " style="grid-template-columns: 1fr 1fr">
                   <div>
                     <span>{{
                       moment(post.created_at).subtract(10, "days").calendar()
@@ -83,16 +76,19 @@
                   </div>
 
                   <div>
-                    <span>
+                    <span class="capitalize ">
                       {{ post.user.username }}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <span class="">
-                    {{ post.name }}
-                  </span>
+                  <router-link class="hover:text-yellow-300" :to="post.slug">
+                    <span class="font-medium">
+                      {{ post.name }}
+                    </span>
+                  </router-link>
+                  
                 </div>
               </div>
             </div>
@@ -106,19 +102,21 @@
           <span>Have a question? </span>
         </div>
 
-        <!--footer posts -->
-        <div class="h-28 w-full">
-          <div class="flex flex-row h-full w-full">
-            <!--post image-->
-            <div class="w-28 h-full items-center flex">
-              <div class="w-12 h-12 rounded bg-gray-400"></div>
+        <!--footer infos -->
+        <div class="w-full footer__grid__content">
+          <div class="flex flex-row h-full w-full bg-red-" v-for="contact in contacts" :key='contact.name'>
+            <!--icons-->
+            <div class="w-auto mr-2 h-full items-center flex">
+              <div class="w-12 h-12 rounded bg-gray- flex  items-center">
+                <font-awesome-icon :icon="contact.icon" />
+              </div>
             </div>
 
-            <!-- post date, image, title -->
-            <div class="w-full h-full flex justify-center flex-col">
+            <!-- information-->
+            <div class="w-full h-auto bg-green- flex justify-center  flex-col">
               <div class="flex">
                 <div>
-                  <span class="">Creativy inspiration</span>
+                  <span>{{contact.name}}</span>
                 </div>
               </div>
             </div>
@@ -145,6 +143,44 @@ export default {
   data() {
     return {
       posts: [],
+      links: [
+        {
+          name: "about", 
+          to: '/about'
+        }, 
+        {
+          name: "blog", 
+          to: '/blog'
+        }, 
+        {
+          name: "contact", 
+          to: '/contact'
+        }
+      ], 
+      socials: [
+        {
+          icon: 'fa-brands fa-twitter', 
+          to: '#'
+        }, 
+        {
+          icon: "fa-brands fa-github", 
+          to: 'https://github.com/nsWilfried/'
+        }
+      ], 
+      contacts: [
+        {
+          icon:"fa-solid fa-map", 
+          name: '203 Fake St. Mountain View, San Francisco', 
+        }, 
+        {
+          icon:"fa-solid fa-phone", 
+          name: '+2 392 3929 210', 
+        }, 
+        {
+          icon:"fa-solid fa-paper-plane", 
+          name: 'info@yourdomain.com',  
+        }
+      ]
     };
   },
 
@@ -175,19 +211,23 @@ export default {
   &__title {
     > span {
       color: #111111;
-      font-size: 20px;
+      font-weight:bold;
+      letter-spacing: 2px; 
       text-transform: uppercase;
     }
   }
 
   &__grid {
     margin: 10px;
+    &__content {
+      margin-top: 20px; 
+    }
   }
 
   &__links {
     > div {
       width: 100px;
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
 
@@ -195,7 +235,6 @@ export default {
     width: 40px;
     height: 40px;
     border-radius: 5px;
-    background: gray;
     display: flex;
     margin-left: 3px;
     margin-right: 3px;
@@ -204,6 +243,7 @@ export default {
     &:hover {
       background: black;
       cursor: pointer;
+      color: white;
       transition: background 0.3s;
     }
   }

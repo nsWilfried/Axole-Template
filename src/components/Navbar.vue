@@ -1,5 +1,5 @@
 <template>
-    <div class="  w-full  flex shadow-sm fixed  justify-center items-center  lg:bg-white sm:bg-black sm:text-white navbar ">
+    <div class="  w-full  flex shadow-sm   justify-center items-center  lg:bg-white sm:bg-black sm:text-white navbar ">
         <div class="navbar__content flex">
 
             <div class="navbar__brand bg-orange flex justify-center items-center">

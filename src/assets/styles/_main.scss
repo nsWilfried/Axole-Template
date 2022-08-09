@@ -1,0 +1,20 @@
+@import './_variables.scss';
+@import './_fonts.scss';
+.blog {
+    background: $primary-bg;
+    color: #444;
+
+    &__content {
+        &__title {
+            font-size: 80px;
+            font-family: $primary-font;
+            line-height: 1.1;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+        }
+        &__author, &__date, &__comments {
+            padding-left: 30px;
+        }
+    }
+}
