@@ -6,16 +6,17 @@
                 
                 <div class="w-1/2 h-full flex flex-col justify-center ">
                         <!-- drop zone --> 
-                    <div class="w-full mt-6 overflow-hidden bg-yellow- p-4 flex justify-center items-center">
+                    <div >
 
-                        <DropZone 
-                        url="http://127.0.0.1:3333/create-post"
-                        :uploadOnDrop="true"
-                        :multipleUpload="false"
-                        name='cover'
-                        class="flex  justify-center items-center w-full h-36 px-4 transition bg-white border-2 border-gray-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-gray-400 focus:outline-none"
-                        />
-
+                        <file-pond
+                        name="file"
+                                ref="pond"
+                                label-idle="Drop files here..."
+                                v-bind:allow-ultiple="false"
+                                accepted-file-types="image/jpeg, image/png"
+                                required='true'
+                                storeAsFile='true'
+                                />          
                     </div>
 
                     <!-- label name--> 
@@ -62,9 +63,31 @@
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
+// Import Vue FilePond
+import vueFilePond from "vue-filepond";
+
+// Import FilePond styles
+import "filepond/dist/filepond.min.css";
+
+// Import FilePond plugins
+// Please note that you need to install these plugins separately
+
+// Import image preview plugin styles
+import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css";
+
+// Import image preview and file type validation plugins
+import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
+import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+const FilePond = vueFilePond(
+  FilePondPluginFileValidateType,
+  FilePondPluginImagePreview
+);
+
+
 export default {
      components: {
-    QuillEditor
+    QuillEditor, 
+    FilePond,
   }, 
      data() {
          return {

@@ -28,7 +28,7 @@
     <!--description -->
     <div class="post__content bg-green-400 flex justify-center">
       <div class="rounded ">
-        {{post.description}}
+        {{post.content}}
       </div>
     </div>
 
