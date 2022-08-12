@@ -43,7 +43,8 @@
                <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
                     <div>
                         <div class="w-full h-96 bg-green- ">
-                            <QuillEditor toolbar="full" class="w-full h-32 border-green-400" theme="snow" id='content' name='content'/>
+                            <input class="hidden" :name='editor'/>
+                            <editor-content class="h-12 w-full border-black border-3" :editor="editor" />
                         </div>
                     </div>
                    
@@ -60,9 +61,8 @@
 </template>
 
 <script>
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
-
+import { Editor, EditorContent } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
 // Import Vue FilePond
 import vueFilePond from "vue-filepond";
 
@@ -86,15 +86,29 @@ const FilePond = vueFilePond(
 
 export default {
      components: {
-    QuillEditor, 
     FilePond,
+    Editor, 
+    EditorContent
+    
   }, 
      data() {
          return {
              editor: null 
          }
      }, 
-    
+
+     mounted(){
+         this.editor = new Editor({
+             content: '', 
+            extensions: [
+                StarterKit,
+        ],
+        })
+     }
+    ,
+     beforeUnmount() {
+    this.editor.destroy()
+  },
 
 }
 </script>

@@ -2,7 +2,7 @@
     
     <div class="flex  justify-around">
          <!-- author --> 
-                            <div class="blog__content__author flex">
+                            <div class="onepost__content__author flex">
 
                                 <aside>
                                     <font-awesome-icon icon="fa-solid fa-user-large" />
@@ -13,7 +13,7 @@
                             </div>
 
                             <!--blog date--> 
-                            <div class="blog__content__date flex ">
+                            <div class="onepost__content__date flex ">
                                 <aside>
                                     <font-awesome-icon icon="fa-regular fa-calendar-days" />
                                 </aside>
@@ -23,7 +23,7 @@
                             </div>
 
                             <!--blog comments-->
-                            <div class="blog__content__comments flex">
+                            <div class="onepost__content__comments flex">
                                 <aside>
                                     <font-awesome-icon icon="fa-regular fa-comments" />
                                 </aside>

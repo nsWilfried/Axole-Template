@@ -1,8 +1,9 @@
 <template>
   <div  v-for="post in posts" :key="post.id" class="post w-full h-auto bg-gray- flex flex-col ">
     
+
     <!-- post -->
-    <div style='height:400px;' class='w-full bg-blue-400 flex flex-col justify-center items-center bg-green-'>
+    <div style='height:400px;' class='w-full bg-blue- flex flex-col justify-center items-center bg-green-'>
       <!-- post name -->
       <div class="post__title flex justify-center items-center bg-red-">
         <div  class="bg-violet- justify-center"><span class="font-bold text-6xl">{{post.name}}</span></div>
@@ -11,7 +12,7 @@
       <!-- post description -->
       <div class="post__description bg-yellow- flex justify-center">
         <div class="bg-gray-">
-          <span class="text-center">
+          <span class="text-center">400
             {{post.description}}
           </span>
         </div>
@@ -26,41 +27,41 @@
     </div>
 
     <!--description -->
-    <div class="post__content bg-green-400 flex justify-center">
+    <div class="post__content bg-green- flex justify-center">
       <div class="rounded ">
         {{post.content}}
       </div>
     </div>
 
-    <div class="post__comments bg-yellow-400 w-full flex justify-center items-center">
+    <div class="post__comments bg-yellow- w-full flex justify-center items-center">
       <div class="rounded">
-        <div class="w-full">
-          <span>{{post.comments.length}} Comments</span>
+        <div class="w-full  h-12 flex items-center pl-4">
+          <span>{{post.comments.length}} Commentaires</span>
         </div>
         <hr>
          <div >
-           <div v-for="comment in post.comments" :key="comment.id" style='height:100px;' class="flex mt-2 w-full bg-green-400">
-             <div class="w-24 bg-orange-400 flex justify-center items-center h-full ">
+           <div v-for="comment in post.comments" :key="comment.id" style='height:100px;' class="flex mt-2 w-full bg-green-">
+             <div class="w-24 bg-orange- flex justify-center items- h-full ">
                <div style="width:60px; height:60px;" class="bg-gray-300 flex overflow-hidden justify-center items-center rounded-full">
                  <font-awesome-icon class='text-white mt-3 text-5xl' icon="fa-solid fa-user" />
                </div>
              </div>
 
-             <div class="w-full bg-violet-300 h-full ">
-               <div class="post__comment__name w-full bg-yellow-500 flex items-center">
-                 <span class="text-md capitalize">
+             <div class="w-full bg-violet- h-full ">
+               <div class="post__comment__name w-full h-auto  bg-yellow- flex  items-end">
+                 <span class="text-md capitalize font-medium">
                    {{comment.users.username}}
                  </span>
                </div>
 
-               <div class="post__comment__name w-full bg-blue-500 py-3">
-                 <span class="text-md capitalize">
+               <div class="post__comment__name w-full bg-blue-">
+                 <span class="text-md capitalize text-gray-400">
                    {{moment(comment.created_at).fromNow()}}
                  </span>
                </div>
 
                <div class="post__comment__description">
-                 <span>
+                 <span class="text-gray-400">
                    {{comment.message}}
                  </span>
                </div>
@@ -103,6 +104,8 @@
 @import '../assets/styles/_mixins.scss'; 
 .post {
   background: $primary-bg;
+  font-family: $primary-font;
+
 }
 .post__title,.post__description, .post__infos{
   width: $full-width;
@@ -115,6 +118,7 @@
 }
 .post__title {
   align-items:end;
+  color: $primary-color;
   > div {
       width: 1000px;
   }
