@@ -62,8 +62,11 @@ Route.get('/posts/:id',async (request) => {
 
 Route.get('/:id',async (request)=> {
   const post = await Post.findBy('slug', request.params.id)
-  await post?.load('comments')
-  await post?.load('user')
+  await post?.load(loader => {
+    loader.load('comments', comment => {
+      comment.preload('users')
+    }).load('user')
+  })
   
   return post;
 })

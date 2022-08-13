@@ -34,7 +34,6 @@
       "@adonisjs/session",
       "@adonisjs/mail",
       "@adonisjs/view",
-      "@zeytech/file-upload-adonisjs"
     ]
   }
 }

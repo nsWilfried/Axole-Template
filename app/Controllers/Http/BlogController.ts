@@ -10,13 +10,13 @@ export default class BlogController {
     client = 'http://127.0.0.1:3000';
     server = 'http://127.0.0.1:3333'
     public async createPost({ request, response }: HttpContextContract) {
-        const thumbnail = request.file('cover')
+        const thumbnail = request.file('file')
         const post = {
             name : request.input('name').trim(), 
             description: request.input('description').trim(),
-            slug: request.input('name').trim().split(' ').join('-'),
+            slug: request.input('name').trim().split(' ').join('-').toLowercase(),
             content: request.input('content'), 
-            thumbnail: `${this.server}/dowloads/${thumbnail?.clientName}`, 
+            thumbnail: `${this.server}/downloads/${thumbnail?.clientName}`, 
             userId: request.cookie('user').id
         }
           

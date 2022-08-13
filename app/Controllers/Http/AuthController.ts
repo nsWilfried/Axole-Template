@@ -1,28 +1,22 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
+import LoginValidator from 'App/Validators/LoginValidator'
+import RegisterValidator from 'App/Validators/RegisterValidator'
 export default class AuthController {
 
     client = 'http://127.0.0.1:3000'
     public async register({request, response}: HttpContextContract){
 
-        try{
-            const user = await User.create({
-                username: request.input('username'), 
-                email: request.input('email'),
-                password: request.input('password')
-
-
-            }).then(data => {
-                console.log('voici ce qui se passe après la création du user', data)
-            })
-
-            this.setUserInfoCookie(response, user)
-           
-            response.redirect().toPath(`/user/login`)
+        try {
+            const payload = await request.validate(RegisterValidator)
+            const user = await User.create(payload)           
+            response.redirect().toPath(`${this.client}/user/login`)
         }
         catch(error){
-
-            response.redirect(`${this.client}/user/register`)
+            for (error of error.messages.errors) {
+             response.redirect(`${this.client}/user/register?error=${error.rule}&field=${error.field}`)
+                
+            }
         }
        
 
@@ -42,7 +36,7 @@ export default class AuthController {
         let rememberMe = false
         
 
-
+        await request.validate(LoginValidator)
         if(remember == 'on'){
             rememberMe = true
         } 
