@@ -87,7 +87,6 @@ const FilePond = vueFilePond(
 export default {
      components: {
     FilePond,
-    Editor, 
     EditorContent
     
   }, 

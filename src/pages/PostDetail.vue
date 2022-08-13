@@ -50,14 +50,11 @@
              <div class="w-full bg-violet- h-full ">
                <div class="post__comment__name w-full h-auto  bg-yellow- flex  items-end">
                  <span class="text-md capitalize font-medium">
-                   {{comment.users.username}}
+                  
+                   {{comment.users.username}} 
                  </span>
-               </div>
-
-               <div class="post__comment__name w-full bg-blue-">
-                 <span class="text-md capitalize text-gray-400">
-                   {{moment(comment.created_at).fromNow()}}
-                 </span>
+                 
+                 <span class="text-gray-400 ml-2">{{moment(comment.created_at).fromNow()}}</span>
                </div>
 
                <div class="post__comment__description">

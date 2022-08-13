@@ -19,7 +19,7 @@
         <!--social links -->
         <div class="w-full flex">
           <div v-for="social in socials" :key="social.icon" class="footer__social bg-slate-300 flex justify-center items-center">
-            <router-link :to="social.to"><font-awesome-icon :icon="social.icon" class="text-xl" /></router-link>
+            <a :href="social.to"><font-awesome-icon :icon="social.icon" class="text-xl" /></a>
           </div>
         </div>
       </div>
@@ -83,7 +83,7 @@
                 </div>
 
                 <div>
-                  <router-link class="hover:text-yellow-300" :to="post.slug">
+                  <router-link class="hover:text-yellow-300" :to="`/blog/${post.slug}`">
                     <span class="font-medium">
                       {{ post.name }}
                     </span>

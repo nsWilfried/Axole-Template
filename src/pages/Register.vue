@@ -1,9 +1,9 @@
 <template>
-    <div class="w-full main__register bg-slate-200 flex justify-center items-center">
-
+    <div class="w-full main__register bg-slate-200 flex flex-col  justify-center items-center">
+        <Error :errorMessage="errorMessage" v-if="errorMessage != null " />
         <div class=" w-96 h-auto rounded-lg bg-white ">
             <div class="w-full h-14 flex justify-center items-center">
-                <span class="font-medium uppercase  text-2xl">Inscription</span>
+                <span class="font-bold  text-2xl">Inscription</span>
             </div>
         <Form :buttonText="text" :schema="registerSchema" :action="action"></Form>
         </div>
@@ -17,10 +17,12 @@
 
 import {ErrorMessage} from 'vee-validate'
 import Form from '@/components/Form.vue'
+import Error from '@/components/Error.vue'
+
 import * as yup from "yup"
 export default {
     
-    components: {Form, ErrorMessage}, 
+    components: {Form,Error,  ErrorMessage}, 
     data() {
         
         
@@ -57,9 +59,28 @@ export default {
         return {
             action: 'http://127.0.0.1:3333/user/register', 
             text: 'S\'inscrire',
-            registerSchema
+            registerSchema, 
+            errorMessage: null
         }
-    } 
+    } , 
+     methods: {
+        checkError(code , message) {
+            if(this.$route.query.error == code){
+                this.errorMessage = message
+                return this.removeErrorMessage()
+            }
+        },
+
+        removeErrorMessage() {
+            setTimeout(() => {
+                this.errorMessage = null
+                this.$router.push({query: undefined})
+            }, 4000)           
+        }      
+    },
+    mounted() {
+       this.checkError('unique', `${this.$route.query.field} déjà utilisé`)
+    },
 } 
 </script>
 

@@ -1,10 +1,6 @@
 <template>
     <div class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
-         <div style="width:330px" class="bg-red-400 text-white p-2 text-center rounded-lg my-2" v-if="errorMessage">
-                <span>
-                    {{errorMessage}}
-                </span>
-            </div>
+         <Error :errorMessage='errorMessage' v-if="errorMessage" />
         <div class=" w-96 h-auto rounded-lg bg-white ">
 
             <div class="w-full h-16 flex justify-center items-center">
@@ -18,9 +14,11 @@
 
 <script>
 import Form from '@/components/Form.vue'
+import Error from '@/components/Error.vue'
+
 import * as yup from 'yup'
 export default {
-    components: {Form}, 
+    components: {Form, Error}, 
     data() {
         const loginSchema = {
             fields: [
