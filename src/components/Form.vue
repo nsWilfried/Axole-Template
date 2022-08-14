@@ -26,7 +26,7 @@
             
                     
             <div class="w-full flex justify-center items-center">
-             <ErrorMessage style="width:330px" class="bg-red-400 text-white p-2 rounded-lg my-2" :name="name" />
+             <ErrorMessage style="width:330px" class="text-red-400" :name="name" />
 
             </div>
         </div>

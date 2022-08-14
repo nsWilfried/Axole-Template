@@ -2,7 +2,7 @@
     <div class="w-full h-screen bg-slate- flex justify-center ">
 
         <div style="width: 1320px;" class=" h-full bg-green- flex justify-content items-center ">
-            <form class="bg-red-40 w-full h-full flex " action="http://127.0.0.1:3333/create-post" method="post" enctype="multipart/form-data">
+            <Form class="bg-red-40 w-full h-full flex " :validation-schema='schemaRules' action="http://127.0.0.1:3333/create-post" method="post" enctype="multipart/form-data">
                 
                 <div class="w-1/2 h-full flex flex-col justify-center ">
                         <!-- drop zone --> 
@@ -22,12 +22,14 @@
                     <!-- label name--> 
 
                     <div class="w-full p-4 bg-violet-">
-                        <input class="w-full hover:border-blue-400  py-4 px-1 text-3xl " type="text" placeholder="Entrez le nom du post..." name="name" id="">
+                        <Field class="w-full  py-4 px-1 text-3xl" type="text" placeholder="Entrez le nom du post..." :rules='nameRule' name="name"/>
+                        <ErrorMessage name="name" class="text-red-400" />
                     </div>
             
 
                     <div class="w-full p-4 bg-violet-">
-                        <textarea style="resize:none;" class="w-full hover:border-blue-400 h-24 p-2 text-gray-600  text-2xl" type="text" placeholder="Entrez la description du post..." name="description"> </textarea>
+                        <Field style="resize:none;" class="w-full h-24 p-2 text-gray-600  text-2xl" type="text" placeholder="Entrez la description du post..." name="description"></Field>
+                        <ErrorMessage name="description" class="text-red-400" />
                     </div>
 
                             
@@ -45,6 +47,7 @@
                         <div class="w-full h-96 bg-green- ">
                             <input class="hidden" :name='editor'/>
                             <editor-content class="h-12 w-full border-black border-3" :editor="editor" />
+
                         </div>
                     </div>
                    
@@ -52,7 +55,7 @@
                
 
                 
-            </form>
+            </Form>
         </div>
         
           
@@ -78,6 +81,9 @@ import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css
 // Import image preview and file type validation plugins
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginImagePreview from "filepond-plugin-image-preview";
+import { Field, Form, ErrorMessage } from 'vee-validate';
+import * as yup from 'yup';
+
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview
@@ -87,12 +93,21 @@ const FilePond = vueFilePond(
 export default {
      components: {
     FilePond,
-    EditorContent
+    EditorContent, 
+    Field,
+    Form,
+    ErrorMessage,
     
   }, 
      data() {
+         const schemaRules = yup.object({
+             name: yup.string().required('Champ requis'), 
+             description: yup.string().required('Champ requis'), 
+         })
          return {
-             editor: null 
+             editor: null, 
+             nameRule: yup.string().required('Champ requis'), 
+             schemaRules
          }
      }, 
 
