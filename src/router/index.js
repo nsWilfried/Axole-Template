@@ -5,68 +5,100 @@ import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
 import CreatePost from '../pages/CreatePost.vue'
 import PostDetail from '../pages/PostDetail.vue'
-import NotFound from '../pages/NotFound.vue'
 
 
 
-import {createRouter, createWebHistory} from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Cookies from 'js-cookie'
+import store from '../store/store'
 
 const isUserLogin = () => {
     const isConnected = Cookies.get('isConnected') != undefined ? true : false
-    console.log('Avant de rentrer dans la page', isConnected)
-    if(isConnected){
+    if (isConnected) {
         return '/'
     }
 }
+const isPostExist = async(to, next) => {
+ let postExist = null
+ await store.state.posts.then(results => {
+    let post = []
+    results.find(element => {
+
+      if (element.slug == to.params.id) {
+        return post= element
+      }
+
+    })
+    return post
+
+    }).then(value => {
+       if (value.length == 0) {
+            return postExist = false
+        } else {
+            return postExist = true
+        }
+        })
+
+        if (postExist == false) {
+            return {
+                path: '/'
+            }
+        }    
+}
 const routes = [
     {
-        path:'/', 
-        component: Home, 
+        path: '/',
+        component: Home,
         name: 'home'
-    }, 
+    },
     {
         path: '/user/login',
-        component: Login, 
-        name: 'login', 
-        beforeEnter:  [isUserLogin]
-    }, 
+        component: Login,
+        name: 'login',
+        beforeEnter: [isUserLogin]
+    },
     {
         path: '/user/register',
-        component: Register, 
-        name: 'register', 
+        component: Register,
+        name: 'register',
         beforeEnter: [isUserLogin]
-    }, 
+    },
     {
-        path: '/about', 
-        component: About, 
-        name:'about'
+        path: '/about',
+        component: About,
+        name: 'about'
     }, {
-        path: '/contact', 
-        component: Contact, 
+        path: '/contact',
+        component: Contact,
         name: 'contact'
     }
     , {
-        path: '/create-post', 
-        component: CreatePost, 
-        name: 'create-post', 
+        path: '/create-post',
+        component: CreatePost,
+        name: 'create-post',
         beforeEnter: () => {
-            const isConnected = Cookies.get('isConnected') != undefined ? true: false
-            if(!isConnected){
+            const isConnected = Cookies.get('isConnected') != undefined ? true : false
+            if (!isConnected) {
                 return '/'
             }
         }
-    }, 
+    },
     , {
-        path: '/blog/:id', 
-        component: PostDetail, 
-        name: 'post-detail'
-    }
+        path: '/blog/:id',
+        component: PostDetail,
+        name: 'post-detail',
+        beforeEnter: [isPostExist]
+    },
+    {
+        path: '/:pathMatch(.*)*', name: 'NotFound', redirect: to => {
+            return '/'
+        }
+    },
 ]
 
 const router = createRouter({
-    history: createWebHistory(), 
+    history: createWebHistory(),
     routes
-  })
+})
 
 export default router;
