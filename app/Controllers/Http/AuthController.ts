@@ -9,7 +9,7 @@ export default class AuthController {
 
         try {
             const payload = await request.validate(RegisterValidator)
-            const user = await User.create(payload)           
+             await User.create(payload)           
             response.redirect().toPath(`${this.client}/user/login`)
         }
         catch(error){

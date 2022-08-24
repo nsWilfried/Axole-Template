@@ -1,8 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany, hasOne } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Comment from './Comment'
 import User from './User'
-import { number } from 'yup'
 
 export default class Post extends BaseModel {
   @column({ isPrimary: true })
