@@ -36,7 +36,7 @@ export default class BlogController {
     response.redirect().toPath(this.client);
   }
 
-  public async addComment({ request, params, response }: HttpContextContract) {
+  public async addComment({ request, response }: HttpContextContract) {
     const comment = {
       message: request.input("message"),
       userId: JSON.parse(atob(request.input("userId"))).message.id,
@@ -46,7 +46,7 @@ export default class BlogController {
     // console.log("voici le commentaire qui eest envoyé", comment);
 
     try {
-      await Comment.create(comment).then((data) => {
+      await Comment.create(comment).then(() => {
         // console.log("tout s'est bien passé", data)
         response.status(200).json({
           message: comment.message,
