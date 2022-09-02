@@ -44,7 +44,7 @@
 
           <ol class="relative border-l border-gray-200 dark:border-gray-700">
 
-            <li v-for="comment in post.comments" :key="comment.id" class="mb-10 ml-6">
+            <li v-for="comment in comments" :key="comment.id" class="mb-10 ml-6">
               <span class="flex absolute -left-3 justify-center items-center w-6 h-6 rounded-full">
                 <div style="width:30px; height:30px;" class=" flex overflow-hidden justify-center items-center ">
                   <font-awesome-icon class='text-gray-300 mt-3 text-5xl' icon="fa-solid fa-user" />
@@ -54,10 +54,10 @@
               <div
                 class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600">
                 <div class="justify-between items-center mb-3 sm:flex">
-                  <time class="mb-1 text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{
+                  <time class="mb-1 capitalize text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{
                       moment(comment.created_at).fromNow()
                   }}</time>
-                  <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300">{{ comment.users.username }}
+                  <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300"><span class="font-medium capitalize">{{ comment.users.username }}</span>
                     commented </div>
                 </div>
                 <div
@@ -170,29 +170,50 @@ export default {
       posts: [],
       isConnected: this.$store.state.isConnected,
       moment: moment, 
-      message: ''
+      message: '', 
+      comments: []
     };
   },
   methods: {
     sendComment(hello){
-      // alert("voilà le post id", postId);
       this.axios.post("http://127.0.0.1:3333/comments", {
         message: this.message, 
         postId: hello,
         userId: this.$cookies.get("user")
       }).then(response => {
-        console.log(response)
+        if(response.status == 200) {
+
+          // vider l'input
+          this.message = ""
+
+          // lancer une alert
+          this.$swal("Succès", "Commentaire ajouté", 'success').then(response => {
+            this.axios.get("http://127.0.0.1:3333/posts").then(response =>  {
+              response.data.filter((element) => element.slug == this.$route.params.id).forEach(element => {
+                this.comments = element.comments 
+              })
+            })
+            // console.log("voici les comments après l'ajout", this.comments)
+          })
+        }else {
+          this.$swal("Erreur", "Message bien envoyé", "error")
+        }
       })
     }
   },
   created() {
     this.$store.state.posts.then((result) => {
-      return result
+       result
         .filter((element) => element.slug == this.$route.params.id)
         .forEach((element) => {
           this.posts.push(element);
+          this.comments = element.comments
+          
         });
+
+        console.log("voici les comments aavant l'ajout", this.comments);
     });
+    
   },
 
   mounted() { },
