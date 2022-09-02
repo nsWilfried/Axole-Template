@@ -211,9 +211,8 @@ export default {
           
         });
 
-        console.log("voici les comments aavant l'ajout", this.comments);
+        // console.log("voici les comments aavant l'ajout", this.comments);
     });
-    
   },
 
   mounted() { },

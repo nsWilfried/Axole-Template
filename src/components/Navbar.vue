@@ -52,6 +52,9 @@
               
 
             </div>
+            <div class="flex justify-center items-center ml-3">
+                {{user.message.email}}
+            </div>
         
         </div>
     </div>
@@ -64,10 +67,13 @@ export default {
     data() {
         return { 
             connected: this.$store.state.isConnected,
+            user: null
             }
     },
 
-    mounted() {
+    created() {
+        this.user = JSON.parse(atob(this.$store.state.user))
+        console.log(this.user.message)
     },
 }
 </script>

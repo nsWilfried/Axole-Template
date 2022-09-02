@@ -21,142 +21,136 @@
                                 I am a Blogger & Photographer Based in Philippines
                             </span>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>
         </div>
 
-        <!--blog --> 
-        <div  class="blog  w-full flex justify-center items-center">
-            <div style="width:1320px " class="bg-green- h-full flex ">
-                <div class="blog__poster h-full bg-slate-300 w-2/3">
-                    <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg" style="height:540px; " class=" bg-cover bg-scroll  " alt="random ">
-                </div>
+        <!--blog -->
 
-                <div class="blog__content h-full w-1/2 flex justify-center items-center">
-                    <div class="w-full p-12 bg- h-auto">
-                        <div class="w-full flex flex-row justify-between bg-green-"> 
+        <div style="background-color: #999999;" class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+            <div :key="index" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+                <div v-for="(element, index) in posts"
+                    class="overflow-hidden transition-shadow duration-300 bg- rounded">
+                    <span v-if="element.thumbnail"><img :src="element.thumbnail"
+                            class="object-cover w-full h-64 rounded" alt="" /></span>
+                    <div v-else class="w-full h-64 bg-gray-400"></div>
+                    <div class="py-5">
+                        <p class="mb-2 text-xs font-semibold text-gray-600 uppercase">
+                            {{ moment(element.created_at).fromNow() }}
+                        </p>
+                        <routerLink :to="`/blog/${element.slug}`" 
+                            class="inline-block mb-3 text-black transition-colors duration-200 hover:text-deep-purple-accent-700">
+                            <p class="text-2xl font-bold leading-5">{{ element.name }}</p>
+                        </routerLink>
+                        <p class="mb-4 text-gray-700">
+                            Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
+                            doloremque.
+                        </p>
+                        <div class="flex space-x-4">
 
-                            <!-- author --> 
-                            <div class="blog__content__author flex">
-
-                                <aside>
-                                    <font-awesome-icon icon="fa-solid fa-user-large" />
-                                </aside>
-                                <aside class="mx-2">admin</aside>
-                            </div>
-
-                            <!--blog date--> 
-                            <div class="blog__content__date flex ">
-                                <aside>
-                                    <font-awesome-icon icon="fa-regular fa-calendar-days" />
-                                </aside>
-                                <aside class="mx-2">Jan. 30, 2021</aside>
-                            </div>
-
-                            <!--blog comments-->
-                            <div class="blog__content__comments flex">
-                                <aside>
-                                    <font-awesome-icon icon="fa-regular fa-comments" />
-                                </aside>
-                                <aside class="mx-2">2comments</aside>
-                            </div>
-                        </div>
-                        
-                        <!-- title -->
-                        <div class="blog__content__title bg-yellow-">
-                            <span class="underline ">
-                               Writing A Novel with A Heart
-                            </span>
-                        </div>
-
-                        <!--description--> 
-                        <div class="blog__content__description">
-                            <span class="text-gray-400">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Iste, rem. Et, quaerat vel at veniam magni repellat quasi deserunt voluptatem officia, beatae reprehenderit inventore perspiciatis. Ex numquam commodi maxime corrupti.
-                            </span>
-                        </div>
-
-                        <!--learn more-->
-                        <div class="blog__content__button">
-                            <button class="bg-blue-400 text-white uppercase px-3 w-36 p-3 font-medium  my-3 rounded hover:bg-blue-600">Lire en plus</button>
+                            <a href="/" aria-label="Comments"
+                                class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
+                                <div class="mr-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        stroke="currentColor"
+                                        class="w-5 h-5 text-gray-600 transition-colors duration-200 group-hover:text-deep-purple-accent-700">
+                                        <polyline points="23 5 23 18 19 18 19 22 13 18 12 18" fill="none"
+                                            stroke-miterlimit="10"></polyline>
+                                        <polygon points="19 2 1 2 1 14 5 14 5 19 12 14 19 14 19 2" fill="none"
+                                            stroke="currentColor" stroke-miterlimit="10"></polygon>
+                                    </svg>
+                                </div>
+                                <p class="font-semibold">{{ element.comments.length }}</p>
+                            </a>
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </div>
-        <Footer/>
+        <Footer />
     </div>
 </template>
 
 <script>
 import Footer from "@/components/Footer.vue"
+import moment from "moment"
 export default {
-    components: {Footer}, 
+    components: { Footer },
     data() {
 
         return {
+            posts: [],
+            moment: moment
         }
     },
 
-    mounted() {
-
-    console.log(this.$store.state.user)
+    created() {
+        this.$store.state.posts.then(response => {
+            this.posts = response
+            console.log(response)
+        })
     },
 }
 </script>
 
 <style lang="scss">
-@import '../assets/styles/_variables.scss'; 
+@import '../assets/styles/_variables.scss';
 @import '../assets/styles/_fonts.scss';
-@import '../assets/styles/_mixins.scss'; 
+@import '../assets/styles/_mixins.scss';
 
-.banner{
+.banner {
 
     height: 750px;
     background: $primary-bg;
-   font-family: $primary-font;
+    font-family: $primary-font;
 
     &__content {
         width: $header-width;
         height: $full-height;
+
         //background: blue;
-        > div {
-            width: 880px ; 
+        >div {
+            width: 880px;
             height: 420px;
-            margin-top:59px;
+            margin-top: 59px;
 
             //background:orange;
         }
     }
+
     &__text {
-        height:40px;
+        height: 40px;
         text-transform: uppercase;
-        margin-top:15px;
-        > span {
+        margin-top: 15px;
+
+        >span {
             font-weight: 500;
             color: #111;
             font-size: 12px;
-             letter-spacing: 3px;
-             margin-left: -60px;
+            letter-spacing: 3px;
+            margin-left: -60px;
         }
-        
-       
-            }
+
+
+    }
+
     &__title {
         height: 265px;
-       // background: aliceblue;
+        // background: aliceblue;
 
-        > span {
+        >span {
             font-weight: 800;
             color: #444;
             font-size: 14vw;
             line-height: 1.2;
-    
+
         }
-        &-special{
+
+        &-special {
             color: #000;
             -webkit-text-fill-color: transparent;
             -webkit-text-stroke-width: 1px;
@@ -165,44 +159,25 @@ export default {
     }
 
     &__description {
-        > div {
+        >div {
             height: 100px;
-            margin-left:70px;
+            margin-left: 70px;
             //background: red;
             width: 500px;
             display: flex;
             align-items: flex-end;
-                >span{
-                    
-                    font-size: 30px;
-                    letter-spacing: 1px;
-                    color: #919191;
-                    font-weight: 200;
-                }
+
+            >span {
+
+                font-size: 30px;
+                letter-spacing: 1px;
+                color: #919191;
+                font-weight: 200;
+            }
 
         }
-         
+
     }
 }
 
-
-.blog {
-    background: $primary-bg; 
-    color: #444;
-    &__content{
-        &__title {
-            font-size: 80px;
-            font-family: $primary-font;
-            line-height: 1.1;
-             margin-top: 10px;
-             margin-bottom: 10px;
-            
-        }
-        &__button {
-            font-family: $primary-font;
-        }
-       
-    }
-}
-    
 </style>
