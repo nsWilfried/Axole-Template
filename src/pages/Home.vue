@@ -29,7 +29,8 @@
 
         <!--blog -->
 
-        <div style="background-color: #999999;" class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
+        <div style="background-color: #999999;"
+            class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div :key="index" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                 <div v-for="(element, index) in posts"
                     class="overflow-hidden transition-shadow duration-300 bg- rounded">
@@ -37,10 +38,16 @@
                             class="object-cover w-full h-64 rounded" alt="" /></span>
                     <div v-else class="w-full h-64 bg-gray-400"></div>
                     <div class="py-5">
-                        <p class="mb-2 text-xs font-semibold text-gray-600 uppercase">
-                            {{ moment(element.created_at).fromNow() }}
-                        </p>
-                        <routerLink :to="`/blog/${element.slug}`" 
+                        <div class="mb-2 flex justify-between text-xs font-semibold text-gray-600 capitalize">
+                            <div>
+                                {{ moment(element.created_at).fromNow() }}
+                            </div>
+
+                            <div>
+                                {{element.user.username}}
+                            </div>
+                        </div>
+                        <routerLink :to="`/blog/${element.slug}`"
                             class="inline-block mb-3 text-black transition-colors duration-200 hover:text-deep-purple-accent-700">
                             <p class="text-2xl font-bold leading-5">{{ element.name }}</p>
                         </routerLink>
@@ -65,11 +72,38 @@
                                 </div>
                                 <p class="font-semibold">{{ element.comments.length }}</p>
                             </a>
+                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.message.id">modifier</button>
+
                         </div>
                     </div>
                 </div>
-
             </div>
+
+            <!-- Previous Button -->
+            <div>
+                <a href="#"
+                class="inline-flex items-center py-2 px-4 mr-3 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+                <svg aria-hidden="true" class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                Précédent
+            </a>
+            <a 
+                class="inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 ">
+                Suivant
+                <svg aria-hidden="true" class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </a>
+            </div>
+            
+
         </div>
         <Footer />
     </div>
@@ -84,15 +118,19 @@ export default {
 
         return {
             posts: [],
-            moment: moment
+            moment: moment, 
+            user: null
         }
     },
 
     created() {
         this.$store.state.posts.then(response => {
-            this.posts = response
+            this.posts = response.slice(0, 6)
             console.log(response)
         })
+        if(this.$store.state.user){
+            this.user = JSON.parse(atob(this.$store.state.user))
+        }
     },
 }
 </script>
@@ -179,5 +217,4 @@ export default {
 
     }
 }
-
 </style>
