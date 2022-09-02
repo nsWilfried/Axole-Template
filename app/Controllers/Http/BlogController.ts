@@ -40,7 +40,7 @@ export default class BlogController {
     const comment = {
       message: request.input("message"),
       userId: JSON.parse(atob(request.input("userId"))).message.id,
-      postId: request.input("postId"),
+        postId: request.input("postId")
     };
 
     // console.log("voici le commentaire qui eest envoyé", comment);
