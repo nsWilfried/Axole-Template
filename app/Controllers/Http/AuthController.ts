@@ -62,7 +62,7 @@ export default class AuthController {
     }
 
     public setUserInfoCookie(response, user){
-        response.cookie('isConnected', true)
-        response.cookie('user', user)
+        response.plainCookie('isConnected', true)
+        response.plainCookie('user', user)
     }
 }
