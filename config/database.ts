@@ -8,6 +8,9 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import Url from 'url-parse'
+
+const DATABASE_URL = new Url(Env.get('DATABASE_URL'))
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -21,6 +24,8 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   |
   */
   connection: Env.get('DB_CONNECTION'),
+
+  
 
   connections: {
     /*
@@ -41,7 +46,7 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
         port: Env.get('PG_PORT', 5432) ,
         user: Env.get('PG_USER', 'postgres')as string,
         password: Env.get('PG_PASSWORD', 'root')as string,
-        database: Env.get('PG_DB_NAME', "lucid")as string,
+        database: Env.get('PG_DB_NAME',  DATABASE_URL.pathname.substr(1))as string,
       },
       healthCheck: true,
 			debug: false,
