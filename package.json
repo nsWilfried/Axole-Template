@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node ace serve --watch", 
     "build": "node ace build --prod",
-    "start": "ENV_SILENT=true node ./build/server.js --watch",
+    "start": "ENV_SILENT=true node ./build/server.js",
     "start:prod": "node ./build/server.js"
   },
   "devDependencies": {
