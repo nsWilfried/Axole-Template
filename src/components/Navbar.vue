@@ -45,15 +45,15 @@
                 
                 <!-- logout button --> 
                 <div v-if="connected == true" >
-                    <form action="http://127.0.0.1:3333/logout" method="post" >
+                    <form :action="`${apiUrl}/logout`" method="post" >
                         <button class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Se déconnecter</button>
                     </form>
                 </div>
               
 
             </div>
-            <div class="flex justify-center items-center ml-3">
-                {{user.message.email}}
+            <div v-if="user != null " class="flex justify-center items-center ml-3">
+                {{user.message.email || ""}}
             </div>
         
         </div>
@@ -67,13 +67,16 @@ export default {
     data() {
         return { 
             connected: this.$store.state.isConnected,
-            user: null
+            user: null, 
+            apiUrl:  "https://ns-blog-api.herokuapp.com"
             }
     },
 
     created() {
-        this.user = JSON.parse(atob(this.$store.state.user))
-        console.log(this.user.message)
+        if(this.$store.state.user){
+            this.user = JSON.parse(atob(this.$store.state.user))
+        }
+        // console.log(this.user.message)
     },
 }
 </script>

@@ -63,7 +63,8 @@ export default {
         }
         
         return {
-            action: 'http://127.0.0.1:3333/user/register', 
+            apiUrl:'https://ns-blog-api.herokuapp.com', 
+            action: `https://ns-blog-api.herokuapp.com/user/register`, 
             text: 'S\'inscrire',
             registerSchema, 
             errorMessage: null
@@ -84,8 +85,12 @@ export default {
             }, 4000)           
         }      
     },
+
+    
     mounted() {
        this.checkError('unique', `${this.$route.query.field} déjà utilisé`)
+        console.log(this.apiUrl)
+       console.log(this.action)
     },
 } 
 </script>

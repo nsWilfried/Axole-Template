@@ -5,8 +5,8 @@ const connected = Cookies.get('isConnected')
 const user_info = Cookies.get('user')
 const store = createStore({
      state(){
-        const api = "http://127.0.0.1:3333"
-
+        const api =  "https://ns-blog-api.herokuapp.com"
+        console.log("je suis ldans le store",)
         return {
             isConnected: connected == undefined ? false :  true, 
             user: user_info !=  undefined ? Cookies.get('user') : null, 

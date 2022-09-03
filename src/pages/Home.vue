@@ -131,6 +131,8 @@ export default {
         if(this.$store.state.user){
             this.user = JSON.parse(atob(this.$store.state.user))
         }
+
+        console.log("je suis l'api ", import.meta.env)
     },
 }
 </script>

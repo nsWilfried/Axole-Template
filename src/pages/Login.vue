@@ -53,8 +53,9 @@ export default {
             ]
         }
         return {
+            apiUrl: 'https://ns-blog-api.herokuapp.com', 
             text: 'Se connecter', 
-            action: `http://127.0.0.1:3333/user/login`, 
+            action: `https://ns-blog-api.herokuapp.com/user/login`, 
             loginSchema, 
             errorMessage: null
         }
