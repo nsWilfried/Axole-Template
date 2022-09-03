@@ -55,7 +55,7 @@ export default class BlogController {
       });
     } catch (error) {
       response.status(401).json({
-        error: "Erreur lors de l'envoi du formulaire",
+        error: "Erreur lors  de l'envoi du formulaire",
       });
     }
 
