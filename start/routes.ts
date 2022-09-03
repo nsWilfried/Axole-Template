@@ -26,11 +26,14 @@ import Comment from 'App/Models/Comment'
 
 // GET ALL CONTENT
 Route.get('/', async()=> {
-  const users = User.query().preload('posts', (query) => {
-    query.preload('comments')
-  })
+  return {
+    message: "hello je suis là "
+  }
+  // const users = User.query().preload('posts', (query) => {
+  //   query.preload('comments')
+  // })
 
-  return await users
+  // return await users
 }).as('home')
 
 Route.get('/users',async () => {
