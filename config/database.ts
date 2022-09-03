@@ -6,10 +6,10 @@
  */
 
 import Env from '@ioc:Adonis/Core/Env'
-import Application from '@ioc:Adonis/Core/Application'
+import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
 
-const databaseConfig: DatabaseConfig = {
+const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
   |--------------------------------------------------------------------------
   | Connection
@@ -25,34 +25,44 @@ const databaseConfig: DatabaseConfig = {
   connections: {
     /*
     |--------------------------------------------------------------------------
-    | SQLite
+    | PostgreSQL config
     |--------------------------------------------------------------------------
     |
-    | Configuration for the SQLite database.  Make sure to install the driver
+    | Configuration for PostgreSQL database. Make sure to install the driver
     | from npm when using this connection
     |
-    | npm i sqlite3
+    | npm i pg
     |
     */
-    sqlite: {
-      client: 'sqlite',
+    pg: {
+      client: 'pg',
       connection: {
-        filename: Application.tmpPath('database/db.sqlite3'),
+        host: Env.get('PG_HOST', "127.0.0.1") as string,
+        port: Env.get('PG_PORT', 5432) ,
+        user: Env.get('PG_USER', 'lucid')as string,
+        password: Env.get('PG_PASSWORD', 'lucid')as string,
+        database: Env.get('PG_DB_NAME', "db")as string,
       },
-      pool: {
-        afterCreate: (conn, cb) => {
-          conn.run('PRAGMA foreign_keys=true', cb)
-        }
-      },
-      migrations: {
-        naturalSort: true,
-      },
-      useNullAsDefault: true,
-      healthCheck: false,
-      debug: false,
+      healthCheck: true,
+			debug: false,
     },
 
-  }
+  },
+
+  /*
+  |--------------------------------------------------------------------------
+  | ORM Configuration
+  |--------------------------------------------------------------------------
+  |
+  | Following are some of the configuration options to tweak the conventional
+  | settings of the ORM. For example:
+  |
+  | - Define a custom function to compute the default table name for a given model.
+  | - Or define a custom function to compute the primary key for a given model.
+  |
+  */
+  orm: {
+  },
 }
 
 export default databaseConfig
