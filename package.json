@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch",
-    "build": "node ace build --production",
-    "start": "node server.js"
+    "build": "node ace build --prod",
+    "start": "node ace serve --watch",
+    "start:prod": "node ./build/server.js"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.8.0",
@@ -25,6 +26,7 @@
     "@adonisjs/repl": "^3.1.0",
     "@adonisjs/session": "^6.4.0",
     "@adonisjs/view": "^6.1.6",
+    "@types/url-parse": "^1.4.8",
     "axios": "^0.27.2",
     "maildev": "^2.0.5",
     "pg": "^8.8.0",
@@ -33,6 +35,7 @@
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21",
     "sqlite3": "^5.0.8",
+    "url-parse": "^1.5.10",
     "vee-validate": "^4.5.11",
     "yup": "^0.32.11"
   }
