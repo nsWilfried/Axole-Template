@@ -1,15 +1,14 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'users'
+  protected tableName = 'users_comments'
 
   public async up () {
     this.schema.createTableIfNotExists(this.tableName, (table) => {
       table.increments('id')
-      table.string('username').notNullable().unique()
-      table.string('email').notNullable().unique()
-      table.string('password').notNullable()
-      table.boolean('isAdmin').notNullable().defaultTo(false)
+      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
+      table.integer('comment_id').unsigned().references('comments.id').onDelete('CASCADE')
+      table.unique(['user_id', 'comment_id'])
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })
