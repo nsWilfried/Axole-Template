@@ -9,8 +9,25 @@ export default class AuthController {
 
         try {
             const payload = await request.validate(RegisterValidator)
-             await User.create(payload)           
-            response.redirect().toPath(`${this.client}/user/login`)
+        
+            if(await User.findOrFail(payload.email)){
+                 
+                await User.create(payload) 
+                return response.status(200).json({
+                    status: 200, 
+                    message:" Utilisateur crée"
+                })
+                
+
+            } else {
+                // utilisateur existe déjà 
+                return response.status(409).json({
+                    status: 409, 
+                    message : "l'utilisateur exsite déjà"
+                })
+            }
+           
+            //response.redirect().toPath(`${this.client}/user/login`)
         }
         catch(error){
             for (error of error.messages.errors) {
