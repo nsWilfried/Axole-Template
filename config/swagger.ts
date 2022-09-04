@@ -13,9 +13,12 @@ export default {
 			openapi: '3.0.0',
 			servers: [
 				{
-		description: "Serveur de production du blog", 
-		url: "https://ns-blog-api.herokuapp.com"
-	}
+				description: "Serveur de production du blog", 
+				url: "https://ns-blog-api.herokuapp.com"
+				}, {
+					description: "Serveur de test", 
+					url: "http://localhost:3333"
+			}
 			], 
 			info: {
 				title: 'NS Blog api',

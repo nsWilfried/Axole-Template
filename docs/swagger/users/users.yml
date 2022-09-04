@@ -6,23 +6,16 @@
     summary: Inscription
     security: []
     description: Enregistrer un  utilisateur par ses informations
-    parameters:
-      - name: Informations utilisateur
-        in: body
-        required: true
-        schema:
-          properties:
-            username:
-              type: string
-              example: "James"
-              required: true
-            email:
-              type: string
-              example: "wilfied@gmail.com"
-              required: true
-            password:
-              type: string
-              required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              email: random@gmail.com
+              password: random
+              username: random
+
     produces:
       - application/json
     responses:
@@ -39,19 +32,14 @@
     summary: Connexion
     security: []
     description: Connecter un  utilisateur
-    parameters:
-      - name: Informations utilisateur
-        in: body
-        required: true
-        schema:
-          properties:
-            email:
-              type: string
-              example: "wilfied@gmail.com"
-              required: true
-            password:
-              type: string
-              required: true
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              email: random@gmail.com
+              password: random
     produces:
       - application/json
     responses:

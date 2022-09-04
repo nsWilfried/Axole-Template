@@ -9,14 +9,26 @@ export default class AuthController {
 
         try {
             const payload = await request.validate(RegisterValidator)
-        
-            if(await User.findOrFail(payload.email)){
+            const user = await User.findBy("email", payload.email)
+            if(!user){
                  
-                await User.create(payload) 
-                return response.status(200).json({
+                await User.create({
+                    username: request.input("username"),
+                    email: request.input("email"), 
+                    password: request.input("password")
+                }).then(() => {
+                    return response.status(200).json({
                     status: 200, 
                     message:" Utilisateur crée"
                 })
+                }, error => {
+                    return response.status(400).json({
+                        status: 400, 
+                        message: "Indentifiants incorrects", 
+                        error: error.message
+                    })
+                })
+                
                 
 
             } else {
@@ -29,10 +41,11 @@ export default class AuthController {
            
             //response.redirect().toPath(`${this.client}/user/login`)
         }
-        catch(error){
+        catch (error) {
             return response.status(400).json({
                     status: 400, 
-                    message : "Erreur survenue"
+                     message: "Erreur survenue", 
+                    error:error.messages
                 })
         }
        
