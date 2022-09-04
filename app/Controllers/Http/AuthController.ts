@@ -30,10 +30,10 @@ export default class AuthController {
             //response.redirect().toPath(`${this.client}/user/login`)
         }
         catch(error){
-            for (error of error.messages.errors) {
-             response.redirect(`${this.client}/user/register?error=${error.rule}&field=${error.field}`)
-                
-            }
+            return response.status(400).json({
+                    status: 400, 
+                    message : "Erreur survenue"
+                })
         }
        
 
