@@ -7,22 +7,34 @@ export default {
 	specUrl: '/swagger.json',
 
 	middleware: [], // middlewares array, for protect your swagger docs and spec endpoints
-
+	
 	options: {
 		definition: {
 			openapi: '3.0.0',
+			servers: [
+				{
+		description: "Serveur de production du blog", 
+		url: "https://ns-blog-api.herokuapp.com"
+	}
+			], 
 			info: {
 				title: 'NS Blog api',
 				version: '1.0.0',
-				description: "Il s'agit de mon api de blog"
+				description: "Il s'agit de mon api de blog",
+				contact: {
+						name: "Wilfried N'SOUKPOE",
+						email: "wacnsoukpoe@gmail.com"
+				},
+				
 			}
 		},
-
+		
 		apis: [
 			'app/**/*.ts',
 			'docs/swagger/**/*.yml',
 			'start/routes.ts'
 		],
+		
 		basePath: '/'
 	},
 	mode: process.env.NODE_ENV === 'production' ? 'PRODUCTION' : 'RUNTIME',

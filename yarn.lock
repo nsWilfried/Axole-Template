@@ -30,16 +30,16 @@
     "@poppinss/utils" "^4.0.4"
     semver "^7.3.7"
 
-"@adonisjs/assembler@^5.8.0":
-  version "5.8.0"
-  resolved "https://registry.npmjs.org/@adonisjs/assembler/-/assembler-5.8.0.tgz"
-  integrity sha512-Mkj4dMRd6yhZmfjt1jjv6jyeY2uPoDzo8GKg7kd3gqJMXau+zEBgRO7k7h5jb0TOAqE5ACR/7Ph8aUunn+fWNA==
+"@adonisjs/assembler@^5.8.1":
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/@adonisjs/assembler/-/assembler-5.8.1.tgz#24c259665fe82b20852bf951c82186444edfac98"
+  integrity sha512-H/v2iQIBIKjQXulxrSCvS+xFEqHgm0Gbiz5LopynlqJpijVmLHZFZauaIzkDtq0sWRrotwkb62pVQ8vPt+Brpg==
   dependencies:
     "@adonisjs/application" "^5.2.5"
     "@adonisjs/env" "^3.0.9"
     "@adonisjs/ioc-transformer" "^2.3.4"
     "@adonisjs/require-ts" "^2.0.12"
-    "@adonisjs/sink" "^5.3.2"
+    "@adonisjs/sink" "^5.4.0"
     "@poppinss/chokidar-ts" "^3.3.5"
     "@poppinss/cliui" "^3.0.2"
     "@poppinss/utils" "^4.0.4"
@@ -274,17 +274,17 @@
     "@poppinss/utils" "^4.0.4"
     fs-extra "^10.1.0"
 
-"@adonisjs/sink@^5.3.2":
-  version "5.3.2"
-  resolved "https://registry.npmjs.org/@adonisjs/sink/-/sink-5.3.2.tgz"
-  integrity sha512-DLwXt6FrNxS2DlRwy/xK6BKjxgE34+WSluWhi7k2AYA0YUtLNzZCNecut03/G1PmeWOTmwiSXaUaRY6Q+9w3IQ==
+"@adonisjs/sink@^5.4.0":
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/@adonisjs/sink/-/sink-5.4.0.tgz#11eed413cd1302de68d573a55522ec68e6a7b44f"
+  integrity sha512-67udQ21w4JNo78Slrwl19DZ8eWDWPSUhVo94K6IWvpC6nOKKOs5uQe2LV19EzJvdOTrn2u0CWDD7m8hE/pe2Lg==
   dependencies:
     "@poppinss/cliui" "^3.0.2"
     "@poppinss/prompts" "^2.0.2"
     "@poppinss/utils" "^4.0.4"
     cp-file "^9.1.0"
     fs-extra "^10.1.0"
-    marked "^4.0.16"
+    marked "^4.0.18"
     marked-terminal "^5.1.1"
     mrm-core "^7.0.0"
     mustache "^4.2.0"
@@ -944,6 +944,11 @@
   dependencies:
     "@types/cookiejar" "*"
     "@types/node" "*"
+
+"@types/url-parse@^1.4.8":
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/@types/url-parse/-/url-parse-1.4.8.tgz#c3825047efbca1295b7f1646f38203d9145130d6"
+  integrity sha512-zqqcGKyNWgTLFBxmaexGUKQyWqeG7HjXj20EuQJSJWwXe54BjX0ihIo5cJB9yAQzH8dNugJ9GvkBYMjPXs/PJw==
 
 "@types/validator@^13.7.2":
   version "13.7.4"
@@ -3993,10 +3998,10 @@ marked-terminal@^5.1.1:
     node-emoji "^1.11.0"
     supports-hyperlinks "^2.2.0"
 
-marked@^4.0.16:
-  version "4.0.17"
-  resolved "https://registry.npmjs.org/marked/-/marked-4.0.17.tgz"
-  integrity sha512-Wfk0ATOK5iPxM4ptrORkFemqroz0ZDxp5MWfYA7H/F+wO17NRWV5Ypxi6p3g2Xmw2bKeiYOl6oVnLHKxBA0VhA==
+marked@^4.0.18:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/marked/-/marked-4.1.0.tgz#3fc6e7485f21c1ca5d6ec4a39de820e146954796"
+  integrity sha512-+Z6KDjSPa6/723PQYyc1axYZpYYpDnECDaU6hkaf5gqBieBkMKYReL5hteF2QizhlMbgbo8umXl/clZ67+GlsA==
 
 md5@~2.2.0:
   version "2.2.1"
@@ -5056,6 +5061,11 @@ qs@^6.10.1, qs@^6.10.3, qs@^6.10.5, qs@^6.9.4:
   dependencies:
     side-channel "^1.0.4"
 
+querystringify@^2.1.1:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/querystringify/-/querystringify-2.2.0.tgz#3345941b4153cb9d082d8eee4cda2016a9aef7f6"
+  integrity sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==
+
 queue-microtask@^1.2.2:
   version "1.2.3"
   resolved "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
@@ -5194,6 +5204,11 @@ require-all@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/require-all/-/require-all-3.0.0.tgz"
   integrity sha512-jPGN876lc5exWYrMcgZSd7U42P0PmVQzxnQB13fCSzmyGnqQWW4WUz5DosZ/qe24hz+5o9lSvW2epBNZ1xa6Fw==
+
+requires-port@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
+  integrity sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==
 
 resolve-alpn@^1.0.0:
   version "1.2.1"
@@ -6087,6 +6102,14 @@ urix@^0.1.0:
   version "0.1.0"
   resolved "https://registry.npmjs.org/urix/-/urix-0.1.0.tgz"
   integrity sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==
+
+url-parse@^1.5.10:
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/url-parse/-/url-parse-1.5.10.tgz#9d3c2f736c1d75dd3bd2be507dcc111f1e2ea9c1"
+  integrity sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==
+  dependencies:
+    querystringify "^2.1.1"
+    requires-port "^1.0.0"
 
 use@^3.1.0:
   version "3.1.1"

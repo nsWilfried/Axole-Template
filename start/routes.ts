@@ -26,6 +26,7 @@ import Comment from 'App/Models/Comment'
 
 // GET ALL CONTENT
 Route.get('/', async()=> {
+
   const users = User.query().preload('posts', (query) => {
     query.preload('comments')
   })
@@ -62,11 +63,11 @@ Route.get('/posts/:id',async (request) => {
 
 Route.get('/:id',async (request)=> {
   const post = await Post.findBy('slug', request.params.id)
-  await post?.load(loader => {
-    loader.load('comments', comment => {
-      comment.preload('users')
-    }).load('user')
-  })
+  // await post?.load(loader => {
+  //   loader.load('comments', comment => {
+  //     comment.preload('users')
+  //   }).load('user')
+  // })
   
   return post;
 })

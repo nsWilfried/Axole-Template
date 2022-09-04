@@ -8,6 +8,9 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { OrmConfig } from '@ioc:Adonis/Lucid/Orm'
 import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
+import Url from 'url-parse'
+
+const DATABASE_URL = new Url(Env.get('DATABASE_URL'))
 
 const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   /*
@@ -21,6 +24,8 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
   |
   */
   connection: Env.get('DB_CONNECTION'),
+
+  
 
   connections: {
     /*
@@ -37,14 +42,18 @@ const databaseConfig: DatabaseConfig & { orm: Partial<OrmConfig> } = {
     pg: {
       client: 'pg',
       connection: {
-        host: Env.get('PG_HOST', "127.0.0.1") as string,
-        port: Env.get('PG_PORT', 5432) ,
-        user: Env.get('PG_USER', 'lucid')as string,
-        password: Env.get('PG_PASSWORD', 'lucid')as string,
-        database: Env.get('PG_DB_NAME', "db")as string,
+        host: Env.get('DB_HOST',DATABASE_URL.hostname) as string,
+        port: Env.get('DB_PORT', DATABASE_URL.port) ,
+        user: Env.get('DB_USER', DATABASE_URL.username)as string,
+        password: Env.get('DB_PASSWORD', DATABASE_URL.password)as string,
+        database: Env.get('DB_DATABASE',  DATABASE_URL.pathname.substr(1))as string,
+        ssl: {
+          rejectUnauthorized: false
+        }
       },
       healthCheck: true,
 			debug: false,
+      
     },
 
   },

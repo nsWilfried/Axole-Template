@@ -1,0 +1,121 @@
+/posts:
+  get:
+    tags:
+      - Post
+    summary: Récupérer
+    description: Récupérer tous les posts du blog
+    parameters: []
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Tous les posts du blog
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                example:
+                  id: 2
+                  name: Post random
+                  description: Je suis une description courte
+                  content: Je suis une descrption longue
+                  thumbnail: https://googlehearth.com/
+                  slug: post-random
+                  user_id: 1
+                  created_at: 2022-09-03T17:36:12.702+00:00
+                  updated_at: 2022-09-03T17:36:12.702+00:00
+
+/posts/{id}:
+  get:
+    tags:
+      - Post
+    summary: Récupérer
+    description: Récupérer un post en particulier
+    produces:
+      - application/json
+    parameters:
+      - name: postId
+        in: path
+        description: ID du post
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Succès
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 2
+                name: Post random
+                description: Je suis une description courte
+                content: Je suis une descrption longue
+                thumbnail: https://googlehearth.com/
+                slug: post-random
+                user_id: 1
+                created_at: 2022-09-03T17:36:12.702+00:00
+                update_at: 2022-09-03T17:36:12.702+00:00
+  put:
+    tags:
+      - Post
+    summary: Modifier
+    description: Modifier le post
+    parameters:
+      - name: postId
+        required: true
+        in: path
+        description: ID du post
+        schema:
+          type: integer
+      - name: Informations du post
+        in: body
+        properties:
+          name:
+            type: string
+            example: "Random2"
+            required: false
+          description:
+            type: string
+            required: false
+          content:
+            type: string
+            required: false
+          thumbnail:
+            type: string
+            required: false
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status: OK
+                message: Post bien modifié
+
+  delete:
+    tags:
+      - Post
+    summary: Supprimer
+    description: Supprimer un post
+    parameters:
+      - name: postId
+        in: path
+        description: ID du post
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Post supprimé
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                status: OK
+                message: Post supprimé

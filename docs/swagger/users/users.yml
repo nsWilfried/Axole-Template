@@ -1,0 +1,120 @@
+# enregister un utilisateur
+/user/register:
+  post:
+    tags:
+      - Auth
+    summary: Inscription
+    security: []
+    description: Enregistrer un  utilisateur par ses informations
+    parameters:
+      - name: Informations utilisateur
+        in: body
+        required: true
+        schema:
+          properties:
+            username:
+              type: string
+              example: "James"
+              required: true
+            email:
+              type: string
+              example: "wilfied@gmail.com"
+              required: true
+            password:
+              type: string
+              required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Utilisateur bien enregistré
+      500:
+        description: Erreur au niveau du serveur
+
+# connecter un utilisateur
+/user/login:
+  post:
+    tags:
+      - Auth
+    summary: Connexion
+    security: []
+    description: Connecter un  utilisateur
+    parameters:
+      - name: Informations utilisateur
+        in: body
+        required: true
+        schema:
+          properties:
+            email:
+              type: string
+              example: "wilfied@gmail.com"
+              required: true
+            password:
+              type: string
+              required: true
+    produces:
+      - application/json
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                username: "hello"
+      500:
+        description: Erreur au niveau du serveur
+
+# récupérer la liste de tous les utlisateurs
+/users:
+  get:
+    tags:
+      - Users
+    summary: Récupération
+    description: Récupérer tous les utilisateurs connectés
+    parameters: []
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Succès
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                example:
+                  id: 1
+                  username: Random
+                  email: random@gmail.com
+                  profile: null
+                  remember_token: null
+                  created_at: 2022-03-03
+
+/user/{id}:
+  get:
+    tags:
+      - Users
+    summary: Récupérer un utilisateur
+    description: Récupérer un seul utilisateur
+    parameters:
+      - name: userId
+        description: ID de l'utilisateur
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Succès
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id: 1
+                username: Random
+                email: random@gmail.com
+                profile: null
+                created_at: 2022-03-11
+                remember_me_token: null
