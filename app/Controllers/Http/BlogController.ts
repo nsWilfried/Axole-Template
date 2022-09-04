@@ -43,7 +43,7 @@ export default class BlogController {
         postId: request.input("postId")
     };
 
-    // console.log("voici le commentaire qui eest envoyé", comment);
+    // console.log("voici le commentairecd qui eest envoyé", comment);
 
     try {
       await Comment.create(comment).then(() => {
