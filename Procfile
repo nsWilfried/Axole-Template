@@ -1,2 +1,2 @@
 release: ENV_SILENT=true node ./build/ace migration:run --force
-web:  ENV_SILENT=true npm postbuild &&  npm start
+web:  ENV_SILENT=true npm start
