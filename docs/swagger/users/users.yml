@@ -21,8 +21,41 @@
     responses:
       200:
         description: Utilisateur bien enregistré
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example:
+                status: 200
+                message: Utilisateur crée
       500:
         description: Erreur au niveau du serveur
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example:
+                status: 500
+                message: Erreur au niveau du serveur
+      409: 
+        description: Nom d'utilisateur ou mail déjà utilisé
+        content: 
+          application/json:
+            schema: 
+              type: object 
+              example: 
+                status: 409
+                message: Nom d'utilisateur ou mail déjà utilisé
+      400: 
+        description: Erreur survenue
+        content: 
+          application/json:
+            schema: 
+              type: object 
+              example: 
+                status: 400
+                message: Erreur survenue
+
 
 # connecter un utilisateur
 /user/login:
@@ -50,10 +83,66 @@
             schema:
               type: object
               example:
-                username: "hello"
+                status: 200
+                message: Utilisateur connecté 
+                user: 
+                  id: 1
+                  username: random
+                  email: random@gmail.com
+                  profile: null
+                  created_at: 2022-09-04T18:08:06.900+00:00
+                  updated_at: 2022-09-04T18:08:06.900+00:00
+                  remember_me_token: null
+
       500:
         description: Erreur au niveau du serveur
-
+        content: 
+          application/json: 
+            schema:
+              type: object
+              example: 
+                status: 500
+                message: Erreur survenue
+                error: 
+      400:
+        description: Erreur au niveau du serveur
+        content: 
+          application/json: 
+            schema:
+              type: object
+              example: 
+                status: 400
+                message: Informations incorrectes
+              
+#se déconnecter 
+/logout: 
+  post: 
+    tags: 
+      - Auth 
+    description: Déconnecter l'utilisateur
+    summary: Déconnexion
+    produces: 
+      - application/json
+    responses: 
+      200: 
+        description: Déconnexion réussie
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example: 
+                status: 200
+                message: Utilisateur déconnecté
+      500:
+        description: Erreur au niveau du serveur
+        content: 
+          application/json: 
+            schema:
+              type: object
+              example: 
+                status: 500
+                message: Erreur survenue
+                error:
 # récupérer la liste de tous les utlisateurs
 /users:
   get:
@@ -78,7 +167,7 @@
                   email: random@gmail.com
                   profile: null
                   remember_token: null
-                  created_at: 2022-03-03
+                  created_at: 2022-09-03T17:36:12.702+00:00
 
 /user/{id}:
   get:
