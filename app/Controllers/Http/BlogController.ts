@@ -20,7 +20,14 @@ export default class BlogController {
         userId: request.cookie("user").id,
       };
       await request.validate(CreatePostValidator);
-      await Post.create(post);
+      await Post.create(post).then(
+        () => {
+          return response.status(200).json({
+            status: 200, 
+            message: "Post crée"
+          });
+        }
+      );
 
       if (thumbnail != null) {
         await thumbnail.move(Application.tmpPath("uploads"), {
@@ -28,12 +35,14 @@ export default class BlogController {
         });
       }
     } catch (error) {
-      return {
-        message: error.message,
-      };
+      return response.status(400).json({
+        status: 400, 
+        message: "Erreur survenue", 
+        error: error.messages
+      })
     }
 
-    response.redirect().toPath(this.client);
+    // response.redirect().toPath(this.client);
   }
 
   public async addComment({ request, response }: HttpContextContract) {

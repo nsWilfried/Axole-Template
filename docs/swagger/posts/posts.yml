@@ -26,6 +26,48 @@
                   created_at: 2022-09-03T17:36:12.702+00:00
                   updated_at: 2022-09-03T17:36:12.702+00:00
 
+# créer un post           
+/create-post:  
+  post: 
+    tags: 
+      - Post
+    summary: Ajouter 
+    description: Ajouter un nouveau post
+    produces:
+      - application/json
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              name: Nom du post
+              description: Courte description du post 
+              content: Contenu du post
+              thumbnail: https://googlehearth.com
+              userId: 2
+
+    responses: 
+      200: 
+        description: Post ajouté
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example:  
+                status: 200
+                message: Post crée
+      400: 
+        description: Erreur lors de l'ajout
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example:  
+                status: 400
+                message: Erreur survenue
+                error: 
+
 /posts/{id}:
   get:
     tags:
