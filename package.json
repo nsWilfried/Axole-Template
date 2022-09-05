@@ -7,7 +7,9 @@
     "build": "node ace build --prod",
     "start": "ENV_SILENT=true node ./build/server.js",
     "start:prod": "node ./build/server.js", 
-    "postbuild": "node ace swagger:generate && cp -a docs/ build/docs"
+    "postbuild": "node ace swagger:generate && cp -a docs/ build/docs", 
+    "heroku-postbuild": "node ace swagger:generate && cp -a docs/ build/docs"
+
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.8.1",
