@@ -5,10 +5,9 @@
   "scripts": {
     "dev": "node ace serve --watch", 
     "build": "node ace build --prod ",
-    "start": "ENV_SILENT=true node ./build/server.js  && cp -a docs/ build/docs",
+    "start": "ENV_SILENT=true node ./build/server.js",
     "start:prod": "node ./build/server.js", 
-    "postbuild": "node ace swagger:generate && cp -a docs/ build/docs", 
-    "heroku-postbuild": "node ace swagger:generate"
+    "postbuild": "node ace swagger:generate && cp -a docs/ build/docs" 
 
   },
   "devDependencies": {
