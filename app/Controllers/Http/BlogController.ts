@@ -50,7 +50,7 @@ export default class BlogController {
         // console.log("tout s'est bien passé", data)
         response.status(200).json({
           message: comment.message,
-          status: "Commentaire soumis"
+          status: "Commentaire bien envoyé"
         });
       });
     } catch (error) {
