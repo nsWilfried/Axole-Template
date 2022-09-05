@@ -45,7 +45,6 @@
               description: Courte description du post 
               content: Contenu du post
               thumbnail: https://googlehearth.com
-              userId: 2
 
     responses: 
       200: 
@@ -67,6 +66,16 @@
                 status: 400
                 message: Erreur survenue
                 error: 
+      409: 
+        description: Connectez vous avant de pouvoir envoyer un post
+        content: 
+          application/json: 
+            schema: 
+              type: object
+              example:  
+                status: 409
+                message: Connectez vous pour poster
+                error:
 
 /posts/{id}:
   get:

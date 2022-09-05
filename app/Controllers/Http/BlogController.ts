@@ -8,37 +8,56 @@ import CreatePostValidator from "App/Validators/CreatePostValidator";
 export default class BlogController {
   client = "http://127.0.0.1:3000";
   server = "http://127.0.0.1:3333";
+  
   public async createPost({ request, response }: HttpContextContract) {
+
+    // le cookie utilisateur
+    const userCookie = request.cookie("user")
     try {
       const thumbnail = request.file("file");
-      const post = {
-        name: request.input("name").trim(),
-        description: request.input("description").trim(),
-        slug: request.input("name").trim().split(" ").join("-").toLowercase(),
-        content: request.input("content"),
-        thumbnail: `${this.server}/downloads/${thumbnail?.clientName}`,
-        userId: request.cookie("user").id,
-      };
-      await request.validate(CreatePostValidator);
-      await Post.create(post).then(
-        () => {
-          return response.status(200).json({
-            status: 200, 
-            message: "Post crée"
+
+      if(userCookie != undefined){
+        const post = {
+          name: request.input("name").trim(),
+          description: request.input("description").trim(),
+          slug: request.input("name").trim().split(" ").join("-"),
+          content: request.input("content"),
+          thumbnail: `${this.server}/downloads/${thumbnail?.clientName}`,
+          userId: request.cookie("user").id,
+        };
+        await request.validate(CreatePostValidator);
+
+        // créer le post et renvoyer un status 200 
+        await Post.create(post).then(
+          () => {
+            return response.status(200).json({
+              status: 200, 
+              message: "Post crée"
+            });
+          }
+        );
+  
+        if (thumbnail != null) {
+          await thumbnail.move(Application.tmpPath("uploads"), {
+            name: post.thumbnail,
           });
         }
-      );
-
-      if (thumbnail != null) {
-        await thumbnail.move(Application.tmpPath("uploads"), {
-          name: post.thumbnail,
-        });
       }
+      // si l'utilisateur n'existe pas, on lui dit de se connecter pour envooyer un post
+      else {
+        return response.status(409).json({
+          status: 409, 
+          message: "Connectez vous pour poster"
+        })
+      }
+      
     } catch (error) {
+
+      // Erreur
       return response.status(400).json({
         status: 400, 
         message: "Erreur survenue", 
-        error: error.messages
+        error: error.message
       })
     }
 
