@@ -25,7 +25,7 @@ export default class CreatePostValidator {
    */
   public schema = schema.create({
     name: schema.string({ trim: true }, [rules.required()]),
-    slug: schema.string({ trim: true }, [rules.required()]), 
+    slug: schema.string.nullableAndOptional(), 
     description: schema.string({ trim: true }, [rules.required()]), 
     content: schema.string({ trim: true }, [rules.required()]), 
     thumbnail: schema.string({ trim: true }, [rules.required()]), 

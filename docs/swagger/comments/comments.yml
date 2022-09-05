@@ -22,6 +22,40 @@
                   user_id: 1
                   created_at: 2022-06-05
                   updated_at: 2022-06-05
+  post: 
+    tags: 
+      - Comment
+    summary: Ajouter
+    description: Ajouter un commentaire
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            example:
+              message: je suis un commentaire 
+              userId: 1
+              postId: 1
+    responses: 
+      200:
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 200
+                  message: Commentaire bien envoyé
+      400: 
+        description: Erreur lors de l'ajout du commentaire
+        content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 400
+                  message: Erreur lors de l'envoi du commentaire
+
 
 /comments/{id}:
   get:

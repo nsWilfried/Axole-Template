@@ -40,9 +40,7 @@ Route.get('/users',async () => {
 })
 
 Route.get('/posts',async () => {
-  const posts = await Post.query().preload('user').preload('comments', (query) => {
-    query.preload('users')
-  })
+  const posts = await Post.query().preload('user')
   return posts;
 })
 

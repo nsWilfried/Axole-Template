@@ -12,18 +12,20 @@ export default class BlogController {
   public async createPost({ request, response }: HttpContextContract) {
 
     // le cookie utilisateur
-    const userCookie = request.cookie("user")
+    const userCookie = request.cookiesList().user
+    const userId = JSON.parse(atob(userCookie)).message.id
+    console.log("cookie utilisateur", atob(userCookie));
     try {
       const thumbnail = request.file("file");
 
-      if(userCookie != undefined){
+      if(userId != undefined){
         const post = {
           name: request.input("name").trim(),
           description: request.input("description").trim(),
           slug: request.input("name").trim().split(" ").join("-"),
           content: request.input("content"),
-          thumbnail: `${this.server}/downloads/${thumbnail?.clientName}`,
-          userId: request.cookie("user").id,
+          thumbnail: thumbnail == null ? 'https://picsum.photos/id/237/536/354': `${this.server}/downloads/${thumbnail?.clientName}`,
+          userId: userId,
         };
         await request.validate(CreatePostValidator);
 
@@ -57,7 +59,7 @@ export default class BlogController {
       return response.status(400).json({
         status: 400, 
         message: "Erreur survenue", 
-        error: error.message
+        error: error
       })
     }
 
