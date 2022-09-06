@@ -67,28 +67,44 @@ export default class BlogController {
   }
 
   public async addComment({ request, response }: HttpContextContract) {
-    const comment = {
-      message: request.input("message"),
-      userId: JSON.parse(atob(request.input("userId"))).message.id,
-        postId: request.input("postId")
-    };
 
-    // console.log("voici le commentairecd qui eest envoyé", comment);
+    // le cookie utilisateur
+    const userCookie = request.cookiesList().user
+    // console.log("cookie utilisateur", userCookie)
 
-    try {
-      await Comment.create(comment).then(() => {
-        // console.log("tout s'est bien passé", data)
-        response.status(200).json({
-          message: comment.message,
-          status: "Commentaire bien envoyé"
+    if(userCookie != undefined){
+      const userId = JSON.parse(atob(userCookie)).message.id
+      const comment = {
+        message: request.input("message"),
+        user_id: userId,
+        post_id: request.input("postId")
+      };
+  
+    //  console.log("voici le cookie utilisateur", userCookie)
+    //    console.log("voici le commentairecd qui eest envoyé", comment);
+  
+      try {
+        await Comment.create(comment)
+         // console.log("tout s'est bien passé", data)
+         response.status(200).json({
+          status: 200, 
+          message: "Commentaire bien envoyé"
         });
-      });
-    } catch (error) {
-      response.status(401).json({
-        error: "Erreur lors  de l'envoi du formulaire",
-      });
+      } catch (error) {
+        response.status(400).json({
+          status: 400, 
+          message: "Erreur lors  de l'envoi du formulaire",
+          error: error.message
+        });
+      }
+  
+    }else {
+      return response.status(409).json({
+        status: 409, 
+        message: "Connectez vous pour envoyer un message"
+      })
     }
-
+   
     // response.redirect().toPath(`${this.client}/${params.id}`)
   }
 

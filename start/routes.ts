@@ -27,9 +27,7 @@ import Comment from 'App/Models/Comment'
 // GET ALL CONTENT
 Route.get('/', async()=> {
 
-  const users = User.query().preload('posts', (query) => {
-    query.preload('comments')
-  })
+  const users = User.query().preload('posts')
 
   return await users
 }).as('home')
@@ -51,8 +49,11 @@ Route.get('/comments',async () => {
 
 // FIND WITH CONTENT ID 
 Route.get('/comments/:id',async (request) => {
-  const comments = await Comment.findOrFail(request.params.id)
-  return comments;
+   const comments = await Comment.findOrFail(request.params.id)
+  console.log("je suis les commentaires", comments )
+  
+    
+  
 })
 Route.get('/posts/:id',async (request) => {
   const post = await Post.findOrFail(request.params.id)

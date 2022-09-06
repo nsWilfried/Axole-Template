@@ -34,7 +34,6 @@
             type: object
             example:
               message: je suis un commentaire 
-              userId: 1
               postId: 1
     responses: 
       200:
