@@ -1,20 +1,105 @@
-/posts:
-  get:
-    tags:
-      - Post
-    summary: Récupérer
-    description: Récupérer tous les posts du blog
-    parameters: []
-    produces:
-      - application/json
-    responses:
-      200:
-        description: Tous les posts du blog
+paths: 
+  /posts:
+    get:
+      tags:
+        - Post
+      summary: Récupérer
+      description: Récupérer tous les posts du blog
+      parameters: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Tous les posts du blog
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  example:
+                    id: 2
+                    name: Post random
+                    description: Je suis une description courte
+                    content: Je suis une descrption longue
+                    thumbnail: https://googlehearth.com/
+                    slug: post-random
+                    user_id: 1
+                    created_at: 2022-09-03T17:36:12.702+00:00
+                    updated_at: 2022-09-03T17:36:12.702+00:00
+
+  # créer un post           
+  /create-post:  
+    post: 
+      tags: 
+        - Post
+      summary: Ajouter 
+      description: Ajouter un nouveau post
+      produces:
+        - application/json
+      requestBody:
         content:
           application/json:
             schema:
-              type: array
-              items:
+              type: object
+              example:
+                name: Nom du post
+                description: Courte description du post 
+                content: Contenu du post
+                thumbnail: https://googlehearth.com
+
+      responses: 
+        200: 
+          description: Post ajouté
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                example:  
+                  status: 200
+                  message: Post crée
+        400: 
+          description: Erreur lors de l'ajout
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                example:  
+                  status: 400
+                  message: Erreur survenue
+                  error: 
+        409: 
+          description: Connectez vous avant de pouvoir envoyer un post
+          content: 
+            application/json: 
+              schema: 
+                type: object
+                example:  
+                  status: 409
+                  message: Connectez vous pour poster
+                  error:
+
+  /posts/{postId}:
+    get:
+      tags:
+        - Post
+      summary: Récupérer
+      description: Récupérer un post en particulier
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: postId
+          description: ID du post
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Succès
+          content:
+            application/json:
+              schema:
+                type: object
                 example:
                   id: 2
                   name: Post random
@@ -24,149 +109,75 @@
                   slug: post-random
                   user_id: 1
                   created_at: 2022-09-03T17:36:12.702+00:00
-                  updated_at: 2022-09-03T17:36:12.702+00:00
-
-# créer un post           
-/create-post:  
-  post: 
-    tags: 
-      - Post
-    summary: Ajouter 
-    description: Ajouter un nouveau post
-    produces:
-      - application/json
-    requestBody:
-      content:
-        application/json:
-          schema:
-            type: object
-            example:
-              name: Nom du post
-              description: Courte description du post 
-              content: Contenu du post
-              thumbnail: https://googlehearth.com
-
-    responses: 
-      200: 
-        description: Post ajouté
-        content: 
-          application/json: 
-            schema: 
-              type: object
-              example:  
-                status: 200
-                message: Post crée
-      400: 
-        description: Erreur lors de l'ajout
-        content: 
-          application/json: 
-            schema: 
-              type: object
-              example:  
-                status: 400
-                message: Erreur survenue
-                error: 
-      409: 
-        description: Connectez vous avant de pouvoir envoyer un post
-        content: 
-          application/json: 
-            schema: 
-              type: object
-              example:  
-                status: 409
-                message: Connectez vous pour poster
-                error:
-
-/posts/{id}:
-  get:
-    tags:
-      - Post
-    summary: Récupérer
-    description: Récupérer un post en particulier
-    produces:
-      - application/json
-    parameters:
-      - name: postId
-        in: path
-        description: ID du post
-        required: true
-        schema:
-          type: integer
-    responses:
-      200:
-        description: Succès
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                id: 2
-                name: Post random
-                description: Je suis une description courte
-                content: Je suis une descrption longue
-                thumbnail: https://googlehearth.com/
-                slug: post-random
-                user_id: 1
-                created_at: 2022-09-03T17:36:12.702+00:00
-                update_at: 2022-09-03T17:36:12.702+00:00
-  put:
-    tags:
-      - Post
-    summary: Modifier
-    description: Modifier le post
-    parameters:
-      - name: postId
-        required: true
-        in: path
-        description: ID du post
-        schema:
-          type: integer
-      - name: Informations du post
-        in: body
-        properties:
-          name:
-            type: string
-            example: "Random2"
-            required: false
-          description:
-            type: string
-            required: false
+                  update_at: 2022-09-03T17:36:12.702+00:00
+        400:
+          description: Post introuvable
           content:
-            type: string
-            required: false
-          thumbnail:
-            type: string
-            required: false
-    responses:
-      200:
-        description: OK
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                status: OK
-                message: Post bien modifié
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 400
+                  message: "L'id ne correspond à aucun post"
+                  error: "Message d'erreur"
+    put:
+      tags:
+        - Post
+      summary: Modifier
+      description: Modifier le post
+      parameters:
+        - name: postId
+          required: true
+          in: path
+          description: ID du post
+          schema:
+            type: integer
+        - name: Informations du post
+          in: body
+          properties:
+            name:
+              type: string
+              example: "Random2"
+              required: false
+            description:
+              type: string
+              required: false
+            content:
+              type: string
+              required: false
+            thumbnail:
+              type: string
+              required: false
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: OK
+                  message: Post bien modifié
 
-  delete:
-    tags:
-      - Post
-    summary: Supprimer
-    description: Supprimer un post
-    parameters:
-      - name: postId
-        in: path
-        description: ID du post
-        required: true
-        schema:
-          type: integer
-    responses:
-      200:
-        description: Post supprimé
-        content:
-          application/json:
-            schema:
-              type: object
-              example:
-                status: OK
-                message: Post supprimé
+    delete:
+      tags:
+        - Post
+      summary: Supprimer
+      description: Supprimer un post
+      parameters:
+        - name: postId
+          in: path
+          description: ID du post
+          required: true
+          schema:
+            type: integer
+      responses:
+        200:
+          description: Post supprimé
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: OK
+                  message: Post supprimé

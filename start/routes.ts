@@ -48,32 +48,11 @@ Route.get('/comments',async () => {
 })
 
 // FIND WITH CONTENT ID 
-Route.get('/comments/:id',async (request) => {
-   const comments = await Comment.findOrFail(request.params.id)
-  // console.log("je suis les commentaires", comments )
-  // console.log("nous commes les attributs", comments.$attributes)
-    return comments; 
-  
-})
-Route.get('/posts/:id',async (request) => {
-  const post = await Post.findOrFail(request.params.id)
-  return post;
-})
+Route.get('/comments/:id',"BlogController.retrieveOneComment")
+Route.get('/posts/:id',"BlogController.retrieveOnePost")
+Route.get('/users/:id',"BlogController.retrieveOneUser")
 
-Route.get('/:id',async (request)=> {
-  const post = await Post.findBy('slug', request.params.id)
-  // await post?.load(loader => {
-  //   loader.load('comments', comment => {
-  //     comment.preload('users')
-  //   }).load('user')
-  // })
-  
-  return post;
-})
-Route.get('/users/:id',async (request) => {
-  const users = await User.findOrFail(request.params.id)
-  return users;
-})
+
 
 Route.get('/user/register', async () => {
   const users = await User.query()
