@@ -14,7 +14,7 @@ export default class BlogController {
     // le cookie utilisateur
     const userCookie = request.cookiesList().user
     const userId = JSON.parse(atob(userCookie)).message.id
-    console.log("cookie utilisateur", atob(userCookie));
+    // console.log("cookie utilisateur", atob(userCookie));
     try {
       const thumbnail = request.file("file");
 
@@ -59,7 +59,7 @@ export default class BlogController {
       return response.status(400).json({
         status: 400, 
         message: "Erreur survenue", 
-        error: error
+        error: error.message
       })
     }
 

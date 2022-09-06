@@ -3,7 +3,7 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class extends BaseSchema {
   protected tableName = 'comments'
 
-  public async up () {
+  public async down () {
     this.schema.createTableIfNotExists(this.tableName, (table) => {
       table.increments('id').primary()
       table.text('message', 'longtext').notNullable()
@@ -14,7 +14,7 @@ export default class extends BaseSchema {
     })
   }
 
-  public async down () {
+  public async up () {
     this.schema.dropTable(this.tableName)
   }
 }

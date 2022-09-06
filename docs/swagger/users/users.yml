@@ -113,6 +113,15 @@
               example: 
                 status: 400
                 message: Informations incorrectes
+      422:
+        description: Utilisateur introuvable
+        content: 
+          application/json: 
+            schema:
+              type: object
+              example: 
+                status: 422
+                message: Cet utilisateur n'existe pas
               
 #se déconnecter 
 /logout: 

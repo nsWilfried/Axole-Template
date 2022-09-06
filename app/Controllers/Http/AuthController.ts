@@ -83,6 +83,13 @@ export default class AuthController {
     }
 
     try {
+      const user = await User.findBy("email", email)
+      if(user == null){
+        return response.status(422).json({
+          status: 422, 
+          message: "Cet utilisateur n'existe pas"
+        });
+      }
       await auth
         .use("web")
         .attempt(email, password, rememberMe)

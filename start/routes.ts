@@ -50,9 +50,9 @@ Route.get('/comments',async () => {
 // FIND WITH CONTENT ID 
 Route.get('/comments/:id',async (request) => {
    const comments = await Comment.findOrFail(request.params.id)
-  console.log("je suis les commentaires", comments )
-  
-    
+  // console.log("je suis les commentaires", comments )
+  // console.log("nous commes les attributs", comments.$attributes)
+    return comments; 
   
 })
 Route.get('/posts/:id',async (request) => {
