@@ -54,6 +54,15 @@
                 example:
                   status: 400
                   message: Erreur lors de l'envoi du commentaire
+      409: 
+        description: Connexion utilisateur requise
+        content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 409
+                  message: Connectez vous pour envoyer un commentaire
 
 
 /comments/{id}:

@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   public async up () {
     this.schema.createTableIfNotExists(this.tableName, (table) => {
-      table.increments('id')
+      table.increments('id').primary()
       table.string('name').notNullable()
       table.string('slug').notNullable()
       table.string('thumbnail').notNullable().defaultTo('https://picsum.photos/seed/picsum/200/300')

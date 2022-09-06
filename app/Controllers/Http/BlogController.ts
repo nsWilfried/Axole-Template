@@ -76,8 +76,8 @@ export default class BlogController {
       const userId = JSON.parse(atob(userCookie)).message.id
       const comment = {
         message: request.input("message"),
-        user_id: userId,
-        post_id: request.input("postId")
+        userId: userId,
+        postId: request.input("postId")
       };
   
     //  console.log("voici le cookie utilisateur", userCookie)
