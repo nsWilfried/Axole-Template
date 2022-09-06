@@ -192,8 +192,8 @@ paths:
       summary: Supprimer
       description: Supprimer un post
       parameters:
-        - name: postId
-          in: path
+        - in: path
+          name: postId
           description: ID du post
           required: true
           schema:
@@ -206,5 +206,32 @@ paths:
               schema:
                 type: object
                 example:
-                  status: OK
+                  status: 200
                   message: Post supprimé
+        401:
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 401
+                  message: Vous n'êtes pas autorisé à supprimer cette ressource
+        500:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 500
+                  message: Erreur lors de la suppression du post
+        400:
+          description: Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 400
+                  message: L'id ne correspond à aucun post

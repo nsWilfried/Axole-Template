@@ -14,7 +14,7 @@ export default class BlogController {
   public async createPost({ request, response }: HttpContextContract) {
     // le cookie utilisateur
     const userCookie = request.cookiesList().user;
-    const userId = JSON.parse(atob(userCookie)).message.id;
+    const userId = userCookie !=undefined?  JSON.parse(atob(userCookie)).message.id: undefined;
     try {
       const thumbnail = request.file("file");
 
@@ -82,10 +82,13 @@ export default class BlogController {
     );
   }
 
+  // modifier un post 
   public async updatePost({request, response}:HttpContextContract){
     const userCookie = request.cookiesList().user;
-    const userId = JSON.parse(atob(userCookie)).message.id;
+    const userId = userCookie !=undefined?  JSON.parse(atob(userCookie)).message.id : undefined;
     let retrievePost; 
+
+    // récupérer le post et lui appliquer des actions
      await Post.findOrFail(request.param("id")).then(async data => {
       retrievePost = data
 
@@ -151,6 +154,52 @@ export default class BlogController {
     
   }
 
+  // supprimer un post
+  public async deletePost({ request, response }: HttpContextContract) {
+    const userCookie = request.cookiesList().user;
+    const userId = userCookie !=undefined? JSON.parse(atob(userCookie)).message.id: undefined;
+    await Post.findOrFail(request.param("id")).then(
+      async (data) => {
+
+        //  si l'utilisateur existe et que c'est son post alors il peut le supprimer
+        if(userId != undefined && userId == data.userId){
+
+            try {
+              await data.delete()
+              return response.status(200).json({
+                status: 200, 
+                message: "Post supprimé"
+              });
+            } catch (error) {
+              console.log("je suis fou", error.message)
+              return response.status(500).json({
+                status: 500, 
+                message: "Erreur lors de la suppression du post", 
+                error: error.message
+              });
+            }
+          
+        }
+
+        // sinon , on lui dit qu'il n'a pas l'autorisation
+        else {
+          return response.status(401).json({
+            status: 401, 
+            message: "Vous n'êtes autorisé à supprimer cette ressource"
+          })
+        }
+        
+      },
+      (error) => {
+        return response.status(400).json({
+          status: 400,
+          message: "L'id ne correspond à aucun post",
+          error: error.message,
+        });
+      }
+    );
+  }
+  
   // retourner un commentaire
   public async retrieveOneComment({ request, response }: HttpContextContract) {
     // console.log("les paramètres", request.param("id") )

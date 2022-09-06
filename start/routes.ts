@@ -71,3 +71,5 @@ Route.get('/users/:id',"BlogController.retrieveOneUser")
 
 // UPDATE
 Route.put("/posts/:id", "BlogController.updatePost")
+//DELETE
+Route.delete("/posts/:id", "BlogController.deletePost")
