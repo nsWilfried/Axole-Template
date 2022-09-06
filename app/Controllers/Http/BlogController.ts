@@ -7,7 +7,7 @@ import CreatePostValidator from "App/Validators/CreatePostValidator";
 import User from "App/Models/User";
 
 export default class BlogController {
-  client = "http://127.0.0.1:3000";
+  // client = "http://127.0.0.1:3000";
   server = "http://127.0.0.1:3333";
 
   //  créer un post
@@ -15,7 +15,6 @@ export default class BlogController {
     // le cookie utilisateur
     const userCookie = request.cookiesList().user;
     const userId = JSON.parse(atob(userCookie)).message.id;
-    // console.log("cookie utilisateur", atob(userCookie));
     try {
       const thumbnail = request.file("file");
 
@@ -83,6 +82,76 @@ export default class BlogController {
     );
   }
 
+  public async updatePost({request, response}:HttpContextContract){
+    const userCookie = request.cookiesList().user;
+    const userId = JSON.parse(atob(userCookie)).message.id;
+    let retrievePost; 
+     await Post.findOrFail(request.param("id")).then(async data => {
+      retrievePost = data
+
+      try{
+        const thumbnail = request.file("file");
+  
+        //  si l'utilisateur existe et que c'est son post alors il peut le modifier
+        if(userId != undefined && userId == retrievePost.userId){
+          const post = {
+            name: request.input("name"), 
+            description: request.input("description"), 
+            content: request.input("content"), 
+            thumbnail: 
+            thumbnail == null
+              ? "https://picsum.photos/id/237/536/354"
+              : `${this.server}/downloads/${thumbnail?.clientName}`,
+              userId: userId
+          }
+          // console.log("le nouveau post modifié", post)
+          await request.validate(CreatePostValidator).then(
+            async ()=> {
+
+              await retrievePost.merge(post).save()
+              return response.status(200).json({
+                status: 200, 
+                message: "Post modifié"
+              });
+            }, 
+            (error) =>{
+              return response.status(409).json({
+                status: 409, 
+                message: "Informations non valides", 
+                error: error
+              })
+            }
+          )
+        }
+
+        // si l'utilisateur n'est pas connecté ou que celui n'est pas lui l'auteur du post
+        else {
+          return response.status(401).json({
+            status: 401, 
+            message: "Vous ne pouvez pas modifier cette ressource"
+          })
+        }
+        
+      }catch(error){
+        return response.status(400).json({
+          status: 400, 
+          message: "Erreur survenue lors de la modification du post", 
+          error: error.message
+        })
+      }
+     }, error => {
+      return response.status(422).json({
+        status: 422, 
+        message: "Ce post n'existe pas", 
+        error: error.message
+      })
+     })
+
+    
+    
+  }
+
+  // retourner un commentaire
   public async retrieveOneComment({ request, response }: HttpContextContract) {
     // console.log("les paramètres", request.param("id") )
     await Comment.findOrFail(request.param("id")).then(
@@ -98,6 +167,8 @@ export default class BlogController {
       }
     );
   }
+
+  //  retourner un utilisateur en particulier
   public async retrieveOneUser({ request, response }: HttpContextContract) {
     // console.log("les paramètres", request.param("id") )
     await User.findOrFail(request.param("id")).then(

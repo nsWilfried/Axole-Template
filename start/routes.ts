@@ -47,12 +47,6 @@ Route.get('/comments',async () => {
   return comments;
 })
 
-// FIND WITH CONTENT ID 
-Route.get('/comments/:id',"BlogController.retrieveOneComment")
-Route.get('/posts/:id',"BlogController.retrieveOnePost")
-Route.get('/users/:id',"BlogController.retrieveOneUser")
-
-
 
 Route.get('/user/register', async () => {
   const users = await User.query()
@@ -67,3 +61,13 @@ Route.post('/logout', 'AuthController.logout')
 Route.post('/create-post', 'BlogController.createPost')
 Route.post('/comments', 'BlogController.addComment')
 Route.get('/downloads/:fileName', 'BlogController.download')
+
+
+// FIND WITH CONTENT ID 
+Route.get('/comments/:id',"BlogController.retrieveOneComment")
+Route.get('/posts/:id',"BlogController.retrieveOnePost")
+Route.get('/users/:id',"BlogController.retrieveOneUser")
+
+
+// UPDATE
+Route.put("/posts/:id", "BlogController.updatePost")

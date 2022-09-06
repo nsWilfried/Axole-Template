@@ -37,6 +37,7 @@ paths:
       produces:
         - application/json
       requestBody:
+        description: Informations du post
         content:
           application/json:
             schema:
@@ -132,32 +133,58 @@ paths:
           description: ID du post
           schema:
             type: integer
-        - name: Informations du post
-          in: body
-          properties:
-            name:
-              type: string
-              example: "Random2"
-              required: false
-            description:
-              type: string
-              required: false
-            content:
-              type: string
-              required: false
-            thumbnail:
-              type: string
-              required: false
+        
+      requestBody:
+        description: Informations du post 
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: Nom du post
+                description: Courte description du post 
+                content: Contenu du post
+                thumbnail: https://googlehearth.com
       responses:
         200:
-          description: OK
+          description: Post modifié
           content:
             application/json:
               schema:
                 type: object
                 example:
-                  status: OK
+                  status: 200
                   message: Post bien modifié
+        409:
+          description: Invalid informations
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 409
+                  message: Informations non valides
+                  error: "Message d'erreur"
+        401:
+          description: Unauthorized access
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 401
+                  message: Vous n'êtes pas autorisé à modifier cette ressource
+        400:
+          description: Erreur survenue
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  status: 400
+                  message: Erreur survenue lors de la modification du post
+        
+
 
     delete:
       tags:
