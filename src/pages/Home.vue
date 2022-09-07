@@ -70,9 +70,12 @@
                                             stroke="currentColor" stroke-miterlimit="10"></polygon>
                                     </svg>
                                 </div>
-                                <p class="font-semibold">{{ element.comments.length }}</p>
+                                <p class="font-semibold">{{ element.user.comments.length }}</p>
                             </a>
-                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.message.id">modifier</button>
+
+                            <div v-if="user">
+                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.message.id">modifier</button>
+                            </div>
 
                         </div>
                     </div>
@@ -125,15 +128,17 @@ export default {
 
     created() {
         this.$store.state.posts.then(response => {
-            this.posts = response.slice(0, 6)
-            console.log(response)
-        })
+            this.posts = response.data.slice(0, 6)
+            console.log("je suis la réponsse", response)
+            // console.log("posts", this.posts)
+        }) 
         if(this.$store.state.user){
-            this.user = JSON.parse(atob(this.$store.state.user))
+            this.user = JSON.parse(this.$store.state.user)
         }
 
-        console.log("je suis l'api ", import.meta.env)
+        // console.log("je suis l'api ", import.meta.env)
     },
+
 }
 </script>
 

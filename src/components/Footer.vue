@@ -185,7 +185,9 @@ export default {
   },
 
   created() {
-    this.$store.state.posts.then((result) => (this.posts = result.slice(0, 2)));
+    if(this.$store.state.posts){
+      this.$store.state.posts.then((result) => (this.posts = result.data.slice(0, 2)));
+    }
   },
 
   methods: {

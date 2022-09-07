@@ -45,15 +45,15 @@
                 
                 <!-- logout button --> 
                 <div v-if="connected == true" >
-                    <form :action="`${apiUrl}/logout`" method="post" >
-                        <button class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Se déconnecter</button>
-                    </form>
+                    <div  method="post" >
+                        <button @click="logout()" class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Se déconnecter</button>
+                    </div>
                 </div>
               
 
             </div>
             <div v-if="user != null " class="flex justify-center items-center ml-3">
-                {{user.message.email || ""}}
+                {{user.username || ""}}
             </div>
         
         </div>
@@ -72,11 +72,24 @@ export default {
             }
     },
 
-    created() {
+    mounted() {
         if(this.$store.state.user){
-            this.user = JSON.parse(atob(this.$store.state.user))
+            this.user = JSON.parse(this.$store.state.user)
         }
         // console.log(this.user.message)
+    },
+    methods: {
+        logout(){
+            return this.axios.post("https://ns-blog-api.herokuapp.com/logout").then(
+                () => {
+                    this.$router.replace('/user/login')
+                    this.$cookies.remove("user")
+                    this.$cookies.remove("isConnected")
+                }, error=> {
+                    console.log(error)
+                }
+            )
+        }
     },
 }
 </script>

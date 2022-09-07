@@ -1,20 +1,20 @@
 <template>
     <div class="w-full h-auto">
-        <div  class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
-         <Error :errorMessage='errorMessage' v-if="errorMessage" />
-        <div class=" w-96 h-auto rounded-lg bg-white ">
+        <div class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
+            <div class=" w-96 h-auto rounded-lg bg-white ">
 
-            <div class="w-full h-16 flex justify-center items-center">
-                <span class="font-bold text-2xl">Connexion</span>
-            </div>
-           <Form :action="action"  :buttonText="text" :schema="loginSchema"/>
-        </div>
-        
-    </div>
-        <Footer/>
-
-    </div>
+                <div class="w-full h-16 flex justify-center items-center">
+                    <span class="font-bold text-2xl">Connexion</span>
+                </div>
+                <Form buttonText="Se connecter" request="login" :schema="loginSchema" />
     
+            </div>
+
+        </div>
+        <Footer />
+
+    </div>
+
 </template>
 
 <script>
@@ -25,45 +25,45 @@ import Footer from '@/components/Footer.vue'
 
 import * as yup from 'yup'
 export default {
-    components: {Form,Footer, Error}, 
+    components: { Form, Footer, Error },
     data() {
         const loginSchema = {
             fields: [
                 {
-                    label: 'Email:', 
-                    as: 'input', 
-                    name:'email', 
-                    type: 'text', 
-                    placeholder: "Entrez votre adresse mail...", 
+                    label: 'Email:',
+                    as: 'input',
+                    name: 'email',
+                    type: 'text',
+                    placeholder: "Entrez votre adresse mail...",
                     rules: yup.string().required('Champ requis').email('Email invalide')
                 }, {
                     label: 'Mot de passe:',
-                    as: 'input', 
-                    name:'password', 
-                    type: 'password', 
-                    placeholder: "Entrez votre mot de passe...", 
+                    as: 'input',
+                    name: 'password',
+                    type: 'password',
+                    placeholder: "Entrez votre mot de passe...",
                     rules: yup.string().required('Champ requis').min(6, 'Mot de passe trop faible ( >= 6caractères)')
-                } ,
+                },
                 {
-                    label: 'Se souvenir de moi ?', 
-                    as: 'input', 
-                    name: 'remember', 
+                    label: 'Se souvenir de moi ?',
+                    as: 'input',
+                    name: 'remember',
                     type: 'checkbox'
                 },
-            ]
+            ],
         }
         return {
-            apiUrl: 'https://ns-blog-api.herokuapp.com', 
-            text: 'Se connecter', 
-            action: `https://ns-blog-api.herokuapp.com/user/login`, 
-            loginSchema, 
+            apiUrl: 'https://ns-blog-api.herokuapp.com',
+            text: 'Se connecter',
+            action: `https://ns-blog-api.herokuapp.com/user/login`,
+            loginSchema,
             errorMessage: null
         }
-        
+
     },
     methods: {
-        checkError(code , message) {
-            if(this.$route.query.error == code){
+        checkError(code, message) {
+            if (this.$route.query.error == code) {
                 this.errorMessage = message
                 return this.removeErrorMessage()
             }
@@ -72,13 +72,17 @@ export default {
         removeErrorMessage() {
             setTimeout(() => {
                 this.errorMessage = null
-                this.$router.push({query: undefined})
-            }, 4000)           
-        }      
+                this.$router.push({ query: undefined })
+            }, 4000)
+        },
+
+        loginUser() {
+            console.log("logons l'utilisateur")
+        }
     },
     mounted() {
-       this.checkError('E_INVALID_AUTH_PASSWORD', 'Mot de passe incorrect')
-       this.checkError('E_INVALID_AUTH_UID', "Cet utilisateur n'existe pas")
+        this.checkError('E_INVALID_AUTH_PASSWORD', 'Mot de passe incorrect')
+        this.checkError('E_INVALID_AUTH_UID', "Cet utilisateur n'existe pas")
     },
 
 }
@@ -86,10 +90,10 @@ export default {
 
 
 <style lang="scss">
-@import '../assets/styles/_variables.scss'; 
-@import '../assets/styles/_fonts.scss'; 
-    .login {
-        font-family:$primary-font;
-    }
+@import '../assets/styles/_variables.scss';
+@import '../assets/styles/_fonts.scss';
 
+.login {
+    font-family: $primary-font;
+}
 </style>

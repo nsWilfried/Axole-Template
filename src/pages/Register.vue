@@ -1,16 +1,16 @@
 <template>
     <div>
         <div class="w-full main__register bg-slate-200 flex flex-col  justify-center items-center">
-            <Error :errorMessage="errorMessage" v-if="errorMessage != null " />
             <div class=" w-96 h-auto rounded-lg bg-white ">
                 <div class="w-full h-14 flex justify-center items-center">
                     <span class="font-bold  text-2xl">Inscription</span>
                 </div>
-            <Form :buttonText="text" :schema="registerSchema" :action="action"></Form>
+            <Form :buttonText="text" :schema="registerSchema" request="register"></Form>
             </div>
-        
         </div>
         <Footer/>
+
+        
     </div>
     
 </template>
@@ -83,7 +83,13 @@ export default {
                 this.errorMessage = null
                 this.$router.push({query: undefined})
             }, 4000)           
-        }      
+        }, 
+        login(){
+            return this.axios.post(`${this.apiUrl}/user/login`, {
+                email: "random@gmail.com", 
+                password: "random"
+            }).then(response =>{console.log("je suis la réponese", response )}, error =>{console.log("je suis l", error);});
+        }
     },
 
     
