@@ -43,7 +43,7 @@ export default class AuthController {
       return response.status(400).json({
         status: 400,
         message: "Erreur survenue",
-        error: error.messages,
+        error: error,
       });
     }
   }
