@@ -23,34 +23,48 @@ import Route from '@ioc:Adonis/Core/Route'
 import User from 'App/Models/User'
 import Post from 'App/Models/Post'
 import Comment from 'App/Models/Comment'
-
 // GET ALL CONTENT
 Route.get('/', async()=> {
 
   const users = User.query().preload('posts')
 
   return await users
-}).as('home')
+})
 
 Route.get('/users',async () => {
-  const users = await User.query()
+  const users = await User.query().preload("posts", (query) => {
+    query.preload("comments")
+  })
   return users;
 })
 
 Route.get('/posts',async () => {
-  const posts = await Post.query().preload('user')
-  return posts;
+  const posts = await Post.query().preload('user', (query) =>{
+    query.preload('comments')
+  })
+  return {
+    status: 200, 
+    data: posts
+  };
 })
 
 Route.get('/comments',async () => {
-  const comments = await Comment.query()
-  return comments;
+  const comments = await Comment.query().preload('users', (query) => {
+    query.preload("posts")
+  })
+  return {
+    status: 200, 
+    data: comments
+  };
 })
 
 
 Route.get('/user/register', async () => {
   const users = await User.query()
-  return  users
+  return {
+    status: 200, 
+    data: users
+  };
 } )
 
 // POSTS
