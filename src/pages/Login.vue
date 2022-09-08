@@ -60,30 +60,7 @@ export default {
             errorMessage: null
         }
 
-    },
-    methods: {
-        checkError(code, message) {
-            if (this.$route.query.error == code) {
-                this.errorMessage = message
-                return this.removeErrorMessage()
-            }
-        },
-
-        removeErrorMessage() {
-            setTimeout(() => {
-                this.errorMessage = null
-                this.$router.push({ query: undefined })
-            }, 4000)
-        },
-
-        loginUser() {
-            console.log("logons l'utilisateur")
-        }
-    },
-    mounted() {
-        this.checkError('E_INVALID_AUTH_PASSWORD', 'Mot de passe incorrect')
-        this.checkError('E_INVALID_AUTH_UID', "Cet utilisateur n'existe pas")
-    },
+    }
 
 }
 </script>

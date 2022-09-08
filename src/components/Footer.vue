@@ -186,7 +186,14 @@ export default {
 
   created() {
     if(this.$store.state.posts){
-      this.$store.state.posts.then((result) => (this.posts = result.data.slice(0, 2)));
+      this.$store.state.posts.then((response) => {
+        if(response.data){
+                this.posts = response.data.slice(0, 2)
+
+            }else {
+                this.posts = []
+            }
+      });
     }
   },
 

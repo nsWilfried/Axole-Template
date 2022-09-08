@@ -74,7 +74,7 @@
                             </a>
 
                             <div v-if="user">
-                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.message.id">modifier</button>
+                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.id">modifier</button>
                             </div>
 
                         </div>
@@ -128,8 +128,9 @@ export default {
 
     created() {
         this.$store.state.posts.then(response => {
-            this.posts = response.data.slice(0, 6)
-            console.log("je suis la réponsse", response)
+        // console.log("je suis la réponsse", response)
+
+                this.posts = response.data.slice(0, 6)
             // console.log("posts", this.posts)
         }) 
         if(this.$store.state.user){

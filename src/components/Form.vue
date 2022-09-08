@@ -75,7 +75,7 @@ export default {
             console.log("j'ai soumis et voici les valeurs", values)
 
             if (this.request == "login") {
-                return this.axios.post("https://ns-blog-api.herokuapp.com/user/login", values)
+                return this.axios.post("http://localhost:3333/user/login", values)
                     .then(response => {
                         // console.log("je suis le résultat de la connexino", response)
 
@@ -94,7 +94,7 @@ export default {
                     })
             } else {
                 return this.axios.post("http://localhost:3333/user/register", values)
-                    .then(response => {
+                    .then(() => {
                         // console.log("je suis le résultat de l'inscription", response)
                         this.$router.replace({path: "/user/login"})
                         this.loading = false

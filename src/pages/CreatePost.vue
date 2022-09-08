@@ -2,14 +2,14 @@
     <div class="w-full h-screen bg-slate- flex justify-center ">
 
         <div style="width: 1320px;" class=" h-full bg-green- flex justify-content items-center ">
-            <Form class="bg-red-40 w-full h-full flex " :validation-schema='schemaRules' action="http://127.0.0.1:3333/create-post" method="post" enctype="multipart/form-data">
+            <Form @submit="createPost" class="bg-red-40 w-full h-full flex " :validation-schema='schemaRules' method="post" enctype="multipart/form-data">
                 
                 <div class="w-1/2 h-full flex flex-col justify-center ">
                         <!-- drop zone --> 
                     <div >
 
                         <file-pond
-                        name="file"
+                                name="file"
                                 ref="pond"
                                 label-idle="Drop files here..."
                                 v-bind:allow-ultiple="false"
@@ -18,6 +18,8 @@
                                 storeAsFile='true'
                                 />          
                     </div>
+
+                    <input type="file" name="hello" >
 
                     <!-- label name--> 
 
@@ -123,6 +125,19 @@ export default {
      beforeUnmount() {
     this.editor.destroy()
   },
+  methods: {
+    createPost(values){
+        console.log("nous sommes l'ensemble des valeurs", values)
+        this.axios.post("http://127.0.0.1:3333/create-post", values).then(
+            response => {
+                console.log("je suis la réponse", response)
+            }, 
+            error => {
+                console.log("je suis l'erreur", error)
+            }
+        )
+    }
+  }
 
 }
 </script>

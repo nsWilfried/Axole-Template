@@ -20,11 +20,12 @@ const isUserLogin = () => {
 }
 const isPostExist = async(to, next) => {
  let postExist = null
- await store.state.posts.then(results => {
+ await store.state.posts.then(response => {
     let post = []
-    results.find(element => {
+    response.data.find(element => {
 
       if (element.slug == to.params.id) {
+        console.log("je suisl 'élément", element)
         return post= element
       }
 

@@ -9,8 +9,6 @@
             </div>
         </div>
         <Footer/>
-
-        
     </div>
     
 </template>
@@ -71,32 +69,13 @@ export default {
         }
     } , 
      methods: {
-        checkError(code , message) {
-            if(this.$route.query.error == code){
-                this.errorMessage = message
-                return this.removeErrorMessage()
-            }
-        },
-
-        removeErrorMessage() {
-            setTimeout(() => {
-                this.errorMessage = null
-                this.$router.push({query: undefined})
-            }, 4000)           
-        }, 
+       
         login(){
             return this.axios.post(`${this.apiUrl}/user/login`, {
                 email: "random@gmail.com", 
                 password: "random"
             }).then(response =>{console.log("je suis la réponese", response )}, error =>{console.log("je suis l", error);});
         }
-    },
-
-    
-    mounted() {
-       this.checkError('unique', `${this.$route.query.field} déjà utilisé`)
-        console.log(this.apiUrl)
-       console.log(this.action)
     },
 } 
 </script>

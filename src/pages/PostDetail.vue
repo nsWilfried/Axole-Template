@@ -36,7 +36,7 @@
     <div class="post__comments bg-yellow- w-full flex justify-center items-center">
       <div class="rounded">
         <div class="w-full  h-12 flex items-center pl-4">
-          <span>{{ post.comments.length }} Commentaires</span>
+          <span>{{ post.user.comments.length }} Commentaires</span>
         </div>
         <hr>
 
@@ -190,7 +190,8 @@ export default {
           this.$swal("Succès", "Commentaire ajouté", 'success').then(response => {
             this.axios.get("http://127.0.0.1:3333/posts").then(response =>  {
               response.data.filter((element) => element.slug == this.$route.params.id).forEach(element => {
-                this.comments = element.comments 
+                this.comments = element.user.comments 
+                console.log("je suis l'élement", element)
               })
             })
             // console.log("voici les comments après l'ajout", this.comments)
@@ -202,8 +203,8 @@ export default {
     }
   },
   created() {
-    this.$store.state.posts.then((result) => {
-       result
+    this.$store.state.posts.then((response) => {
+       response.data
         .filter((element) => element.slug == this.$route.params.id)
         .forEach((element) => {
           this.posts.push(element);

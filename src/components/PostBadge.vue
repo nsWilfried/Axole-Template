@@ -27,7 +27,7 @@
                                 <aside>
                                     <font-awesome-icon icon="fa-regular fa-comments" />
                                 </aside>
-                                <aside class="mx-2"> {{post.comments.length}} comments</aside>
+                                <aside class="mx-2"> {{post.user.comments.length}} comments</aside>
                             </div>
     </div>
 </template>
