@@ -24,10 +24,10 @@ import User from 'App/Models/User'
 import Post from 'App/Models/Post'
 import Comment from 'App/Models/Comment'
 // GET ALL CONTENT
-Route.get('/', async()=> {
+Route.get('/', async({request})=> {
 
   const users = User.query().preload('posts')
-
+  console.log("voici tous les cookies", request.cookiesList())
   return await users
 })
 

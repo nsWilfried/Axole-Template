@@ -5,16 +5,21 @@ import Post from "App/Models/Post";
 import Drive from "@ioc:Adonis/Core/Drive";
 import CreatePostValidator from "App/Validators/CreatePostValidator";
 import User from "App/Models/User";
-
+import Env from '@ioc:Adonis/Core/Env'
 export default class BlogController {
-  // client = "http://127.0.0.1:3000";
-  server = "http://127.0.0.1:3333";
+  server = Env.get("SERVER_URL");
 
   //  créer un post
   public async createPost({ request, response }: HttpContextContract) {
     // le cookie utilisateur
     const userCookie = request.cookiesList().user;
-    const userId = userCookie !=undefined?  JSON.parse(atob(userCookie)).message.id: undefined;
+    const userId = userCookie !=undefined? JSON.parse(atob(userCookie)).message.id: undefined;
+
+    console.log("liste de touts le user", request.cookiesList())
+    console.log("usercookie", userCookie)
+    // console.log("je suis l'id utilisateur", userId)
+    // console.log("je susi sur qeut out le monde v bien et que je vais bien élémùeent ")
+
     try {
       const thumbnail = request.file("file");
 

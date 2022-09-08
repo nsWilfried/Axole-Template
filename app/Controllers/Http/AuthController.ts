@@ -3,7 +3,7 @@ import User from "App/Models/User";
 import LoginValidator from "App/Validators/LoginValidator";
 import RegisterValidator from "App/Validators/RegisterValidator";
 export default class AuthController {
-  client = "http://127.0.0.1:3000";
+  // client = "http://127.0.0.1:3000";
 
   // inscriptin utilisateur
   public async register({ request, response }: HttpContextContract) {
@@ -96,12 +96,11 @@ export default class AuthController {
         .then(
           (data) => {
             const user = data.$attributes;
-            this.setUserInfoCookie(response, {
-              id: user.id,
-              email: user.email,
-              profile: user.profile,
-              isAdmin: user.isAdmin,
-            });
+            // console.log("voici l'utilisateur en question", user)
+            // this.setUserInfoCookie(response, user);
+            response.plainCookie("isConnected", true)
+            response.plainCookie("user", user)
+            // console.log("je suis le cookie utilisateur enfoiré", request.cookie("user"))
             return response.status(200).json({
               status: 200,
               message: "Utilisateur connecté",
