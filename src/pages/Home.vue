@@ -70,7 +70,7 @@
                                             stroke="currentColor" stroke-miterlimit="10"></polygon>
                                     </svg>
                                 </div>
-                                <p class="font-semibold">{{ element.user.comments.length }}</p>
+                                <p class="font-semibold">{{ element.user.comments.filter(comment => comment.post_id == element.id).length }}</p>
                             </a>
 
                             <div v-if="user">

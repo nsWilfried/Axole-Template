@@ -27,7 +27,7 @@
                                 <aside>
                                     <font-awesome-icon icon="fa-regular fa-comments" />
                                 </aside>
-                                <aside class="mx-2"> {{post.user.comments.length}} comments</aside>
+                                <aside class="mx-2"> {{commentsLength}} comments</aside>
                             </div>
     </div>
 </template>
@@ -36,7 +36,8 @@
 import moment from 'moment'
 export default {
     props:{
-        post: Array
+        post: Array, 
+        commentsLength: Number
     }, 
     data(){
         return {

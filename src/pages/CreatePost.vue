@@ -8,7 +8,7 @@
                         <!-- drop zone --> 
                     <div >
 
-                        <file-pond
+                        <!-- <file-pond
                                 name="file"
                                 ref="pond"
                                 label-idle="Drop files here..."
@@ -16,10 +16,10 @@
                                 accepted-file-types="image/jpeg, image/png"
                                 required='true'
                                 storeAsFile='true'
-                                />          
+                                />           -->
                     </div>
 
-                    <input type="file" name="hello" >
+                    <Field type="file" name="file" />
 
                     <!-- label name--> 
 
@@ -47,9 +47,9 @@
                <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
                     <div>
                         <div class="w-full h-96 bg-green- ">
-                            <input class="hidden" :name='editor'/>
-                            <editor-content class="h-12 w-full border-black border-3" :editor="editor" />
-
+                            <!-- <input class="hidden" :name='editor'/>
+                            <editor-content class="h-12 w-full border-black border-3" :editor="editor" /> -->
+                            <Field class="h-12 w-full border " name="content" id="" cols="30" rows="10"></Field>
                         </div>
                     </div>
                    
@@ -128,7 +128,11 @@ export default {
   methods: {
     createPost(values){
         console.log("nous sommes l'ensemble des valeurs", values)
-        this.axios.post("http://127.0.0.1:3333/create-post", values).then(
+        this.axios.post("http://127.0.0.1:3333/create-post", values, {
+            headers: {
+                authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`
+            }
+        }).then(
             response => {
                 console.log("je suis la réponse", response)
             }, 

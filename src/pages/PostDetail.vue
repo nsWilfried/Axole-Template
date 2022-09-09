@@ -12,7 +12,7 @@
       <!-- post description -->
       <div class="post__description bg-yellow- flex justify-center">
         <div class="bg-gray-">
-          <span class="text-center">400
+          <span class="text-center">
             {{ post.description }}
           </span>
         </div>
@@ -21,7 +21,7 @@
       <!-- post infos -->
       <div class="post__infos">
         <div class="flex justify-around bg-green-">
-          <PostBadge :post='post' />
+          <PostBadge :post='post' :commentsLength="comments.length" />
         </div>
       </div>
     </div>
@@ -36,7 +36,7 @@
     <div class="post__comments bg-yellow- w-full flex justify-center items-center">
       <div class="rounded">
         <div class="w-full  h-12 flex items-center pl-4">
-          <span>{{ post.user.comments.length }} Commentaires</span>
+          <span>{{ comments.length }} Commentaires</span>
         </div>
         <hr>
 
@@ -50,13 +50,13 @@
                   <font-awesome-icon class='text-gray-300 mt-3 text-5xl' icon="fa-solid fa-user" />
                 </div>
               </span>
-
               <div
                 class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm dark:bg-gray-700 dark:border-gray-600">
                 <div class="justify-between items-center mb-3 sm:flex">
                   <time class="mb-1 capitalize text-xs font-normal text-gray-400 sm:order-last sm:mb-0">{{
                       moment(comment.created_at).fromNow()
-                  }}</time>
+                  }} 
+                  </time>
                   <div class="text-sm font-normal text-gray-500 lex dark:text-gray-300"><span class="font-medium capitalize">{{ comment.users.username }}</span>
                     commented </div>
                 </div>
@@ -175,11 +175,14 @@ export default {
     };
   },
   methods: {
-    sendComment(hello){
-      this.axios.post("http://127.0.0.1:3333/comments", {
+    sendComment(postId){
+      this.axios.post("http://localhost:3333/comments", {
         message: this.message, 
-        postId: hello,
-        userId: this.$cookies.get("user")
+        postId: postId,
+      },{
+        headers: {
+          authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`,
+        }
       }).then(response => {
         if(response.status == 200) {
 
@@ -188,10 +191,11 @@ export default {
 
           // lancer une alert
           this.$swal("Succès", "Commentaire ajouté", 'success').then(response => {
-            this.axios.get("http://127.0.0.1:3333/posts").then(response =>  {
-              response.data.filter((element) => element.slug == this.$route.params.id).forEach(element => {
-                this.comments = element.user.comments 
-                console.log("je suis l'élement", element)
+            this.axios.get("http://localhost:3333/posts").then(response =>  {
+              console.log("je suis la réponse", response)
+              response.data.data.filter((element) => element.slug == this.$route.params.id).forEach(post => {
+                this.comments = post.user.comments.filter(element => element.post_id == post.id ) 
+                // console.log("je suis l'élement", element)
               })
             })
             // console.log("voici les comments après l'ajout", this.comments)
@@ -208,9 +212,12 @@ export default {
         .filter((element) => element.slug == this.$route.params.id)
         .forEach((element) => {
           this.posts.push(element);
-          this.comments = element.comments
-          
         });
+
+        response.data.filter(element => element.slug == this.$route.params.id).forEach(post =>{
+          this.comments = post.user.comments.filter(element => element.post_id == post.id )
+        })
+    
 
         // console.log("voici les comments aavant l'ajout", this.comments);
     });
