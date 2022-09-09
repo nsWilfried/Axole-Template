@@ -12,18 +12,16 @@ export default class BlogController {
   //  créer un post
   public async createPost({ request, response }: HttpContextContract) {
     // le cookie utilisateur
-    const userCookie = request.cookiesList().user;
-    const userId = userCookie !=undefined? JSON.parse(atob(userCookie)).message.id: undefined;
+    const userInfo = JSON.parse(request.headers().authorization?.split(" ")[1] || "null");
+    const userId = userInfo !=null? userInfo.id : null ;
 
-    console.log("liste de touts le user", request.cookiesList())
-    console.log("usercookie", userCookie)
-    // console.log("je suis l'id utilisateur", userId)
-    // console.log("je susi sur qeut out le monde v bien et que je vais bien élémùeent ")
+    // console.log("voici la requete", request.headers())
+    // console.log("les entêtes", userInfo)
 
     try {
       const thumbnail = request.file("file");
 
-      if (userId != undefined) {
+      if (userId != null) {
         const post = {
           name: request.input("name").trim(),
           description: request.input("description").trim(),
@@ -90,8 +88,8 @@ export default class BlogController {
 
   // modifier un post 
   public async updatePost({request, response}:HttpContextContract){
-    const userCookie = request.cookiesList().user;
-    const userId = userCookie !=undefined?  JSON.parse(atob(userCookie)).message.id : undefined;
+    const userInfo = JSON.parse(request.headers().authorization?.split(" ")[1] || "null");
+    const userId = userInfo !=null? userInfo.id : null;
     let retrievePost; 
 
     // récupérer le post et lui appliquer des actions
@@ -102,7 +100,7 @@ export default class BlogController {
         const thumbnail = request.file("file");
   
         //  si l'utilisateur existe et que c'est son post alors il peut le modifier
-        if(userId != undefined && userId == retrievePost.userId){
+        if(userId != null && userId == retrievePost.userId){
           const post = {
             name: request.input("name"), 
             description: request.input("description"), 
@@ -162,13 +160,13 @@ export default class BlogController {
 
   // supprimer un post
   public async deletePost({ request, response }: HttpContextContract) {
-    const userCookie = request.cookiesList().user;
-    const userId = userCookie !=undefined? JSON.parse(atob(userCookie)).message.id: undefined;
+    const userInfo = JSON.parse(request.headers().authorization?.split(" ")[1] || "null");
+    const userId = userInfo !=null? userInfo.id : null;
     await Post.findOrFail(request.param("id")).then(
       async (data) => {
 
         //  si l'utilisateur existe et que c'est son post alors il peut le supprimer
-        if(userId != undefined && userId == data.userId){
+        if(userId != null && userId == data.userId){
 
             try {
               await data.delete()
@@ -177,7 +175,7 @@ export default class BlogController {
                 message: "Post supprimé"
               });
             } catch (error) {
-              console.log("je suis fou", error.message)
+              // console.log("je suis fou", error.message)
               return response.status(500).json({
                 status: 500, 
                 message: "Erreur lors de la suppression du post", 
@@ -243,11 +241,11 @@ export default class BlogController {
   // ajouter un commentaire sous un post
   public async addComment({ request, response }: HttpContextContract) {
     // le cookie utilisateur
-    const userCookie = request.cookiesList().user;
+    const userInfo = JSON.parse(request.headers().authorization?.split(" ")[1] || "null");
     // console.log("cookie utilisateur", userCookie)
 
-    if (userCookie != undefined) {
-      const userId = JSON.parse(atob(userCookie)).message.id;
+    if (userInfo != null) {
+      const userId = userInfo.id; 
       const comment = {
         message: request.input("message"),
         userId: userId,
