@@ -20,6 +20,7 @@ export default class BlogController {
 
     try {
       const thumbnail = request.file("file");
+      console.log("je suis la requete du fichier image", thumbnail)
 
       if (userId != null) {
         const post = {
@@ -33,6 +34,8 @@ export default class BlogController {
               : `${this.server}/downloads/${thumbnail?.clientName}`,
           userId: userId,
         };
+
+        console.log("je suis le post envoyé", post)
         await request.validate(CreatePostValidator);
 
         // créer le post et renvoyer un status 200
@@ -253,6 +256,7 @@ export default class BlogController {
         postId: request.input("postId"),
       };
 
+      // console.log("je suis le commentaire ajouté", comment)
       //  console.log("voici le cookie utilisateur", userCookie)
       //    console.log("voici le commentairecd qui eest envoyé", comment);
 
@@ -276,8 +280,6 @@ export default class BlogController {
         message: "Connectez vous pour envoyer un message",
       });
     }
-
-    // response.redirect().toPath(`${this.client}/${params.id}`)
   }
 
   public async download({ params, response }: HttpContextContract) {
