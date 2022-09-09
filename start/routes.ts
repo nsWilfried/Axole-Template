@@ -24,10 +24,10 @@ import User from 'App/Models/User'
 import Post from 'App/Models/Post'
 import Comment from 'App/Models/Comment'
 // GET ALL CONTENT
-Route.get('/', async({request})=> {
+Route.get('/', async()=> {
 
   const users = User.query().preload('posts')
-  console.log("voici tous les cookies", request.cookiesList())
+  // console.log("voici tous les cookies", request.cookiesList())
   return await users
 })
 
@@ -40,7 +40,9 @@ Route.get('/users',async () => {
 
 Route.get('/posts',async () => {
   const posts = await Post.query().preload('user', (query) =>{
-    query.preload('comments')
+    query.preload('comments', (query) => {
+      query.preload("users")
+    })
   })
   return {
     status: 200, 

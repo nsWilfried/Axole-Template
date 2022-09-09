@@ -61,7 +61,7 @@ export default class BlogController {
       return response.status(400).json({
         status: 400,
         message: "Erreur survenue",
-        error: error.message,
+        error: error,
       });
     }
 
@@ -241,6 +241,7 @@ export default class BlogController {
   // ajouter un commentaire sous un post
   public async addComment({ request, response }: HttpContextContract) {
     // le cookie utilisateur
+    // console.log("informations utilisateur", request.headers().authorization)
     const userInfo = JSON.parse(request.headers().authorization?.split(" ")[1] || "null");
     // console.log("cookie utilisateur", userCookie)
 
