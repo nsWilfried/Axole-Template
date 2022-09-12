@@ -75,6 +75,7 @@
 
                             <div v-if="user">
                                 <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.id">modifier</button>
+                                <button class='ml-3 text-white bg-red-400 flex justify-center items-center'  v-if="element.user.id == user.id" @click="deletePost(element.id)">Supprimer</button>
                             </div>
 
                         </div>
@@ -139,6 +140,28 @@ export default {
 
         // console.log("je suis l'api ", import.meta.env)
     },
+    methods: {
+        deletePost(id){
+            return this.axios.delete(`http://localhost:3333/posts/${id}`, {
+                headers: {
+                    authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`
+                }
+            }).then(
+                response => {
+                    console.log("je suis la réponse", response)
+                    this.$swal("Succès", "Post supprimé", 'success')
+                }, 
+                error => {
+                    console.log("je suis l'erreur", error )
+                    this.$swal("Erreur", "Erreur lors de la suppression", 'error')
+
+                }
+            )
+        }, 
+        updatePost(){
+
+        }
+    }
 
 }
 </script>

@@ -15,6 +15,20 @@ const store = createStore({
         }
     }, 
 
+    mutations: {
+        retrieveUser(state){
+            state.user = user_info !=  undefined ? Cookies.get('user') : null
+        }
+    }, 
+    getters: {
+        parseUserData: state =>{
+            if(state.user){
+                return JSON.parse(state.user)
+
+            }
+        }
+    }
+
 })
 
 

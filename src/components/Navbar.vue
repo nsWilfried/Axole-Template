@@ -74,11 +74,16 @@ export default {
     },
 
     mounted() {
-        if(this.$store.state.user){
-            this.user = JSON.parse(this.$store.state.user)
-        }
+        this.user = this.$store.getters.parseUserData
         // console.log(this.user.message)
+        console.log("l'élement est bien monté et je vais vérifier si ça fonctionne")
+        // this.$store.commit("retrieveUser")
     },
+    updated(){
+        console.log("le composant est mis à jour")
+        this.user = this.$store.getters.parseUserData
+
+    }, 
     methods: {
         logout(){
             return this.axios.post("https://ns-blog-api.herokuapp.com/logout").then(
