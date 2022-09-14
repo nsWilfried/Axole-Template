@@ -58,7 +58,7 @@
             <!--post image-->
             <div class="w-auto pr-2 h-full items-center flex bg-green-">
               <div
-                style="width: 50px; height: 55px"
+                style="width: 50px;"
                 class="rounded bg-gray-400 overflow-hidden"
               >
                 <img :src="post.thumbnail" alt="" srcset="" />
