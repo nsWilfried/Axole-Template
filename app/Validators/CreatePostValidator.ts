@@ -28,7 +28,7 @@ export default class CreatePostValidator {
     slug: schema.string.nullableAndOptional(), 
     description: schema.string({ trim: true }, [rules.required()]), 
     content: schema.string({ trim: true }, [rules.required()]), 
-    thumbnail: schema.string({ trim: true }, [rules.required()]), 
+    thumbnail: schema.string.nullableAndOptional(), 
 
     
   })

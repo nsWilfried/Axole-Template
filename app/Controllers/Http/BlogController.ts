@@ -36,7 +36,7 @@ export default class BlogController {
         };
 
         // console.log("je suis le post envoyé", post)
-        await request.validate(CreatePostValidator);
+        // await request.validate(CreatePostValidator);
 
         // créer le post et renvoyer un status 200
         await Post.create(post).then(() => {
