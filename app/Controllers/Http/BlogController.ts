@@ -17,10 +17,10 @@ export default class BlogController {
 
     // console.log("voici la requete", request.headers())
     // console.log("les entêtes", userInfo)
-
+    // console.log("je suis la requête", request)
     try {
-      const thumbnail = request.file("file");
-      console.log("je suis la requete du fichier image", thumbnail)
+      const thumbnail = request.file("thumbnail");
+      // console.log("je suis la requete du fichier image", thumbnail?.tmpPath)
 
       if (userId != null) {
         const post = {
@@ -35,7 +35,7 @@ export default class BlogController {
           userId: userId,
         };
 
-        console.log("je suis le post envoyé", post)
+        // console.log("je suis le post envoyé", post)
         await request.validate(CreatePostValidator);
 
         // créer le post et renvoyer un status 200
@@ -47,9 +47,8 @@ export default class BlogController {
         });
 
         if (thumbnail != null) {
-          await thumbnail.move(Application.tmpPath("uploads"), {
-            name: post.thumbnail,
-          });
+          // test if move thumnail work .then((response) => console.log("tout a marché, je suis la réponse", response), error => console.log("je suis l'erreur", error));
+          await thumbnail.move(Application.tmpPath("uploads"))
         }
       }
       // si l'utilisateur n'existe pas, on lui dit de se connecter pour envooyer un post
