@@ -31,7 +31,7 @@
 
         <div style="background-color: #999999;"
             class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div :key="index" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+            <div v-if="posts" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                 <div v-for="(element, index) in posts"
                     class="overflow-hidden transition-shadow duration-300 bg- rounded">
                     <span v-if="element.thumbnail"><img :src="element.thumbnail"
@@ -47,7 +47,7 @@
                                 {{element.user.username}}
                             </div>
                         </div>
-                        <routerLink :to="`/blog/${element.slug}`"
+                        <routerLink :to="`/blog/${element.id}`"
                             class="inline-block mb-3 text-black transition-colors duration-200 hover:text-deep-purple-accent-700">
                             <p class="text-2xl font-bold leading-5">{{ element.name }}</p>
                         </routerLink>
@@ -74,7 +74,9 @@
                             </a>
 
                             <div v-if="user">
-                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.id">modifier</button>
+                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.id">
+                                    <router-link :to ="`/blog/update/${element.id}`">modifier</router-link>
+                                </button>
                                 <button class='ml-3 text-white bg-red-400 flex justify-center items-center'  v-if="element.user.id == user.id" @click="deletePost(element.id)">Supprimer</button>
                             </div>
 
@@ -83,6 +85,9 @@
                 </div>
             </div>
 
+            <div v-else>
+                Aucun post trouvé
+            </div>
             <!-- Previous Button -->
             <!-- <div>
                 <a href="#"

@@ -193,7 +193,7 @@ export default {
           this.$swal("Succès", "Commentaire ajouté", 'success').then(response => {
             this.axios.get("http://localhost:3333/posts").then(response =>  {
               console.log("je suis la réponse", response)
-              response.data.data.filter((element) => element.slug == this.$route.params.id).forEach(post => {
+              response.data.data.filter((element) => element.id == this.$route.params.id).forEach(post => {
                 this.comments = post.user.comments.filter(element => element.post_id == post.id ) 
                 // console.log("je suis l'élement", element)
               })
@@ -209,12 +209,12 @@ export default {
   created() {
     this.$store.state.posts.then((response) => {
        response.data
-        .filter((element) => element.slug == this.$route.params.id)
+        .filter((element) => element.id == this.$route.params.id)
         .forEach((element) => {
           this.posts.push(element);
         });
 
-        response.data.filter(element => element.slug == this.$route.params.id).forEach(post =>{
+        response.data.filter(element => element.id == this.$route.params.id).forEach(post =>{
           this.comments = post.user.comments.filter(element => element.post_id == post.id )
         })
     

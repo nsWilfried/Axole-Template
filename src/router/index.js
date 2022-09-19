@@ -5,6 +5,8 @@ import About from '../pages/About.vue'
 import Contact from '../pages/Contact.vue'
 import CreatePost from '../pages/CreatePost.vue'
 import PostDetail from '../pages/PostDetail.vue'
+import UpdatePost from '../pages/UpdatePost.vue'
+
 
 
 
@@ -25,7 +27,7 @@ const isPostExist = async(to, next) => {
     let post = []
     response.data.find(element => {
 
-      if (element.slug == to.params.id) {
+      if (element.id == to.params.id) {
         // console.log("je suisl 'élément", element)
         return post= element
       }
@@ -91,6 +93,11 @@ const routes = [
         name: 'post-detail',
         beforeEnter: [isPostExist]
     },
+    {
+        path: '/blog/update/:id', 
+        component: UpdatePost, 
+        name: 'update-post',
+    }, 
     {
         path: '/:pathMatch(.*)*', name: 'NotFound', redirect: to => {
             return '/'
