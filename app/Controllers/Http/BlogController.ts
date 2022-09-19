@@ -73,7 +73,7 @@ export default class BlogController {
   // retourner un post en particulier
   public async retrieveOnePost({ request, response }: HttpContextContract) {
     // console.log("les paramètres", request.param("id") )
-    console.log("je suis bien la fonction pour récupérer un post", request.param("id"))
+    // console.log("je suis bien la fonction pour récupérer un post", request.param("id"))
     await Post.findOrFail(request.param("id")).then(
       (data) => {
         return response.status(200).json(data);
