@@ -72,17 +72,18 @@ export default {
         onSubmit(values) {
             this.errorMessage = ""
             this.loading = true
-            console.log("j'ai soumis et voici les valeurs", values)
+            // console.log("j'ai soumis et voici les valeurs", values)
 
             if (this.request == "login") {
                 return this.axios.post("http://localhost:3333/user/login", values)
-                    .then(response => {
+                    .then(async(response) => {
                         // console.log("je suis le résultat de la connexino", response)
 
                         const user = response.data.user
                         this.$cookies.set("user", JSON.stringify(user))
                         this.$cookies.set("isConnected", true)
                         this.loading = false
+                        await this.$store.commit("retrieveUser")
 
                         this.$router.push('/')
 

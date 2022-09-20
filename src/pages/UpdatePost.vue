@@ -1,10 +1,12 @@
 <template>
     <div>
+        <Navbar />
         <UpdateForm />
     </div>
 </template>
 <script>
-    import UpdateForm from '../components/UpdateForm.vue'
+import Navbar from '@/components/Navbar.vue'
+import UpdateForm from '../components/UpdateForm.vue'
 export default {
     data() {
         return {
@@ -14,9 +16,9 @@ export default {
     mounted() {
         // console.log("je suis la page de modification du post", this.$route.params.id);
     },
-    components: { UpdateForm }
+    components: { UpdateForm, Navbar }
 }
 </script>
 <style lang="css">
-    
+
 </style>

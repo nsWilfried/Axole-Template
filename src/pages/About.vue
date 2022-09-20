@@ -1,5 +1,6 @@
 <template>
     <div class="about">
+        <Navbar/>
         <div>
             <Banner :name="title"/>
         </div>
@@ -83,8 +84,9 @@
 <script>
 import Banner from "@/components/Banner.vue";
 import AboutSkills from '@/components/AboutSkills.vue';
+import Navbar from '@/components/Navbar.vue'
 export default {
-    components: {Banner, AboutSkills},
+    components: {Banner, AboutSkills, Navbar},
     data() { 
 
         const skills = [

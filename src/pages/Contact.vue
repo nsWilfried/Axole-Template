@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Navbar/>
         <div>
             <Banner :name="title" />
         </div>
@@ -117,12 +118,13 @@
 <script>
 import  Banner from '@/components/Banner.vue'
 import  Footer from '@/components/Footer.vue'
+import Navbar from '@/components/Navbar.vue'
 
 import {Form, Field, ErrorMessage} from 'vee-validate'
 import * as yup from 'yup'
 export default {
 
-    components: {Banner,Footer,Form, Field, ErrorMessage},
+    components: {Banner,Footer,Form, Field, ErrorMessage, Navbar},
     data() {
        const  schema = {
            fields:  [

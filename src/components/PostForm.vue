@@ -109,7 +109,10 @@ export default {
             }).then(
                 response => {
                     // console.log("je suis la réponse", response)
-                    this.$swal("Succès", "Post crée", "success"); then(() => this.$router.push("/"))
+                    this.$swal("Succès", "Post crée", "success").then(() => {
+                        this.$router.push("/")
+                        this.$store.commit("getAllPosts")
+                    })
                 },
                 error => {
                     // console.log("je suis l'erreur", error)

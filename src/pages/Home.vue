@@ -1,5 +1,7 @@
 <template>
     <div>
+    <Navbar/>
+
         <!--banner-->
         <div class="banner w-full flex items-center justify-center">
             <div class="banner__content flex items-start mt-44 justify-end">
@@ -70,14 +72,17 @@
                                             stroke="currentColor" stroke-miterlimit="10"></polygon>
                                     </svg>
                                 </div>
-                                <p class="font-semibold">{{ element.user.comments.filter(comment => comment.post_id == element.id).length }}</p>
+                                <p class="font-semibold">{{ element.user.comments.filter(comment => comment.post_id ==
+                                element.id).length }}</p>
                             </a>
 
                             <div v-if="user">
-                                <button class='text-white bg-blue-400 flex justify-center items-center' v-if="element.user.id == user.id">
-                                    <router-link :to ="`/blog/update/${element.id}`">modifier</router-link>
+                                <button class='text-white bg-blue-400 flex justify-center items-center'
+                                    v-if="element.user.id == user.id">
+                                    <router-link :to="`/blog/update/${element.id}`">modifier</router-link>
                                 </button>
-                                <button class='ml-3 text-white bg-red-400 flex justify-center items-center'  v-if="element.user.id == user.id" @click="deletePost(element.id)">Supprimer</button>
+                                <button class='ml-3 text-white bg-red-400 flex justify-center items-center'
+                                    v-if="element.user.id == user.id" @click="deletePost(element.id)">Supprimer</button>
                             </div>
 
                         </div>
@@ -111,7 +116,7 @@
                 </svg>
             </a>
             </div> -->
-            
+
 
         </div>
         <Footer />
@@ -120,53 +125,61 @@
 
 <script>
 import Footer from "@/components/Footer.vue"
+import Navbar from "@/components/Navbar.vue"
+
 import moment from "moment"
 export default {
-    components: { Footer },
+    components: { Footer, Navbar },
     data() {
 
         return {
             posts: [],
-            moment: moment, 
+            moment: moment,
             user: null
         }
     },
 
     created() {
-        this.$store.state.posts.then(response => {
-        // console.log("je suis la réponsse", response)
+        this.getAllPosts();
 
-                this.posts = response.data.slice(0, 6)
-            // console.log("posts", this.posts)
-        }) 
-        if(this.$store.state.user){
-            this.user = JSON.parse(this.$store.state.user)
-        }
-
-        // console.log("je suis l'api ", import.meta.env)
+        // parser les données utilisateurs
+        this.parseUserData()
     },
     methods: {
-        deletePost(id){
+        deletePost(id) {
             return this.axios.delete(`http://localhost:3333/posts/${id}`, {
                 headers: {
                     authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`
                 }
             }).then(
                 response => {
-                    console.log("je suis la réponse", response)
-                    this.$swal("Succès", "Post supprimé", 'success')
-                }, 
+                    // console.log("je suis la réponse", response)
+                    this.$swal("Succès", "Post supprimé", 'success').then(() => {
+                        this.$store.commit("getAllPosts")
+                        this.getAllPosts();
+                    })
+                },
                 error => {
-                    console.log("je suis l'erreur", error )
+                    // console.log("je suis l'erreur", error)
                     this.$swal("Erreur", "Erreur lors de la suppression", 'error')
 
                 }
             )
-        }, 
-        updatePost(){
+        },
+        updatePost() {
 
+        },
+        getAllPosts() {
+            this.$store.state.posts.then(response => {
+                this.posts = response.data.slice(0, 6)
+            })
+        },
+        parseUserData() {
+            if (this.$store.state.user) {
+                this.user = this.$store.getters.parseUserData
+            }
         }
-    }
+    },
 
 }
 </script>

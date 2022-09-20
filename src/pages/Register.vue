@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Navbar/>
         <div class="w-full main__register bg-slate-200 flex flex-col  justify-center items-center">
             <div class=" w-96 h-auto rounded-lg bg-white ">
                 <div class="w-full h-14 flex justify-center items-center">
@@ -16,7 +17,7 @@
 
 <!-- script -->
 <script>
-
+import Navbar from '@/components/Navbar.vue'
 import {ErrorMessage} from 'vee-validate'
 import Form from '@/components/Form.vue'
 import Error from '@/components/Error.vue'
@@ -26,7 +27,7 @@ import Footer from '@/components/Footer.vue'
 import * as yup from "yup"
 export default {
     
-    components: {Form,Error,Footer,  ErrorMessage}, 
+    components: {Form,Error,Footer,  ErrorMessage, Navbar}, 
     data() {
         
         

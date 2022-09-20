@@ -1,5 +1,6 @@
 <template>
     <div class="w-full h-auto">
+        <Navbar/>
         <div class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
             <div class=" w-96 h-auto rounded-lg bg-white ">
 
@@ -21,11 +22,13 @@
 import Form from '@/components/Form.vue'
 import Error from '@/components/Error.vue'
 import Footer from '@/components/Footer.vue'
+import Navbar from '@/components/Navbar.vue'
+
 
 
 import * as yup from 'yup'
 export default {
-    components: { Form, Footer, Error },
+    components: { Form, Footer, Error, Navbar },
     data() {
         const loginSchema = {
             fields: [
