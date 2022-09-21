@@ -181,7 +181,7 @@ export default {
   },
   methods: {
     sendComment(postId) {
-      this.axios.post("http://localhost:3333/comments", {
+      this.axios.post(`${import.meta.env.VITE_DEV_API}/comments`, {
         message: this.message,
         postId: postId,
       }, {
@@ -196,7 +196,7 @@ export default {
 
           // lancer une alert
           this.$swal("Succès", "Commentaire ajouté", 'success').then(response => {
-            this.axios.get("http://localhost:3333/posts").then(response => {
+            this.axios.get(`${import.meta.env.VITE_DEV_API}/posts`).then(response => {
               // console.log("je suis la réponse", response)
               response.data.data.filter((element) => element.id == this.$route.params.id).forEach(post => {
                 this.comments = post.user.comments.filter(element => element.post_id == post.id)

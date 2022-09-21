@@ -106,7 +106,7 @@ export default {
     },
     methods: {
         async logout() {
-            return await this.axios.post("http://localhost:3333/logout").then(
+            return await this.axios.post(`${import.meta.env.VITE_DEV_API}/logout`).then(
                 async () => {
                     this.$router.replace('/user/login')
                     this.$cookies.remove("user")

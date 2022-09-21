@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="contact__form bg-green-">
-                         <Form :action="action" method="post">
+                         <Form @submit="sendMail" >
                             <div  v-for="{ as, name,type,placeholder, label,  ...attrs } of schema.fields" :key="name">
                                 <div class="w-full h-12 flex items-center justify-center">
 
@@ -166,10 +166,22 @@ export default {
         return {
             title: 'Contact', 
             schema, 
-            action: 'http://127.0.0.1:3333/contact'
            
         }
     },
+    methods:{
+        sendMail(values){
+            // console.log("j'envoie un mail wilfried", values)
+            return this.axios.post(`${import.meta.env.VITE_DEV_API}/contact`, values).then(response => {
+                // console.log("je suis la réponse", response)
+                this.$swal("Succès", "Message bien envoyé", "success")
+            }, error => {
+                console.log("je suis le message d'erreur", error)
+                // this.$swal("Erreur", "Erreur lors de l'envoi du message", "Erreur")     
+
+            })
+        }
+    }
     
 }
 </script>

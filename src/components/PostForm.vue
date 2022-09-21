@@ -96,7 +96,7 @@ export default {
         createPost(values) {
             // console.log("je suis l'ensemble des valeurs", values)
             // console.log("je suis le texte de l'éditeur", this.editor.getText())
-            this.axios.post(`http://localhost:3333/create-post`, {
+            this.axios.post(`${import.meta.env.VITE_DEV_API}/create-post`, {
                 name: values.name,
                 description: values.description,
                 content: this.editor.getText(),

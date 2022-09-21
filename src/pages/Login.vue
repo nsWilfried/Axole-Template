@@ -56,9 +56,7 @@ export default {
             ],
         }
         return {
-            apiUrl: 'https://ns-blog-api.herokuapp.com',
             text: 'Se connecter',
-            action: `https://ns-blog-api.herokuapp.com/user/login`,
             loginSchema,
             errorMessage: null
         }

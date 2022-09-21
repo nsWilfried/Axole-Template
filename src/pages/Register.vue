@@ -62,8 +62,6 @@ export default {
         }
         
         return {
-            apiUrl:'https://ns-blog-api.herokuapp.com', 
-            action: `https://ns-blog-api.herokuapp.com/user/register`, 
             text: 'S\'inscrire',
             registerSchema, 
             errorMessage: null
@@ -72,7 +70,7 @@ export default {
      methods: {
        
         login(){
-            return this.axios.post(`${this.apiUrl}/user/login`, {
+            return this.axios.post(`${import.meta.env.VITE_DEV_API}/user/login`, {
                 email: "random@gmail.com", 
                 password: "random"
             }).then(response =>{console.log("je suis la réponese", response )}, error =>{console.log("je suis l", error);});

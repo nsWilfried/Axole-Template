@@ -59,7 +59,7 @@
                         </p>
                         <div class="flex space-x-4">
 
-                            <a href="/" aria-label="Comments"
+                            <span
                                 class="flex items-start text-gray-800 transition-colors duration-200 hover:text-deep-purple-accent-700 group">
                                 <div class="mr-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -74,14 +74,14 @@
                                 </div>
                                 <p class="font-semibold">{{ element.user.comments.filter(comment => comment.post_id ==
                                 element.id).length }}</p>
-                            </a>
+                            </span>
 
-                            <div v-if="user">
-                                <button class='text-white bg-blue-400 flex justify-center items-center'
+                            <div v-if="user" class="flex justify-around">
+                                <button class='text-white bg-blue-400 flex justify-center items-center px-2 capitalize rounded'
                                     v-if="element.user.id == user.id">
                                     <router-link :to="`/blog/update/${element.id}`">modifier</router-link>
                                 </button>
-                                <button class='ml-3 text-white bg-red-400 flex justify-center items-center'
+                                <button class='ml-3 text-white bg-red-400 flex justify-center items-center px-2 capitalize rounded'
                                     v-if="element.user.id == user.id" @click="deletePost(element.id)">Supprimer</button>
                             </div>
 
@@ -147,7 +147,7 @@ export default {
     },
     methods: {
         deletePost(id) {
-            return this.axios.delete(`http://localhost:3333/posts/${id}`, {
+            return this.axios.delete(`${import.meta.env.VITE_DEV_API}/posts/${id}`, {
                 headers: {
                     authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`
                 }
