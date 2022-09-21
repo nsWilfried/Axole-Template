@@ -18,9 +18,23 @@ export default class ContactController {
                     content: content, 
                     fullname: fullname
                 })
+        }).then(() => {
+            response.status(200).json({
+                status:200, 
+                message: "Tout a fonctionné"
+            })
+    
+        }, error => {
+            response.status(400).json({
+                status:400, 
+
+                message: "Erreur survenue", 
+                error: error.message
+            })
         })
 
-        response.redirect().toPath(this.client)
+       
+        // response.redirect().toPath(this.client)
 
     }
 }
