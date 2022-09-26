@@ -38,7 +38,7 @@
                 <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
                     <div>
                         <div class="w-full h-96 bg-green- ">
-                            <editor-content class="h-12 w-full border-black border-3" :editor="editor" />
+                            <!-- <editor-content class="h-12 w-full border-black border-3" :editor="editor" /> -->
                             <Field type="text" name="content" class="hidden input-file" :value="post.content" />
 
                             <!-- <Field
@@ -54,13 +54,13 @@
     </div>
 </template>
 <script>
-import { Editor, EditorContent } from '@tiptap/vue-3'
-import StarterKit from '@tiptap/starter-kit'
+
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
 export default {
-    components: {Editor, EditorContent, Field, Form, ErrorMessage, StarterKit }, 
+    // Editor, EditorContent,StarterKit
+    components: { Field, Form, ErrorMessage }, 
     data() {
         const schemaRules = yup.object({
             name: yup.string().required('Champ requis'),
@@ -83,17 +83,8 @@ export default {
             this.post = response.data.filter(element => element.id == this.$route.params.id)
             // console.log("je suis le post en question", this.post[0].content )
         })
-        this.editor = new Editor({
-            content: this.post[0].content,
-            extensions: [
-                StarterKit,
-            ],
-        })
-    }
-    ,
-    beforeUnmount() {
-        this.editor.destroy()
-    },
+      
+    }, 
     methods:{
     }
 }

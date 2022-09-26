@@ -44,11 +44,9 @@
                 <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
                     <div>
                         <div class="w-full h-96 bg-green- ">
-                            <editor-content class="h-12 w-full border-black border-3" :editor="editor" />
-                            <Field type="text" name="content" class="hidden input-file" />
-
-                            <!-- <Field
-                             class="h-12 w-full border " /> -->
+                             <QuillEditor ref="editor" toolbar="full" theme="snow"/>
+                             
+                             <button @click="hello">rando</button>
                         </div>
                     </div>
 
@@ -60,13 +58,13 @@
     </div>
 </template>
 <script>
-import { Editor, EditorContent } from '@tiptap/vue-3'
-import StarterKit from '@tiptap/starter-kit'
+
 import { Field, Form, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 
 export default {
-    components: {Editor, EditorContent, Field, Form, ErrorMessage, StarterKit }, 
+    // Editor, EditorContent,StarterKit
+    components: { Field, Form, ErrorMessage }, 
     data() {
         const schemaRules = yup.object({
             name: yup.string().required('Champ requis'),
@@ -79,20 +77,12 @@ export default {
             file: null
         }
     },
-    mounted() {
-        this.editor = new Editor({
-            content: '',
-            extensions: [
-                StarterKit,
-            ],
-        })
 
-    }
-    ,
-    beforeUnmount() {
-        this.editor.destroy()
-    },
     methods:{
+      
+        hello(){
+            console.log(this.$refs.editor.getEditor())
+        }, 
         createPost(values) {
             // console.log("je suis l'ensemble des valeurs", values)
             // console.log("je suis le texte de l'éditeur", this.editor.getText())
@@ -124,7 +114,63 @@ export default {
     }
 }
 </script>
-<style>
+<style lang="scss">
+    /* Basic editor styles */
+.ProseMirror {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  pre {
+    background: #0D0D0D;
+    color: #FFF;
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0D0D0D, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    margin: 2rem 0;
+  }
+}
     .dropbox {
         outline: 2px dashed grey;
         /* the dash box */
@@ -156,5 +202,9 @@ export default {
         font-size: 1.2em;
         text-align: center;
         padding: 50px 0;
+    }
+    .is-active {
+        background-color: black ;
+        color: white;
     }
     </style>
