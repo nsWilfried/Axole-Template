@@ -7,7 +7,11 @@
                 <div class="w-1/2 h-full flex flex-col justify-center ">
                     <!-- drop zone -->
                     <div class="dropbox">
-                        <Field type="file" name="thumbnail" class="input-file" />
+                        <Field type="file" name="thumbnail" class="input-file"  @change="filesChange($event.target.name, $event.target.files) "  />
+                        <p >
+                        Drag your file(s) here to begin<br> or click to browse
+                    </p>
+                    <span v-if="file">{{file[0].name}}</span>
                     </div>
                     <!-- label name-->
 
@@ -39,8 +43,10 @@
                     <div>
                         <div class="w-full h-96 bg-green- ">
                             <!-- <editor-content class="h-12 w-full border-black border-3" :editor="editor" /> -->
-                            <Field type="text" name="content" class="hidden input-file" :value="post.content" />
-
+                            <!-- <Field type="text" name="content" class="hidden input-file" :value="post.content" /> -->
+                            <QuillEditor ref="editor" toolbar="full" theme="snow" >
+                                {{post.content}}
+                                </QuillEditor>
                             <!-- <Field
                              class="h-12 w-full border " /> -->
                         </div>
@@ -73,10 +79,11 @@ export default {
             file: null, 
             post:[]
         }
-    },
-    mounted() {
-       
-
+    }, 
+    methods: {
+        filesChange(field, file){
+            this.file = file; 
+        }
     }, 
      async created(){
         await this.$store.state.posts.then(response => {
@@ -84,12 +91,10 @@ export default {
             // console.log("je suis le post en question", this.post[0].content )
         })
       
-    }, 
-    methods:{
     }
 }
 </script>
-<style>
+<style lang="scss" >
     .dropbox {
         outline: 2px dashed grey;
         /* the dash box */

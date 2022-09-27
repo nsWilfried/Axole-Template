@@ -130,9 +130,9 @@
       style="background: #e9e9e9"
     >
       <span style="font-family: 'Poppins'" class="text-gray-400"
-        >Copyright ©2022 All rights reserved | This template is made with by
-        <span class="text-yellow-600">Colorlib</span></span
-      >
+        >Copyright ©2022 All rights reserved | Designed by
+        <span class="text-yellow-600">Colorlib</span> and made by wilfried n'soukpoe</span
+      > 
     </div>
   </div>
 </template>
