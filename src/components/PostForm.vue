@@ -37,7 +37,10 @@
                 <!--submit button  -->
                 <div class="w-full ml-3 bg-yellow-">
                     <button class="text-white bg-blue-400 font-bold rounded uppercase hover:bg-blue-500  py-3 px-3"
-                        type="submit">Ajouter un post</button>
+                        type="submit">
+                        <span v-if="loading==false">Ajouter un post</span>
+                        <span v-else>Loading...</span>
+                    </button>
                 </div>
 
             </div>
@@ -77,7 +80,8 @@ export default {
             nameRule: yup.string().required('Champ requis'),
             schemaRules,
             file: null,
-            currentStatus: null,
+            currentStatus: null,  
+            loading: false                                                                                                                                               
         }
     },
 
@@ -90,6 +94,7 @@ export default {
             // console.log("je suis l'ensemble des valeurs", values.thumbnail)
             // console.log("je suis le texte de l'éditeur", this.editor.getText())
             // console.log(`${this.$refs.editor.getHTML()}`)
+            this.loading = true
             this.axios.post(`${import.meta.env.VITE_DEV_API}/create-post`, {
                 name: values.name,
                 description: values.description,
@@ -103,12 +108,15 @@ export default {
             }).then(
                 response => {
                     // console.log("je suis la réponse", response)
+                    this.loading = false
                     this.$swal("Succès", "Post crée", "success").then(() => {
+                        
                         this.$router.push("/")
                         this.$store.commit("getAllPosts")
                     })
                 },
                 error => {
+                    this.loading = false
                     // console.log("je suis l'erreur", error)
                     this.$swal("Erreur", "Erreur lors de la création du post", "error")
 
@@ -117,7 +125,7 @@ export default {
         }
     }, 
     mounted(){
-        console.log("je suisl a", this.$refs.editor.getHTML())
+        // console.log("je suisl a", this.$refs.editor.getHTML())
     }
 }
 </script>

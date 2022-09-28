@@ -1,5 +1,8 @@
 @import './_variables.scss';
 @import './_fonts.scss';
+html {
+    scroll-behavior: smooth;
+}
 .onepost {
     background: $primary-bg;
     color: #444;

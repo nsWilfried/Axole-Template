@@ -4,7 +4,7 @@
             class=" h-full bg-green- flex flex-col justify-content items-center ">
 
             <img :src="post.thumbnail" :alt="post.name" style="width: 120px; height: 120px; " />
-            <Form class="bg-red-40 w-full h-full flex " @submit="createPost" :validation-schema='schemaRules'
+            <Form class="bg-red-40 w-full h-full flex " @submit="updatePost" :validation-schema='schemaRules'
                 method="post" enctype="multipart/form-data">
                 <div class="w-1/2 h-full flex flex-col justify-center ">
                     <!-- drop zone -->
@@ -36,7 +36,10 @@
                     <!--submit button  -->
                     <div class="w-full ml-3 bg-yellow-">
                         <button class="text-white bg-blue-400 font-bold rounded uppercase hover:bg-blue-500  py-3 px-3"
-                            type="submit">Ajouter un post</button>
+                            type="submit">
+                            <span v-if="loading==false">Modifier un post</span>
+                        <span v-else>Loading...</span>
+                        </button>
                     </div>
 
                 </div>
@@ -55,13 +58,7 @@
         <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
             <div>
                 <div class="w-full h-96 bg-green- ">
-                    <!-- <editor-content class="h-12 w-full border-black border-3" :editor="editor" /> -->
-                    <!-- <Field type="text" name="content" class="hidden input-file" :value="post.content" /> -->
                     <QuillEditor ref="editor" toolbar="full" theme="snow" />
-                    <!-- <Field
-                             class="h-12 w-full border " /> -->
-
-
                 </div>
             </div>
 
@@ -87,7 +84,8 @@ export default {
             nameRule: yup.string().required('Champ requis'),
             schemaRules,
             file: null,
-            post: []
+            post: [], 
+            loading: false
         }
     },
     methods: {
@@ -95,6 +93,35 @@ export default {
             this.file = file;
         },
 
+        updatePost(values){
+            this.loading = true
+            this.axios.put(`${import.meta.env.VITE_DEV_API}/posts/${this.post[0].id}`, {
+                name: values.name,
+                description: values.description,
+                content: `${this.$refs.editor.getHTML()}`, 
+                thumbnail: values.thumbnail
+            }, {
+                headers: {
+                    authorization: `Bearer ${JSON.stringify(this.$cookies.get("user"))}`,
+                    "Content-Type": "multipart/form-data"
+                }
+            }).then(
+                response => {
+                    // console.log("je suis la réponse", response)
+                    this.loading = false
+                    this.$swal("Succès", "Post modifié", "success").then(() => {
+                        this.$router.push("/")
+                        this.$store.commit("getAllPosts")
+                    })
+                },
+                error => {
+                    this.loading = false
+                    // console.log("je suis l'erreur", error)
+                    this.$swal("Erreur", "Erreur lors de la modifictation du post", "error")
+
+                }
+            )
+        }
     },
     async created() {
         await this.$store.state.posts.then(response => {

@@ -95,7 +95,8 @@
 
                             <div class="w-full h-10 my-4">
                                 <button class="form__button rounded p-2  hover:bg-blue-600 uppercase bg-blue-500 text-white font-medium w-8" type="submit">
-                                    Nous contacter
+                                    <span v-if="loading==false">Nous contactez</span>
+                        <span v-else>Loading...</span>
                                 </button>
                             </div>
                         
@@ -120,6 +121,7 @@
 import  Banner from '@/components/Banner.vue'
 import  Footer from '@/components/Footer.vue'
 import Navbar from '@/components/Navbar.vue'
+import { faBullseye } from '@fortawesome/free-solid-svg-icons'
 
 import {Form, Field, ErrorMessage} from 'vee-validate'
 import * as yup from 'yup'
@@ -167,18 +169,23 @@ export default {
         return {
             title: 'Contact', 
             schema, 
+            loading: false
            
         }
     },
     methods:{
-        sendMail(values){
+        sendMail(values, {resetForm}){
+            this.loading = true
             // console.log("j'envoie un mail wilfried", values)
             return this.axios.post(`${import.meta.env.VITE_DEV_API}/contact`, values).then(response => {
                 // console.log("je suis la réponse", response)
+                this.loading = false
+                resetForm()
                 this.$swal("Succès", "Message bien envoyé", "success")
             }, error => {
-                console.log("je suis le message d'erreur", error)
-                // this.$swal("Erreur", "Erreur lors de l'envoi du message", "Erreur")     
+                // console.log("je suis le message d'erreur", error)
+                this.loading = false 
+                this.$swal("Erreur", "Erreur lors de l'envoi du message", "error")     
 
             })
         }

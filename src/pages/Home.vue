@@ -30,8 +30,8 @@
         </div>
 
         <!--blog -->
-
-        <div style="background-color: #999999;"
+        <!-- style="background-color: #999999;" -->
+        <div 
             class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
             <div v-if="posts" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                 <div v-for="(element, index) in posts"
@@ -171,7 +171,7 @@ export default {
         },
         getAllPosts() {
             this.$store.state.posts.then(response => {
-                this.posts = response.data.slice(0, 6)
+                this.posts = response.data.slice(0, 7)
             })
         },
         parseUserData() {
@@ -180,6 +180,9 @@ export default {
             }
         }
     },
+    mounted(){
+        window.scrollTo(0,0);
+    }
 
 }
 </script>
