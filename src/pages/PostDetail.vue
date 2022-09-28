@@ -1,6 +1,7 @@
 <template>
   <div>
     <Navbar />
+
     <div v-for="post in posts" :key="post.id" class="post w-full h-auto bg-gray- flex flex-col ">
 
 
@@ -27,6 +28,7 @@
           </div>
         </div>
       </div>
+      
 
       <!--description -->
       <div class="post__content bg-green- flex justify-center">
@@ -97,6 +99,8 @@
               <button class="text-white bg-blue-400 font-bold rounded uppercase  py-3 px-3 ml-2 ">Connectez vous pour
                 envoyer un commentaire</button>
             </router-link>
+
+            
           </div>
         </div>
       </div>
@@ -228,6 +232,7 @@ export default {
     });
   },
 
-  mounted() { },
+   mounted(){
+    }
 };
 </script>

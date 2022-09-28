@@ -20,7 +20,13 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 library.add(fas, far, fab)
 
-const app = createApp(App).use(VueAxios, axios).use(VueSweetalert2).component('font-awesome-icon', FontAwesomeIcon).component('QuillEditor', QuillEditor).use(VueCookies).use(router).use(store).mount('#app')
+const app = createApp(App)
+.component('QuillEditor', QuillEditor)
+.use(VueAxios, axios)
+.use(VueSweetalert2)
+.component('font-awesome-icon', FontAwesomeIcon)
+.use(VueCookies)
+.use(router).use(store).mount('#app')
 
 
 

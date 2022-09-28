@@ -5,6 +5,7 @@
             <Banner :name="title" />
         </div>
 
+
         <div class="contact w-full  flex justify-center items-center ">
             <div class="contact__content h-screen flex  ">
 

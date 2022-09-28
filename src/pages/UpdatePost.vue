@@ -8,6 +8,8 @@
 import Navbar from '@/components/Navbar.vue'
 import UpdateForm from '../components/UpdateForm.vue'
 export default {
+    components: { UpdateForm, Navbar }, 
+
     data() {
         return {
             // post: {}
@@ -16,9 +18,8 @@ export default {
     mounted() {
         // console.log("je suis la page de modification du post", this.$route.params.id);
     },
-    components: { UpdateForm, Navbar }
 }
 </script>
-<style lang="css">
+<style lang="scss">
 
 </style>

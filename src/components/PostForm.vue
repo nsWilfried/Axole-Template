@@ -6,15 +6,16 @@
             <div class="w-1/2 h-full flex flex-col justify-center ">
                 <!-- drop zone -->
                 <div class="dropbox">
-                    <div >
-                        <Field   type="file" name="thumbnail" class="input-file" @change="filesChange($event.target.name, $event.target.files) " />
+                    <div>
+                        <Field type="file" name="thumbnail" class="input-file"
+                            @change="filesChange($event.target.name, $event.target.files) " />
                     </div>
-                    <!--  @change="filesC hange($event.target.name, $event.target.files); fileCount = $event.target.files.length" -->
-                    <p >
+                    <!--  @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" -->
+                    <p>
                         Drag your file(s) here to begin<br> or click to browse
                     </p>
                     <span v-if="file">{{file[0].name}}</span>
-                   
+
 
                 </div>
                 <!-- label name-->
@@ -48,7 +49,7 @@
                     <div class="w-full h-96 bg-green- ">
                         <QuillEditor ref="editor" toolbar="full" theme="snow" />
 
-                        <button @click="hello">rando</button>
+                        <!-- <button @click="hello">rando</button> -->
                     </div>
                 </div>
 
@@ -73,30 +74,26 @@ export default {
             description: yup.string().required('Champ requis'),
         })
         return {
-            editor: null,
             nameRule: yup.string().required('Champ requis'),
             schemaRules,
             file: null,
             currentStatus: null,
         }
     },
-   
-    methods: {
-        filesChange(field, file){
-           this.file = file
-        }, 
 
-        hello() {
-            console.log(this.$refs.editor.getEditor())
+    methods: {
+        filesChange(field, file) {
+            this.file = file
         },
+
         createPost(values) {
             // console.log("je suis l'ensemble des valeurs", values.thumbnail)
             // console.log("je suis le texte de l'éditeur", this.editor.getText())
-            console.log(`${this.$refs.editor.getEditor()}`)
+            // console.log(`${this.$refs.editor.getHTML()}`)
             this.axios.post(`${import.meta.env.VITE_DEV_API}/create-post`, {
                 name: values.name,
                 description: values.description,
-                content: `${this.$refs.editor.getEditor()}`,
+                content: `${this.$refs.editor.getHTML()}`, 
                 thumbnail: values.thumbnail
             }, {
                 headers: {
@@ -118,6 +115,9 @@ export default {
                 }
             )
         }
+    }, 
+    mounted(){
+        console.log("je suisl a", this.$refs.editor.getHTML())
     }
 }
 </script>
