@@ -32,8 +32,7 @@
 
       <!--description -->
       <div class="post__content bg-green- flex justify-center">
-        <div class="rounded ">
-          {{ post.content }}
+        <div v-html="post.content" class="rounded ">
         </div>
       </div>
 
