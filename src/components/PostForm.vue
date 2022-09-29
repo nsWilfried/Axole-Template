@@ -12,7 +12,7 @@
                     </div>
                     <!--  @change="filesChange($event.target.name, $event.target.files); fileCount = $event.target.files.length" -->
                     <p>
-                        Drag your file(s) here to begin<br> or click to browse
+                        Drag your file(s) here to begin
                     </p>
                     <span v-if="file">{{file[0].name}}</span>
 
@@ -21,14 +21,14 @@
                 <!-- label name-->
 
                 <div class="w-full p-4 bg-violet-">
-                    <Field class="w-full  py-4 px-1 text-3xl" type="text" placeholder="Entrez le nom du post..."
+                    <Field class="w-full input " type="text" placeholder="Entrez le nom du post..."
                         :rules='nameRule' name="name" />
                     <ErrorMessage name="name" class="text-red-400" />
                 </div>
 
 
                 <div class="w-full p-4 bg-violet-">
-                    <Field style="resize:none;" class="w-full h-24 p-2 text-gray-600  text-2xl" type="text"
+                    <Field  class="input w-full " type="text"
                         placeholder="Entrez la description du post..." name="description" />
                     <ErrorMessage name="description" class="text-red-400" />
                 </div>

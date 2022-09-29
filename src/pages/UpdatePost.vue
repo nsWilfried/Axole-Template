@@ -1,7 +1,12 @@
 <template>
     <div>
         <Navbar />
-        <UpdateForm />
+
+        <div class="bg--400 flex justify-center items-center">
+
+            <UpdateForm />
+
+        </div>
     </div>
 </template>
 <script>

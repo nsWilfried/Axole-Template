@@ -54,8 +54,7 @@
                             <p class="text-2xl font-bold leading-5">{{ element.name }}</p>
                         </routerLink>
                         <p class="mb-4 text-gray-700">
-                            Sed ut perspiciatis unde omnis iste natus error sit sed quia consequuntur magni voluptatem
-                            doloremque.
+                            {{element.description }}
                         </p>
                         <div class="flex space-x-4">
 
@@ -166,9 +165,7 @@ export default {
                 }
             )
         },
-        updatePost() {
-
-        },
+      
         getAllPosts() {
             this.$store.state.posts.then(response => {
                 this.posts = response.data.slice(0, 7)
