@@ -99,7 +99,7 @@ export default class BlogController {
       retrievePost = data
 
       try{
-        const thumbnail = request.file("file");
+        const thumbnail = request.file("thumbnail");
   
         //  si l'utilisateur existe et que c'est son post alors il peut le modifier
         if(userId != null && userId == retrievePost.userId){
@@ -109,14 +109,15 @@ export default class BlogController {
             content: request.input("content"), 
             thumbnail: 
             thumbnail == null
-              ? "https://picsum.photos/id/237/536/354"
+              ? retrievePost.thumbnail
               : `${this.server}/downloads/${thumbnail?.clientName}`,
               userId: userId
           }
+
+          // console.log("je suis le post à modifier", post)
           // console.log("le nouveau post modifié", post)
           await request.validate(CreatePostValidator).then(
             async ()=> {
-
               await retrievePost.merge(post).save()
               return response.status(200).json({
                 status: 200, 
@@ -124,6 +125,7 @@ export default class BlogController {
               });
             }, 
             (error) =>{
+              console.log(error.messages.errors)
               return response.status(409).json({
                 status: 409, 
                 message: "Informations non valides", 
