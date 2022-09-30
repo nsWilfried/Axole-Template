@@ -46,6 +46,7 @@ Technologies used in the project:
 
 *   Nodejs/AdonisJs
 *   Postgresql
+*   Swagger
 
 <h2>🛡️ License:</h2>
 
