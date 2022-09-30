@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-auto main flex flex-col items-center justify-center">
+  <div class="footer__container w-full h-auto main flex flex-col items-center justify-center">
     <div class="footer grid">
       <div class="footer__grid flex flex-col justify-center bg-red-">
 
@@ -131,7 +131,7 @@
     >
       <span style="font-family: 'Poppins'" class="text-gray-400"
         >Copyright ©2022 All rights reserved | Designed by
-        <span class="text-yellow-600">Colorlib</span> and made by wilfried n'soukpoe</span
+        <span class="text-yellow-600 copyrigth">Colorlib</span> and made by wilfried n'soukpoe</span
       > 
     </div>
   </div>
@@ -256,5 +256,12 @@ export default {
       transition: background 0.3s;
     }
   }
+}
+
+@media only screen and (min-width: 320px ) and (max-width: 1000px){
+  .footer__container {
+    display: none;
+  }
+
 }
 </style>

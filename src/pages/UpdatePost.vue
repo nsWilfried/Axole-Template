@@ -2,7 +2,7 @@
     <div>
         <Navbar />
 
-        <div class="bg--400 flex justify-center items-center">
+        <div class="w-full bg--400 flex justify-center items-center">
 
             <UpdateForm />
 

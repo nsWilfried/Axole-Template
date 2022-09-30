@@ -1,5 +1,5 @@
 <template>
-        <div class=" button  w-36 text-center rounded-md p-2  ml-2 ">
+        <div class=" button  text-center rounded-md p-2  ml-2 ">
             <span class="uppercase">
                 <router-link :to="link">
                     {{name}}

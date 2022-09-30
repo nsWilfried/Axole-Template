@@ -7,7 +7,7 @@
 
         <div class="about__content flex flex-col items-center justify-center sm:h-auto">
 
-            <div class="about__profile flex lg:flex-row sm:h-  md:flex-col-reverse ">
+            <div class="about__profile flex lg:flex-row sm:h- ">
 
                 <!-- profile --> 
                 <div class="about__profile__img bg-cover bg-center  w-5/6 h-full">
@@ -80,6 +80,25 @@
         color: rgba(0,0,0,.8);
     }
  }
+ @media only screen and (min-width: 320px ) and (max-width: 1000px){
+  .about{
+    &__profile {
+        flex-direction: column ;
+
+        width: 100%;
+
+    }
+    &__description {
+        width: 100%;
+        padding: 30px;
+    }
+    &__title {
+        span{
+            font-size: 2.4em ;
+        }
+    }
+  }
+}
 </style>
 <script>
 import Banner from "@/components/Banner.vue";

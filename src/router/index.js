@@ -20,6 +20,12 @@ const isUserLogin = () => {
         return '/'
     }
 }
+const isUserNotLogin =  () => {
+    const isConnected = Cookies.get('isConnected') != undefined ? true : false
+    if (!isConnected) {
+        return '/'
+    }
+}
 const isPostExist = async(to, next) => {
  let postExist = null
  await store.state.posts.then(response => {
@@ -80,12 +86,7 @@ const routes = [
         path: '/create-post',
         component: CreatePost,
         name: 'create-post',
-        beforeEnter: () => {
-            const isConnected = Cookies.get('isConnected') != undefined ? true : false
-            if (!isConnected) {
-                return '/'
-            }
-        }
+        beforeEnter:[isUserNotLogin]
     },
     , {
         path: '/blog/:id',
@@ -97,6 +98,7 @@ const routes = [
         path: '/blog/update/:id', 
         component: UpdatePost, 
         name: 'update-post',
+        beforeEnter: [isUserNotLogin]
     }, 
     {
         path: '/:pathMatch(.*)*', name: 'NotFound', redirect: to => {

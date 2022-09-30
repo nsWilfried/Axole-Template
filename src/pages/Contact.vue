@@ -19,7 +19,7 @@
                         <span class="text-gray-400">We're open for any suggestion or just to have a chat</span>
                     </div>
                     
-                    <div class="flex w-full h-auto bg-orange">
+                    <div class="flex w-full h-auto bg-orange contact__info">
                         <!--adress--> 
                         <div class="w-1/3">
                             <div>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
 
-                    <div class="contact__form bg-green-">
+                    <div class="contact__inputs bg-green-">
                          <Form @submit="sendMail" >
                             <div  v-for="{ as, name,type,placeholder, label,  ...attrs } of schema.fields" :key="name">
                                 <div class="w-full h-12 flex items-center justify-center">
@@ -217,5 +217,27 @@ export default {
         font-family: $primary-font;
     }
     
+}
+
+@media only screen and (min-width: 320px ) and (max-width: 1000px){
+
+    .contact__content {
+        width: 100%;
+        flex-direction: column;
+        height: auto;
+    }
+    .contact__form {
+        width: 100%;
+        padding: 20px;
+    }
+    .form__button {
+        width:200px;
+    }
+    .contact__info{
+        flex-direction: column;
+    }
+    .contact__map {
+        width: 100%;
+    }
 }
 </style>

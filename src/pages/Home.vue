@@ -2,7 +2,7 @@
     <div>
     <Navbar/>
 
-        <!--banner-->
+        <!--banner laptop-->
         <div class="banner w-full flex items-center justify-center">
             <div class="banner__content flex items-start mt-44 justify-end">
                 <div class="flex flex-col">
@@ -27,6 +27,22 @@
                     </div>
                 </div>
             </div>
+
+            
+        
+        </div>
+
+        <!-- banner mobile -->
+
+        <div class="banner__mobile w-full flex items-center justify-center">
+         
+               
+                    <div class="banner__mobile__title flex items-center justify-start">
+                        <span>
+                            A<span class="banner__title-special">xol</span>e.
+                        </span>
+                    </div>
+                 
         </div>
 
         <!--blog -->
@@ -89,6 +105,8 @@
                 </div>
             </div>
 
+            
+
             <div v-else>
                 Aucun post trouvé
             </div>
@@ -125,10 +143,10 @@
 <script>
 import Footer from "@/components/Footer.vue"
 import Navbar from "@/components/Navbar.vue"
-
+import { Slide } from 'vue3-burger-menu'
 import moment from "moment"
 export default {
-    components: { Footer, Navbar },
+    components: { Footer, Navbar, Slide },
     data() {
 
         return {
@@ -194,7 +212,9 @@ export default {
     height: 750px;
     background: $primary-bg;
     font-family: $primary-font;
-
+   &__mobile {
+    display: none;
+   }
     &__content {
         width: $header-width;
         height: $full-height;
@@ -266,4 +286,40 @@ export default {
 
     }
 }
+
+@media only screen and (min-width: 320px ) and (max-width: 1000px){
+ .banner{
+    display: none ;
+    &__mobile {
+        display: flex ;
+        justify-content: center ;
+        align-items: center;
+        height: 300px;
+    background: $primary-bg;
+    font-family: $primary-font;
+    &__title {
+        height: 265px;
+        // background: aliceblue;
+
+        >span {
+            font-weight: 800;
+            color: #444;
+            font-size: 14vw;
+            line-height: 1.2;
+
+        }
+
+        &-special {
+            color: #000;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke-width: 1px;
+            -webkit-text-stroke-color: black;
+        }
+    }
+    }
+ }
+
+}
+
+
 </style>

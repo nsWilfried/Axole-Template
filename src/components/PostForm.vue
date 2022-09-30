@@ -1,11 +1,11 @@
 <template>
-    <div style="width: 1320px;" class=" h-full bg-green- flex justify-content items-center ">
-        <Form class="bg-red-40 w-full h-full flex " @submit="createPost" :validation-schema='schemaRules' method="post"
+    <div  class=" post__form h-full bg--400 flex justify-content items-center ">
+        <Form class="post__form__content bg-red-40 w-full h-full flex  " @submit="createPost" :validation-schema='schemaRules' method="post"
             enctype="multipart/form-data">
 
-            <div class="w-1/2 h-full flex flex-col justify-center ">
+            <div class="w-full h-full flex flex-col justify-center ">
                 <!-- drop zone -->
-                <div class="dropbox">
+                <div class="dropbox flex flex-col items-center justify-center">
                     <div>
                         <Field type="file" name="thumbnail" class="input-file"
                             @change="filesChange($event.target.name, $event.target.files) " />
@@ -20,7 +20,7 @@
                 </div>
                 <!-- label name-->
 
-                <div class="w-full p-4 bg-violet-">
+                <div class="w-full name__input p-4 bg-violet-">
                     <Field class="w-full input " type="text" placeholder="Entrez le nom du post..."
                         :rules='nameRule' name="name" />
                     <ErrorMessage name="name" class="text-red-400" />
@@ -47,7 +47,7 @@
 
             <!--editor -->
 
-            <div class="w-2/3 h-full p-4 flex flex-col bg-red- justify-center">
+            <div class="w-full h-full p-4 flex flex-col bg-red- justify-center">
                 <div>
                     <div class="w-full h-96 bg-green- ">
                         <QuillEditor ref="editor" toolbar="full" theme="snow" />
@@ -223,5 +223,23 @@ export default {
 .is-active {
     background-color: black;
     color: white;
+}
+.post__form {
+    width: 1320px;
+    // background-color: green;
+}
+@media only screen and (min-width: 320px) and (max-width: 1000px) {
+   .post__form {
+    width: 90%;
+    &__content {
+        flex-direction: column;
+    }
+   }
+   .name__input {
+    margin-top: 100px;
+   }
+   .dropbox{
+    margin-top: 40px;
+   }
 }
 </style>

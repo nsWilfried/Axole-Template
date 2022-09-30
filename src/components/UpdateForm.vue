@@ -1,7 +1,7 @@
 <template>
-    <div class="bg--400 flex h-screen p-12 justify-center items-center">
-        <div v-for="(post, index) in post" :key="index" style="width: 800px;"
-            class=" h-full bg-green- flex flex-col justify-content items-center ">
+    <div class="bg--400 update__form flex h-screen p-12 justify-center items-center">
+        <div v-for="(post, index) in post" :key="index"
+            class=" h-full bg--400 flex flex-col justify-content items-center ">
 
             <!-- thumbnail -->
             <!-- <div class="thumbnail w-full h-72 flex justify-center items-center bg--200">
@@ -26,15 +26,15 @@
                     </div>
                     <!-- label name-->
 
-                    <div class="w-full p-4 bg-violet-">
-                        <Field class="input " type="text" placeholder="Entrez le nom du post..."
+                    <div class="w-full p-4 bg-violet- block ">
+                        <Field class="input w-full block bg-red-300 " type="text"  placeholder="Entrez le nom du post..."
                             :rules='nameRule' name="name" :value="post.name" />
                         <ErrorMessage name="name" class="text-red-400" />
                     </div>
 
 
-                    <div class="w-full p-4 bg-violet-">
-                        <Field style="resize:none;" class="input " type="textarea"
+                    <div class="w-full p-4 bg-violet- block">
+                        <Field class="input w-full block" type="textarea"
                             placeholder="Entrez la description du post..." name="description"
                             :value="post.description" />
                         <ErrorMessage name="description" class="text-red-400" />
@@ -58,7 +58,7 @@
 
         </div>
 
-        <div class="editor h-full p-4 flex flex-col bg-red- justify-center">
+        <div class="update__editor h-full p-4 flex flex-col bg-red- justify-center">
             <div>
                 <div class=" h-96 bg-green- ">
                     <QuillEditor ref="editor" toolbar="full" theme="snow" />
@@ -141,8 +141,12 @@ export default {
 }
 </script>
 <style lang="scss" >
-    .editor{
+    .update__editor{
         width: 800px;
+    }
+
+    .update__form {
+        width: 90%;
     }
     .input{
         background-color: #ddd;
@@ -150,7 +154,7 @@ export default {
     border: 0px;
     border-radius: 0.25rem;
     // width: 100%;
-    max-width: 500px;
+    // max-width: 500px;
     margin: 0px auto;
     padding: 1rem;
     // color: #EC7063;
@@ -190,5 +194,23 @@ export default {
     font-size: 1.2em;
     text-align: center;
     padding: 50px 0;
+}
+
+@media only screen and (min-width: 320px ) and (max-width: 1000px){
+
+.update__form{
+    width: 100%;
+    flex-direction: column ;
+}
+.update__editor{
+    width: 100%;
+}
+
+}
+@media only screen and (min-width: 320px ) and (max-width: 600px){
+    .update__form {
+    margin-top: 200px;
+
+    }
 }
 </style>

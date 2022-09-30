@@ -49,6 +49,20 @@
      font-size: 16px;
      color: $secondary-color;
     }
+    @media only screen and (min-width: 320px ) and (max-width: 1000px){
+.about__skill{
+    height: AUTO;
+    flex-direction: column;
+    &_icon, &__title, &__description{
+        width: 100%;
+        padding: 10px;
+        display: flex ;
+        justify-content: center;
+        text-align: center;
+    }
+}
+
+}
 </style>
 <script>
 export default {

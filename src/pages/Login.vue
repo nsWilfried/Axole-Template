@@ -1,8 +1,8 @@
 <template>
-    <div class="w-full h-auto">
+    <div class="w-full  h-auto">
         <Navbar/>
         <div class="login w-full h-screen bg-gray-200 flex flex-col justify-center items-center ">
-            <div class=" w-96 h-auto rounded-lg bg-white ">
+            <div class=" login__card h-auto rounded-lg bg-white ">
 
                 <div class="w-full h-16 flex justify-center items-center">
                     <span class="font-bold text-2xl">Connexion</span>
@@ -73,5 +73,18 @@ export default {
 
 .login {
     font-family: $primary-font;
+    &__card {
+        width: 384px;
+    }
+}
+@media only screen and (min-width: 320px ) and (max-width: 1000px){
+
+    // .login__card{
+    //     width: 350px;
+    // }
+    // .login {
+    //     // background-color: white;
+    // }
+
 }
 </style>

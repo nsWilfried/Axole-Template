@@ -4,9 +4,7 @@
         <Navbar />
         <div class="w-full h-screen bg-slate- flex justify-center ">
 
-            <div>
                 <PostForm />
-            </div>
         </div>
     </div>
 
@@ -27,6 +25,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>
