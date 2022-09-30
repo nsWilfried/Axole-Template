@@ -68,6 +68,7 @@ npm run dev
 Technologies used in the project:
 
 *   VueJs
+*   Tailwindcss
 
 <h2>🛡️ License:</h2>
 
