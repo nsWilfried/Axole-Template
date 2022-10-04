@@ -5,7 +5,7 @@ let connected = Cookies.get('isConnected')
 let user_info = Cookies.get('user')
 const store = createStore({
      state(){
-        const api =  "http://localhost:3333"
+        const api =  "https://ns-blog-api.herokuapp.com"
         // console.log("je suis ldans le store",)
         return {
             isConnected: connected == undefined ? false :  true, 
@@ -24,7 +24,7 @@ const store = createStore({
             return state.user
         }, 
         getAllPosts(state){
-            return state.posts = axios(`http://localhost:3333/posts`).then(response => {return response.data})
+            return state.posts = axios(`https://ns-blog-api.herokuapp.com/posts`).then(response => {return response.data})
         }, 
         changeStatusConnected(state){
             this.connected = Cookies.get('isConnected')

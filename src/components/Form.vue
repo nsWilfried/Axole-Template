@@ -75,7 +75,7 @@ export default {
             // console.log("j'ai soumis et voici les valeurs", values)
 
             if (this.request == "login") {
-                return this.axios.post("http://localhost:3333/user/login", values)
+                return this.axios.post(`${import.meta.env.VITE_DEV_API}/user/login`, values)
                     .then(async(response) => {
                         // console.log("je suis le résultat de la connexino", response)
 
@@ -94,7 +94,7 @@ export default {
                         // console.log("erreur lors de la connexion", error.response.data.message)
                     })
             } else {
-                return this.axios.post("http://localhost:3333/user/register", values)
+                return this.axios.post(`${import.meta.env.VITE_DEV_API}/user/register`, values)
                     .then(() => {
                         // console.log("je suis le résultat de l'inscription", response)
                         this.$router.replace({path: "/user/login"})

@@ -186,7 +186,7 @@ export default {
       
         getAllPosts() {
             this.$store.state.posts.then(response => {
-                this.posts = response.data.slice(0, 7)
+                this.posts = response.data
             })
         },
         parseUserData() {
