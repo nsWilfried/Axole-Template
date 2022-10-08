@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "node ace serve --watch", 
-    "build": "node ace build --prod && cp -a docs/ build/docs ",
+    "build": "node ace build --prod && cp -a docs/ build/docs && cp -a tmp build/tmp ",
     "start": "ENV_SILENT=true node ./build/server.js ",
     "start:prod": "node ./build/server.js", 
     "postbuild": "node ace swagger:generate " 
