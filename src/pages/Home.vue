@@ -49,7 +49,7 @@
         <!-- style="background-color: #999999;" -->
         <div 
             class="px-4  py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-            <div v-if="posts" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
+            <div v-if="loading == false" class="grid gap-5 lg:grid-cols-3 sm:max-w-sm sm:mx-auto lg:max-w-full">
                 <div v-for="(element, index) in posts"
                     class="overflow-hidden transition-shadow duration-300 bg- rounded">
                     <span v-if="element.thumbnail"><img :src="element.thumbnail"
@@ -107,8 +107,8 @@
 
             
 
-            <div v-else>
-                Aucun post trouvé
+            <div  v-else>
+              <span class="text-5xl">Loading</span>  <span class="text-5xl text-red-400">...</span>
             </div>
             <!-- Previous Button -->
             <!-- <div>
@@ -152,7 +152,8 @@ export default {
         return {
             posts: [],
             moment: moment,
-            user: null
+            user: null, 
+            loading: false
         }
     },
 
@@ -185,8 +186,10 @@ export default {
         },
       
         getAllPosts() {
+            this.loading = true
             this.$store.state.posts.then(response => {
                 this.posts = response.data
+                this.loading = false
             })
         },
         parseUserData() {
